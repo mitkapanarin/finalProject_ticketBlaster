@@ -1,0 +1,33 @@
+.card-parent {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 0 20px; 
+}
+
+.card-parent img {
+  border-radius: 8%;
+}
+
+.card-date {
+  color: #ff00ff; /* Replace with your desired color */
+}
+
+.card-bottom_section {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+  justify-content: space-between;
+}
+
+@media (max-width: 768px) {
+  .card-parent {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .card-bottom_section {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
