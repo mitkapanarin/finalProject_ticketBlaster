@@ -1,26 +1,31 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { ErrorPage, Home, Login, Admin, CustomerDashboard } from "./Pages";
-import { CustomerRoutes, AdminRoutes } from "./utils";
+import {
+  Home,
+  AdminDashboard,
+  ErrorPage,
+  Login,
+  ProfileDashboard,
+} from "./Pages";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { AdminRoutes, UserRoutes } from "./ProtectedRoutes";
 
 const App = () => {
   return (
-    <BrowserRouter>
+    <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
 
+        <Route element={<UserRoutes />}>
+          <Route path="/user-profile" element={<ProfileDashboard />} />
+        </Route>
         <Route element={<AdminRoutes />}>
-          <Route path="/admin-panel" element={<Admin />} />
+          <Route path="/admin-dashboard" element={<AdminDashboard />} />
         </Route>
 
-        <Route element={<CustomerRoutes />}>
-          <Route path="/customer-dashboard" element={<CustomerDashboard />} />
-        </Route>
-
+        <Route path="/login" element={<Login />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
-    </BrowserRouter>
+    </Router>
   );
 };
 

@@ -7,10 +7,14 @@
 
 .card-parent img {
   border-radius: 8%;
+  width: 550px; 
+  height: 150px; 
+  object-fit: cover;
 }
 
 .card-date {
   color: #ff00ff; /* Replace with your desired color */
+  margin-bottom: 10px;
 }
 
 .card-bottom_section {
@@ -19,6 +23,7 @@
   align-items: center;
   gap: 20px;
   justify-content: space-between;
+  margin-top: 10px;
 }
 
 @media (max-width: 768px) {
