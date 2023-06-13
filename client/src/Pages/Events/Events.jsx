@@ -40,37 +40,45 @@ const Events = () => {
       </div>
       <div>
         <div className="input-row">
-          <InputField
-            type="text"
-            name="name"
-            value={data.name}
-            onChange={handleInput}
-            label="Event Name"
-            placeholder="Event Name"
-            required={true}
-          />
-          <label htmlFor="category">Category:</label>
-          <select
-            name="category"
-            value={data.category}
-            onChange={handleInput}
-            required={true}
-          >
-            <option value="">Select a category</option>
-            <option value="Musical Concert">Musical Concert</option>
-            <option value="Stand-Up Comedy">Stand-Up Comedy</option>
-          </select>
+          <div>
+            <label htmlFor="name">Event Name:</label>
+            <InputField
+              className="inputField"
+              type="text"
+              name="name"
+              value={data.name}
+              onChange={handleInput}
+              placeholder="Event Name"
+              required={true}
+            />
+          </div>
 
-          <label htmlFor="date">Date:</label>
-          <input
-            type="date"
-            name="date"
-            value={data.date}
-            onChange={handleInput}
-            placeholder="Event Name"
-            required={true}
-          />
+          <div>
+            <label htmlFor="category">Category:</label>
+            <select
+              name="category"
+              value={data.category}
+              onChange={handleInput}
+              required={true}
+            >
+              <option value="">Select a category</option>
+              <option value="Musical Concert">Musical Concert</option>
+              <option value="Stand-Up Comedy">Stand-Up Comedy</option>
+            </select>
+          </div>
+
+          <div>
+            <label htmlFor="date">Date:</label>
+            <input
+              type="date"
+              name="date"
+              value={data.date}
+              onChange={handleInput}
+              required={true}
+            />
+          </div>
         </div>
+
       </div>
       <div className="events-content">
         <div className="events-left-section">
@@ -97,7 +105,7 @@ const Events = () => {
             ></textarea>
           </div>
           <div className="events-price-input">
-            <label htmlFor="price">Price:</label>
+            <label htmlFor="price">Total Price:</label>
             <input
               type="text"
               name="price"
@@ -106,6 +114,65 @@ const Events = () => {
             />
           </div>
         </div>
+      </div>
+      <div className="related-events">
+        <label htmlFor="category" className="related-events-label">
+          Related Events
+        </label>
+        <div className="related-events-input">
+          <select
+            name="category"
+            value={data.category}
+            onChange={handleInput}
+            required={true}
+          >
+            <option value="">Select a category</option>
+            <option value="Concert1">Concert1</option>
+            <option value="Concert2">Concert2</option>
+          </select>
+          <button className="related-events-btn">Add</button>
+        </div>
+      </div>
+      <div className="bottom-cards">
+        <div className="botom-event-card-container">
+          <img
+            className="botom-event-card-image"
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/World_Map_%28political%29.svg/1024px-World_Map_%28political%29.svg.png"
+            alt="World Map"
+            width="200"
+            height="153"
+          />
+          <div className="botom-event-card-content">
+            <h5 className="botom-event-card-title">Name of artist</h5>
+            <p className="botom-event-card-date">
+              June 9th 2023
+            </p>
+            <p className="botom-event-card-location">
+              Skopje, Macedonia
+            </p>
+            <button className="botom-event-card-button">Remove</button>
+          </div>
+        </div>
+        <div className="botom-event-card-container">
+          <img
+            className="botom-event-card-image"
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/World_Map_%28political%29.svg/1024px-World_Map_%28political%29.svg.png"
+            alt="World Map"
+            width="200"
+            height="153"
+          />
+          <div className="botom-event-card-content">
+            <h5 className="botom-event-card-title">Name of artist</h5>
+            <p className="botom-event-card-date">
+              June 9th 2023
+            </p>
+            <p className="botom-event-card-location">
+              Skopje, Macedonia
+            </p>
+            <button className="botom-event-card-button">Remove</button>
+          </div>
+        </div>
+      <button className="botom-right-btn">Save</button>
       </div>
     </div>
   );
