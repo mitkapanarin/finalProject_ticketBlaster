@@ -1,0 +1,93 @@
+.checkout-card-h {
+  margin-bottom: 10px;
+  font-size: 44px;
+  font-weight: bold;
+}
+
+
+.checkout-card-container {
+  display: flex;
+}
+
+.left-checkout-card-container {
+  display: flex;
+  margin-top: 15px;
+  flex-direction: row;
+  align-items: center;
+  max-width: 480px;
+  margin-bottom: 16px;
+  text-decoration: none;
+  margin-right: 20px;
+}
+
+
+.left-checkout-card-image {
+  width: 145px;
+  height: 120px;
+  border-radius: 20px;
+  object-fit: cover;
+}
+
+.left-checkout-card-content {
+  padding: 16px;
+}
+
+.left-checkout-card-title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.left-checkout-card-date {
+  color: #ff00ff;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.left-checkout-card-location {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.left-checkout-card-button {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  margin-top: 16px;
+  cursor: pointer;
+}
+
+.checkout-total-price {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.checkout-total-tickets {
+  font-size: 18px;
+  font-weight: bold;
+  color: #ff00ff;
+}
+
+.checkout-price {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.hr {
+  width: 448px;
+  border: 1px solid #D8D8D8;
+  opacity: 1;
+}
+
+.total{
+  justify-content: space-between;
+  display: flex;
+  width: 448px;
+  font-size: 24px;
+  font-weight: bold;
+}

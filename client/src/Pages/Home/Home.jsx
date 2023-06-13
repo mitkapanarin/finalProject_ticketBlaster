@@ -6,6 +6,7 @@ import TopCard from "../../components/TopCard/TopCard";
 import ProfileDashboard from "../Dashboard/User/ProfileDashboard";
 import Events from "../Events/Events";
 import "./Home.css";
+import Checkout from "../Checkout/Checkout";
 
 const Home = () => {
   return (
@@ -28,6 +29,7 @@ const Home = () => {
         </div>
       </div>
       <Events />
+      <Checkout/>
     </div>
   );
 };
