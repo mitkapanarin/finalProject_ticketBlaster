@@ -1,0 +1,94 @@
+.card-events-details {
+  display: flex;
+  flex-direction: column;
+  margin: 30px 60px;
+}
+
+.navbar-events-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.navbar-events-details h2 {
+  margin-right: auto;
+}
+
+.navbar-events-details ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+
+.navbar-events-details li {
+  margin-left: 15px;
+}
+
+.navbar-events-details a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+}
+
+.input-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.input-row label {
+  white-space: nowrap;
+}
+
+.input-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.events-content {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .events-left-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 33.33%;
+  }
+  
+  .events-upload-button {
+    margin-bottom: 10px;
+  }
+  
+  .events-black-button {
+    background-color: black;
+    color: white;
+    border-radius: 20px;
+  }
+  
+  .events-event-photo img {
+    width: 150px;
+    height: 150px;
+  }
+  
+  .events-right-section {
+    display: flex;
+    flex-direction: column;
+    width: 66.67%;
+  }
+  
+  .events-event-details textarea {
+    height: 150px;
+    border-radius: 20px;
+  }
+  
+  .events-price-input input {
+    height: 30px;
+    border-radius: 20px;
+  }
+  

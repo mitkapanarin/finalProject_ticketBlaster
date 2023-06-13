@@ -10,22 +10,22 @@ const Cards = ({
 }) => {
   return (
     <div className="card-parent">
-      {/* // Left section */}
-      <img src={image} alt="" />
-      {/* // right section */}
-      <div className="">
-        {/* // top section */}
-        <div className="">
-          <h3>{title}</h3>
+      {/* Left section */}
+      <img src={image} alt="" className="card__left"/>
+      {/* Right section */}
+      <div className="card__right">
+        {/* Top section */}
+        <div className="card__right--text">
+          <h3 className="title">{title}</h3>
           <h6 className="card-date">{date}</h6>
           <p>{description}</p>
         </div>
-        {/* // bottom section */}
+        {/* Bottom section */}
         <div className="card-bottom_section">
-          <h6>
+          <h6 className="location">
             {location.city}, {location.country}
           </h6>
-          <button>Get ticket</button>
+          <button className="black-button">Get ticket</button>
         </div>
       </div>
     </div>

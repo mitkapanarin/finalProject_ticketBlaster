@@ -1,8 +1,11 @@
 import React from "react";
+import { Outlet, Navigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 
 const UserRoutes = () => {
-  const token = "skdjciksd";
-  const role = "User";
+  const dispatch = useDispatch();
+  const { token, role } = useSelector((state) => state.userData);
+
   return token && role === "User" ? (
     <Outlet />
   ) : token ? (

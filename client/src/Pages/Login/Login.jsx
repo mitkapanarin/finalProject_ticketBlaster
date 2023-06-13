@@ -1,85 +1,82 @@
-import React, { useState } from 'react'
-import InputField from '../../components/Form/InputField'
-import { useNavigate } from 'react-router-dom';
+import './Login.css';
+import React, { useState } from 'react';
+import InputField from '../../components/Form/InputField';
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const dispatch = useDispatch() // initialization
-  const store = useSelector((z) => z)
-  console.log(store)
-  const navigate = useNavigate()
+  const dispatch = useDispatch(); // initialization
+  const store = useSelector((z) => z);
+  console.log(store);
+  const navigate = useNavigate();
   const [data, setData] = useState({
     email: "",
     password: ""
-  })
+  });
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     try {
+    } catch (err) {
+      console.log("error occurred");
+      toast.error("Couldn't login, please try again");
     }
-    catch (err) {
-      console.log("error occured")
-      toast.error("Couldn't login, please try again")
-    }
-  }
+  };
 
   const handleInput = (e) => {
     setData({
       ...data,
       [e.target.name]: e.target.value
-    })
-  }
+    });
+  };
+
+  const handleForgotPassword = () => {
+    navigate("/forgot-password");
+  };
+
+  const handleSignup = () => {
+    navigate("/signup");
+  };
 
   return (
-    <div className="custom-container">
+    <div className="login-container">
       <section>
-        <div className="custom-form-container">
-          <div className="custom-form-card">
-            <div className="custom-form-content">
-              <h1 className="custom-form-title">Sign in to your account</h1>
-              <form onSubmit={handleSubmit} className="custom-form">
+        <div className="login-form-container">
+          <div className="login-form-card">
+            <div className="login-form-content">
+              <h1 className="login-form-title">Log In</h1>
+              <form onSubmit={handleSubmit} className="login-form">
                 <InputField
-                  label="Your email"
+                  type="email"
                   name="email"
-                  onChange={handleInput}
-                  placeholder="Enter your email"
-                  required={true}
                   value={data.email}
+                  onChange={handleInput}
+                  label="Email"
+                  placeholder="name@company.com"
+                  required={true}
                 />
                 <InputField
-                  label="Your password"
+                  type="password"
                   name="password"
+                  value={data.password}
                   onChange={handleInput}
+                  label="Password"
                   placeholder="Enter your password"
                   required={true}
-                  type="password"
-                  value={data.password}
                 />
-                <div className="custom-remember-forgot">
-                  <div className="custom-remember-me">
-                    <input
-                      id="custom-remember"
-                      aria-describedby="custom-remember"
-                      type="checkbox"
-                      className="custom-remember-checkbox"
-                      required=""
-                    />
-                    <label htmlFor="custom-remember" className="custom-remember-label">
-                      Remember me
-                    </label>
-                  </div>
-                  <a href="#" className="custom-forgot-link">
+
+                <div className="login-remember-forgot">
+                  <a href="#" className="login-forgot-link" onClick={handleForgotPassword}>
                     Forgot password?
                   </a>
+                  <button type="submit" className="login-signin-button">
+                    Log in
+                  </button>
                 </div>
-                <button type="submit" className="custom-signin-button">
-                  Sign in
-                </button>
-                <p className="custom-signup-text">
-                  Don't have an account yet?{' '}
-                  <a href="#" className="custom-signup-link">
-                    Sign up
-                  </a>
+                <p className="login-signup-text">
+                  <button type="submit" className="login-signup-button" onClick={handleSignup}>
+                    Don't have an account?
+                  </button>
                 </p>
               </form>
             </div>

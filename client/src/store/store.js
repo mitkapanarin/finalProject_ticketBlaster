@@ -7,6 +7,7 @@ import storage from "redux-persist/lib/storage";
 
 // importing reducers from slice folder
 import { counterSlice } from "./Slice/counter";
+import { userDataSlice } from "./Slice/UserData";
 
 const persistConfig = {
   key: "counter",
@@ -15,9 +16,18 @@ const persistConfig = {
 
 const persistedCounter = persistReducer(persistConfig, counterSlice.reducer);
 
+const persistedUserData = persistReducer(
+  {
+    key: "User Data",
+    storage,
+  },
+  userDataSlice.reducer
+);
+
 export const store = configureStore({
   reducer: {
     counter: persistedCounter,
+    userData: persistedUserData,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(),
 });
