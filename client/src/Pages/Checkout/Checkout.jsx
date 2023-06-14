@@ -54,7 +54,7 @@ const handleLogin = () => {
         <p>Total:</p>
         <p>$120</p>
       </div>
-      <div>
+      <div className="checkout-right-section">
         <InputField
           type="text"
           name="name"
@@ -76,22 +76,22 @@ const handleLogin = () => {
           className="checkout-input"
         />
         <InputField
-          type="calendar"
+          type="date"
           name="expires"
-          value={data.expireing date}
+          value={data.date}
           onChange={handleInput}
-          label="expireing date"
+          label="Expires"
           placeholder="Enter your expireing date"
           required={true}
           className="checkout-input"
         />
         <InputField
-          type="password"
-          name="password"
-          value={data.password}
+          type="pin"
+          name="pin"
+          value={data.pin}
           onChange={handleInput}
-          label="Re-type Password"
-          placeholder="Re-enter your password"
+          label="PIN"
+          placeholder="Enter your pin"
           required={true}
           className="checkout-input"
         />
