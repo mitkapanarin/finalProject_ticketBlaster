@@ -80,7 +80,60 @@ UserRoute.post("/auth", async (req, res) => {
 });
 
 // Edit User
-UserRoute.post("/edit", async (req, res) => {});
+UserRoute.put("/update-user/:userID", async (req, res) => {
+  try {
+    const { userID } = req.params;
+    const { fullName, email, password } = req.body;
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const updatedUser = await UserModel.findByIdAndUpdate(
+      userID,
+      {
+        fullName,
+        email,
+        password: hashedPassword
+      },
+    );
+
+    if (!updatedUser) {
+      res.status(404).json({ message: "User not found" });
+      return;
+    }
+
+    res.json({ message: "Successfully updated user" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error" });
+  }
+});
 
 // Delete User
-UserRoute.post("/delete", async (req, res) => {});
+UserRoute.delete("/delete-users/:id", async (req, res) => {
+  try {
+    const { userID } = req.params;
+    const deletedUser = await UserModel.findByIdAndDelete(userID);
+
+    if (!deletedUser) {
+      res.status(404).json({ message: "User not found" });
+      return;
+    }
+
+    res.status(204).json({ message: "User deleted successfully" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+
+
+UserRoute.get("/get-all-users", async (req, res) => {
+  try {
+    const users = await UserModel.find();
+    res.status(200).json(users);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
