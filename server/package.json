@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "bcrypt": "^5.1.0",
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^16.1.4",
     "express": "^4.18.2",
@@ -8,15 +8,15 @@
     "express-jwt": "^8.4.1",
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^7.3.0",
-    "nanoid": "^4.0.2",
-    "nodemon": "^2.0.22"
+    "nodemon": "^2.0.22",
+    "validator": "^13.9.0"
   },
   "name": "server",
   "version": "1.0.0",
   "main": "index.js",
-  "type": "module",
   "scripts": {
-    "start": "nodemon index.js"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./services/proxy/index.js & node ./services/auth/index.js & node ./services/events/index.js"
   },
   "author": "",
   "license": "ISC",
