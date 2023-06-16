@@ -1,38 +1,85 @@
-const UserModel = require("../../../pkg/user/usersSchema");
+const UsersModel = require("../../../pkg/user/usersSchema");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
+// exports.signup = async (req, res) => {
+// try {
+//   const newUser = await UsersModel.create({
+//     fullName: req.body.fullName,
+//     email: req.body.email,
+//     password: req.body.password,
+//     role: req.body.role,
+//     profilePicture: req.body.profilePicture
+//   });
+
+//     const token = jwt.sign(
+// {
+//   id: newUser._id,
+//   fullName: newUser.fullName,
+//   email: newUser.email,
+//   role: newUser.role,
+//   profilePicture: newUser.profilePicture
+// },
+//       process.env.JWT_SECRET,
+//       {
+//         expiresIn: process.env.JWT_EXPIRES,
+//       }
+//     );
+
+//     res.status(201).json({
+//       status: "success",
+//       token,
+//     });
+//   }  catch (err) {
+//     res.status(500).json({ message: "Server Error, please try again", error: err });
+//   }
+// };
+
+
+
 exports.signup = async (req, res) => {
   try {
-    const newUser = await UserModel.create({
+    const existingUser = await UsersModel.findOne({ email: req.body.email });
+
+    if (existingUser) {
+      return res.status(409).json({ message: "Email already exists" });
+    }
+    const newUser = await UsersModel.create({
       fullName: req.body.fullName,
       email: req.body.email,
       password: req.body.password,
-      role: req.body.role
+      role: req.body.role,
+      profilePicture: req.body.profilePicture
     });
 
     const token = jwt.sign(
-      { id: newUser._id, fullName: newUser.fullName, email: newUser.email, role: newUser.role },
+      {
+        id: newUser._id,
+        fullName: newUser.fullName,
+        email: newUser.email,
+        role: newUser.role,
+        profilePicture: newUser.profilePicture
+      },
       process.env.JWT_SECRET,
       {
         expiresIn: process.env.JWT_EXPIRES,
       }
     );
+
     res.status(201).json({
       message: "User registered successfully",
       token,
       userData: {
-        fullName,
-        role,
-        email,
+        fullName: newUser.fullName,
+        role: newUser.role,
+        email: newUser.email,
       },
     });
   } catch (err) {
-    res
-      .status(500)
-      .json({ message: "Server Error, please try again", error: err });
+    res.status(500).json({ message: "Server Error, please try again", error: err });
   }
 };
+
 
 exports.login = async (req, res) => {
   try {
@@ -45,7 +92,7 @@ exports.login = async (req, res) => {
     }
 
     // 2) Proveruvvame dali korisnikot posti
-    const user = await UserModel.findOne({ email });
+    const user = await UsersModels.findOne({ email });
 
     if (!user) {
       return res.status(401).send("this user doesn't exist");
@@ -85,7 +132,7 @@ exports.updateUser = async (req, res) => {
     const { fullName, email, password } = req.body;
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    const updatedUser = await UserModel.findByIdAndUpdate(
+    const updatedUser = await UsersModels.findByIdAndUpdate(
       userID,
       {
         fullName,
@@ -109,7 +156,7 @@ exports.updateUser = async (req, res) => {
 exports.deleteUser = async (req, res) => {
   try {
     const { userID } = req.params;
-    const deletedUser = await UserModel.findByIdAndDelete(userID);
+    const deletedUser = await UsersModels.findByIdAndDelete(userID);
 
     if (!deletedUser) {
       res.status(404).json({ message: "User not found" });
@@ -125,7 +172,7 @@ exports.deleteUser = async (req, res) => {
 
 exports.allUser = async (req, res) => {
   try {
-    const users = await UserModel.find();
+    const users = await UsersModels.find();
     res.status(200).json(users);
   } catch (err) {
     console.error(err);

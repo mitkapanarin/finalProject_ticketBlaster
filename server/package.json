@@ -16,7 +16,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./services/proxy/index.js & node ./services/auth/index.js & node ./services/events/index.js"
+    "startproxy": "node ./services/proxy/index.js",
+    "startauth": "node ./services/auth/index.js",
+    "startevents": "node ./services/events/index.js"
   },
   "author": "",
   "license": "ISC",
