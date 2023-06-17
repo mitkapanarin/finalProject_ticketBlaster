@@ -11,6 +11,8 @@ import {
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { AdminRoutes, UserRoutes } from "./ProtectedRoutes";
 import { NavBar, Footer } from "./components/Layout/index";
+import MusicalConcerts from "./Pages/MusicalConcerts/MusicalConcerts";
+import StandUpComedies from "./Pages/StandUpComedies/StandUpComedies";
 
 const App = () => {
   return (
@@ -19,6 +21,8 @@ const App = () => {
       <div className="container">
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/musical-concerts" element={<MusicalConcerts />} />
+          <Route path="/stand-up-comedies" element={<StandUpComedies />} />
 
           <Route element={<UserRoutes />}>
             <Route path="/user-profile" element={<ProfileDashboard />} />
