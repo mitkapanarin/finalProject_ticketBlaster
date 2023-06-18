@@ -1,41 +1,52 @@
-import './Login.css';
-import React, { useState } from 'react';
-import InputField from '../../components/Form/InputField';
+import React, { useState } from 'react'
+import { useLoginUserMutation } from '../../store/API/userApi'
+import InputField from '../../components/Form/InputField'
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
+import { login } from "../../store/Slices/userSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const dispatch = useDispatch(); // initialization
-  const store = useSelector((z) => z);
-  console.log(store);
-  const navigate = useNavigate();
+  const dispatch = useDispatch() // initialization
+  const store = useSelector((z) => z)
+  console.log(store)
+  const navigate = useNavigate()
   const [data, setData] = useState({
     email: "",
     password: ""
-  });
+  })
+
+  const [loginUser] = useLoginUserMutation()
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     try {
-    } catch (err) {
-      console.log("error occurred");
-      toast.error("Couldn't login, please try again");
+      const x = await loginUser(data)
+      dispatch(login(x?.data))
+      toast.success("Logged in successfully")
+      navigate("/")
+
     }
-  };
+    catch (err) {
+      console.log("error occured")
+      toast.error("Couldn't login, please try again")
+    }
+  }
 
   const handleInput = (e) => {
     setData({
       ...data,
       [e.target.name]: e.target.value
-    });
-  };
+    })
+  }
+
 
   const handleForgotPassword = () => {
     navigate("/forgot-password");
   };
 
   const handleSignup = () => {
-    navigate("/signup");
+    navigate("/create-user");
   };
 
   return (

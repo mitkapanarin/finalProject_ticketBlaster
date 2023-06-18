@@ -1,17 +1,20 @@
-import '../SignUp/SignUp.css';
-import React, { useState } from 'react';
-import InputField from '../../components/Form/InputField';
+import React, { useState } from 'react'
+import { useCreateUserMutation } from "../../store/API/userApi"
+import InputField from '../../components/Form/InputField'
+import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
-    const navigate = useNavigate();
-    const store = useSelector((state) => state);
+    const dispatch = useDispatch() // initialization
+    const navigate = useNavigate()
+    const store = useSelector((z) => z)
     const [data, setData] = useState({
-        name: "",
+        fullName: "",
         email: "",
         password: ""
-    });
+    })
+    const [createUser, { isLoading, isError, isSuccess }] = useCreateUserMutation() // since this is not query, but it is mutation we put [] and since we are Signup we put the name of the functin createUser
 
     const handleInput = (e) => {
         setData({
@@ -21,8 +24,20 @@ const Signup = () => {
     };
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
-    };
+        e.preventDefault()
+        try {
+            await toast.promise(
+                createUser(data),
+                toast.success("Account created successfully 👌")
+            )
+            console.log(data)
+            navigate("/login")
+        }
+        catch (err) {
+            console.log(err)
+            toast.success("Couldn't create acount, please try again")
+        }
+    }
 
     const handleLogin = () => {
         navigate("/login");
@@ -38,8 +53,8 @@ const Signup = () => {
                             <form className="signup-form" onSubmit={handleSubmit}>
                                 <InputField
                                     type="text"
-                                    name="username"
-                                    value={data.username}
+                                    name="fullName"
+                                    value={data.fullName}
                                     onChange={handleInput}
                                     label="Full Name"
                                     placeholder="Enter Your name here..."
@@ -68,7 +83,7 @@ const Signup = () => {
                                 />
                                 <InputField
                                     type="password"
-                                    name="password"
+                                    name="reTypePassword"
                                     value={data.password}
                                     onChange={handleInput}
                                     label="Re-type Password"

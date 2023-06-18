@@ -1,16 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "../Navbar/Navbar.css";
+import "./Navbar.css";
 import { useSelector, useDispatch } from "react-redux";
-import { resetUserData, registerUser } from "../../../store/Slice/UserData";
+// import { resetUserData, registerUser } from "../../../store/Slices/UserData";
+import { logout } from "../../store/Slices/userSlice";
 
 const NavBar = () => {
   const dispatch = useDispatch();
-
-  const { token, role } = useSelector((state) => state.userData);
-  const handleLogout = () => {
-    dispatch(resetUserData());
-  };
+  const state = useSelector((x) => x);
+  const token = state.User.token;
+  // const handleLogout = () => {
+  //   dispatch(resetUserData());
+  // };
 
   const handleLogin = () => {
     dispatch(
@@ -61,13 +62,13 @@ const NavBar = () => {
                 >
                   Log in
                 </Link>
-                <Link to="/signup" className="create-account-button">
+                <Link to="/create-user" className="create-account-button">
                   Create Account
                 </Link>
               </>
             )}
             {token !== "" && (
-              <button className="logout-button" onClick={handleLogout}>
+              <button className="logout-button" onClick={() => dispatch(logout())}>
                 Log out
               </button>
             )}

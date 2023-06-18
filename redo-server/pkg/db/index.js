@@ -9,16 +9,13 @@ const DB_URL = process.env.DATABASE.replace(
 ).replace("<USER>", process.env.DATABASE_USER);
 
 export const initializeDatabase = async () => {
-  mongoose
-    .connect(DB_URL)
-    .then((res) => console.log("connected to db"))
-    .catch((err) => console.log("Unable to connect to db"));
-  // try {
-  //   await mongoose.connect(DB_URL, {
-  //     // useNewUrlParser: true,
-  //     // useUnifiedTopology: true,
-  //   });
-  // } catch (err) {
-  //   console.log(err);
-  // }
+  try {
+    await mongoose.connect(DB_URL, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log("Connected to the database");
+  } catch (err) {
+    console.error("Unable to connect to the database:", err);
+  }
 };

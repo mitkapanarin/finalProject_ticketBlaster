@@ -30,6 +30,7 @@ app.use("/api/v1/auth", authUser);
 app.use("/api/v1/events", authEvents);
 app.use("/api/v1/sales", authSales);
 
+
 app.listen(process.env.PORT_PROXY, () => {
   console.log(`Proxy server listening on port ${process.env.PORT_PROXY}`);
 });
