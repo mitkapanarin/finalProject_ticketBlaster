@@ -62,6 +62,79 @@ export const login = async (req, res) => {
   }
 };
 
+export const updateUser = async (req, res) => {
+  try {
+    const { userID } = req.params;
+    const { fullName, email, password } = req.body;
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const updatedUser = await UserModel.findByIdAndUpdate(
+      userID,
+      {
+        fullName,
+        email,
+        password: hashedPassword,
+      },
+      { new: true }
+    );
+
+    if (!updatedUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    return res.json({ message: "Successfully updated user" });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ message: "Server error" });
+  }
+};
+
+
+export const getOneUser = async (req, res) => {
+  try {
+    const { userID } = req.params;
+    const user = await UserModel.findById(userID);
+
+    if (!user) {
+      res.status(404).json({ message: "User not found" });
+      return;
+    }
+
+    res.status(200).json(user);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+
+export const deleteUser = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const deletedUser = await UserModel.findByIdAndDelete(id);
+
+    if (!deletedUser) {
+      res.status(404).json({ message: "User not found" });
+      return;
+    }
+
+    res.status(204).json({ message: "User deleted successfully" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+export const getAllUsers = async (req, res) => {
+  try {
+    const users = await UserModel.find();
+    res.status(200).json(users);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
 // export const forgotPassword = async (req, res) => {
 //   try {
 //     const user = await UserModel.findOne({ email: req.body.email });

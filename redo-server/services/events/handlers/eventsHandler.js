@@ -41,8 +41,8 @@ export const getAllEvents = async (req, res) => {
 export const getOneEvent = async (req, res) => {
   // sjdbchjsbdchsvdc?id=""
   try {
-    const { id } = req.params;
-    const event = await EventModel.findById(id);
+    const { eventID } = req.params;
+    const event = await EventModel.findById(eventID);
     if (!event) {
       return res.status(404).json({ message: "Event not found" });
     }
@@ -53,8 +53,42 @@ export const getOneEvent = async (req, res) => {
 };
 
 // update
-export const updateEvent = async (req, res) => {};
+export const updateEvent = async (req, res) => {  
+  try {
+  const { eventID } = req.params;
+  const { eventName, eventDescription, eventDate, price, eventLocation, eventType } = req.body;
 
+  const updatedEvent = await EventModel.findByIdAndUpdate(
+    eventID,
+    {eventName, eventDescription, eventDate, price, eventLocation, eventType},
+    { new: true }
+  );
+
+  if (!updatedEvent) {
+    res.status(404).json({ message: "Event not found" });
+    return;
+  }
+
+  res.json({ message: "Successfully updated Event" });
+} catch (err) {
+  console.error(err);
+  res.status(500).json({ message: "Server error" });
+}
+};
 // delete
 
-export const deleteEvent = async (req, res) => {};
+export const deleteEvent = async (req, res) => { try {
+  const eventID = req.params.id;
+  const deletedEvent = await EventModel.findByIdAndDelete(eventID);
+
+  if (!deletedEvent) {
+    res.status(404).json({ message: "Event not found" });
+    return;
+  }
+
+  res.status(204).json({ message: "Event deleted successfully" });
+} catch (err) {
+  console.error(err);
+  res.status(500).json({ message: "Server error" });
+}
+};
