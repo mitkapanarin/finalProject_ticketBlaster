@@ -7,14 +7,14 @@ import "./MusicalConcerts.css";
 const MusicalConcerts = () => {
   return (
     <div>
-        <div className="musical__pageItems">
-          <h3 className="musical__page__h3">Musical concerts</h3>
-          {concerts?.map((item) => (
-            <Cards key={item.id} {...item} />
-          ))}
-          <button className="musical__page--exploreBtn">See All</button>
-        </div>
+      <h3 className="musical__page__h3">Musical concerts</h3>
+      <div className="musical__pageItems">
+        {concerts?.map((item) => (
+          <Cards key={item.id} {...item} />
+        ))}
       </div>
+      <button className="musical__page--exploreBtn">See All</button>
+    </div>
   );
 };
 

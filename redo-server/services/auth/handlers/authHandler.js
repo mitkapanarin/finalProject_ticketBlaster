@@ -82,7 +82,7 @@ export const updateUser = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    return res.json({ message: "Successfully updated user" });
+    return res.status(200).json({ message: "Successfully updated user" });
   } catch (err) {
     console.error(err);
     return res.status(500).json({ message: "Server error" });
@@ -99,7 +99,6 @@ export const getOneUser = async (req, res) => {
       res.status(404).json({ message: "User not found" });
       return;
     }
-
     res.status(200).json(user);
   } catch (err) {
     console.error(err);
@@ -110,15 +109,14 @@ export const getOneUser = async (req, res) => {
 
 export const deleteUser = async (req, res) => {
   try {
-    const id = req.params.id;
-    const deletedUser = await UserModel.findByIdAndDelete(id);
+    const { userID } = req.params;
+    const deletedUser = await UserModel.findByIdAndDelete(userID);
 
     if (!deletedUser) {
       res.status(404).json({ message: "User not found" });
       return;
     }
-
-    res.status(204).json({ message: "User deleted successfully" });
+    res.status(200).json({ message: "User deleted successfully" });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Server error" });
