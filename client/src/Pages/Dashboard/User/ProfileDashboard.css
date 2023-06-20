@@ -69,6 +69,7 @@
   padding: 10px;
   border-radius: 20px;
   margin-top: 5px;
+  margin-left: 10px;
 }
 
 .submit-button-user {
@@ -87,7 +88,7 @@
 
 .left-botton-psw {
   flex: 1;
-  width: 33.33%;
+  width: 50%;
   margin-top: 15px;
 }
 
@@ -95,7 +96,6 @@
   background-color: #ff00ff;
   border: none;
   border-radius: 20px;
-  padding: 10px;
   cursor: pointer;
   margin-top: 10px;
   color: white;
@@ -104,4 +104,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-bottom: 5px;
+}
+
+.password-fields {
+  display: flex;
+  margin-top: 40px;
+  justify-content: space-between;
+}
+
+.label-psw {
+  margin-right: 10px;
 }

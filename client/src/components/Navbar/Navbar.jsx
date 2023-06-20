@@ -4,18 +4,22 @@ import "./Navbar.css";
 import { useSelector, useDispatch } from "react-redux";
 // import { resetUserData, registerUser } from "../../../store/Slices/UserData";
 import { logout } from "../../store/Slices/userSlice";
-import { UserIcon } from "@heroicons/react/24/outline"
+import {
+  UserIcon,
+  PresentationChartLineIcon,
+} from "@heroicons/react/24/outline";
 
 const NavBar = () => {
-
+  const dispatch = useDispatch();
   const { token, role } = useSelector((state) => state.User);
 
-  const dispatch = useDispatch();
-  // const handleLogout = () => {
-  //   dispatch(resetUserData());
-  // };
-
   const handleLogin = () => {
+    dispatch(
+      registerUser({
+        token: "lsidjciuhsdyuweduhweiudh",
+        role: "User",
+      })
+    );
   };
 
   return (
@@ -54,6 +58,7 @@ const NavBar = () => {
                 <Link
                   to="/login"
                   className="login-button"
+                  onClick={handleLogin}
                 >
                   Log in
                 </Link>
@@ -62,15 +67,25 @@ const NavBar = () => {
                 </Link>
               </>
             )}
+            {token !== "" && role === "user" && (
+              <Link to="/user-profile">
+                <UserIcon className="user-profile-button" strokeWidth={2} />
+              </Link>
+            )}
+
+            {token !== "" && role === "admin" && (
+              <Link to="/admin-dashboard">
+                <PresentationChartLineIcon className="user-profile-button" />
+              </Link>
+            )}
+
             {token !== "" && (
-              <>
-                <Link to="/user-profile">
-                  <UserIcon className="h-6 w-6" strokeWidth={2} />
-                </Link>
-                <button className="logout-button" onClick={() => dispatch(logout())}>
-                  Log out
-                </button>
-              </>
+              <button
+                className="logout-button"
+                onClick={() => dispatch(logout())}
+              >
+                Log out
+              </button>
             )}
           </div>
         </div>

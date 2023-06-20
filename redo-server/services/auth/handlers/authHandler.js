@@ -64,16 +64,16 @@ export const login = async (req, res) => {
 
 export const updateUser = async (req, res) => {
   try {
-    const { userID } = req.params;
+    const { _id } = req.params;
     const { fullName, email, password } = req.body;
 
     // const hashedPassword = await bcrypt.hash(password, 10);
-    const findUser = await UserModel.findOne({_id: userID})
-    if(!findUser){
+    const findUser = await UserModel.findOne({ _id });
+    if (!findUser) {
       return res.status(404).json({ message: "User not found" });
     }
     const updatedUser = await UserModel.findOneAndUpdate(
-      { _id: userID },
+      { _id },
       {
         fullName,
         email,
@@ -81,12 +81,15 @@ export const updateUser = async (req, res) => {
       { new: true }
     );
 
-    return res.status(200).json({ message: "Successfully updated user", findUser });
+    return res.status(200).json({ message: "Successfully updated user", updateUser });
   } catch (err) {
     console.error(err);
     return res.status(500).json({ message: "Server error" });
   }
 };
+
+
+
 
 
 export const getOneUser = async (req, res) => {
