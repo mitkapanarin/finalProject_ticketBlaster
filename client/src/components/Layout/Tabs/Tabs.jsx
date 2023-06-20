@@ -1,7 +1,12 @@
 import React from "react";
 import "./Tabs.css";
+import { useDispatch } from "react-redux";
+import { logout } from "../../../store/Slices/userSlice";
+
 
 const Tabs = () => {
+const dispatch = useDispatch()
+
   return (
     <nav>
       <ul>
@@ -12,7 +17,12 @@ const Tabs = () => {
           <a href="#">User Details</a>
         </li>
         <li>
-          <a href="#">Logout</a>
+              <button
+                className="logout-button"
+                onClick={() => dispatch(logout())}
+              >
+                Log out
+              </button>
         </li>
       </ul>
     </nav>

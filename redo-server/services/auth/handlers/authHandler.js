@@ -56,11 +56,19 @@ export const login = async (req, res) => {
         expiresIn: process.env.JWT_EXPIRES_IN,
       }
     );
-    res.status(200).json({ message: "user logged in successfully", token, role: findUser.role, _id: findUser._id, email: findUser.email, fullName: findUser.fullName });
+    res.status(200).json({
+      message: "User logged in successfully",
+      token,
+      role: findUser.role,
+      _id: findUser._id,
+      email: findUser.email,
+      fullName: findUser.fullName
+    });
   } catch (err) {
     res.status(500).json({ message: "Server Error", log: err.message });
   }
 };
+
 
 export const updateUser = async (req, res) => {
   try {

@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import "./Navbar.css";
 import { useSelector, useDispatch } from "react-redux";
 // import { resetUserData, registerUser } from "../../../store/Slices/UserData";
-import { logout } from "../../store/Slices/userSlice";
 import {
   UserIcon,
   PresentationChartLineIcon,
+  ShoppingCartIcon
 } from "@heroicons/react/24/outline";
 
 const NavBar = () => {
@@ -72,20 +72,16 @@ const NavBar = () => {
                 <UserIcon className="user-profile-button" strokeWidth={2} />
               </Link>
             )}
-
+            
             {token !== "" && role === "admin" && (
-              <Link to="/admin-dashboard">
-                <PresentationChartLineIcon className="user-profile-button" />
-              </Link>
-            )}
-
-            {token !== "" && (
-              <button
-                className="logout-button"
-                onClick={() => dispatch(logout())}
-              >
-                Log out
-              </button>
+              <>
+                <Link to="/admin-dashboard">
+                  <PresentationChartLineIcon className="user-profile-button" />
+                </Link>
+                <Link to="/shopping-cart">
+                  <ShoppingCartIcon className="user-shopping-button" />
+                </Link>
+              </>
             )}
           </div>
         </div>

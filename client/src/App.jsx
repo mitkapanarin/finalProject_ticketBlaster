@@ -7,6 +7,7 @@ import {
   ProfileDashboard,
   ForgotPassword,
   Signup,
+  ShoppingCart,
 } from "./Pages";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { AdminRoutes, UserRoutes } from "./ProtectedRoutes";
@@ -26,9 +27,11 @@ const App = () => {
 
           <Route element={<UserRoutes />}>
             <Route path="/user-profile" element={<ProfileDashboard />} />
+            <Route path="/shopping-cart" element={<ShoppingCart/>}/>
           </Route>
           <Route element={<AdminRoutes />}>
             <Route path="/admin-dashboard" element={<AdminDashboard />} />
+            <Route path="/shopping-cart" element={<ShoppingCart/>}/>
           </Route>
 
           <Route path="/login" element={<Login />} />

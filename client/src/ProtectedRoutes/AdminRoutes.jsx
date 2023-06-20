@@ -8,7 +8,7 @@ const AdminRoutes = () => {
   return token && role === "Admin" ? (
     <Outlet />
   ) : token ? (
-    <Navigate to="/user-profile" />
+    <Navigate to="/admin-dashboard" />
   ) : (
     <Navigate to="/login" />
   );

@@ -25,7 +25,6 @@ const Login = () => {
       dispatch(login(x?.data))
       toast.success("Logged in successfully")
       navigate("/")
-
     }
     catch (err) {
       console.log("error occured")
