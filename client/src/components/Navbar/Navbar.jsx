@@ -4,22 +4,18 @@ import "./Navbar.css";
 import { useSelector, useDispatch } from "react-redux";
 // import { resetUserData, registerUser } from "../../../store/Slices/UserData";
 import { logout } from "../../store/Slices/userSlice";
+import { UserIcon } from "@heroicons/react/24/outline"
 
 const NavBar = () => {
+
+  const { token, role } = useSelector((state) => state.User);
+
   const dispatch = useDispatch();
-  const state = useSelector((x) => x);
-  const token = state.User.token;
   // const handleLogout = () => {
   //   dispatch(resetUserData());
   // };
 
   const handleLogin = () => {
-    dispatch(
-      registerUser({
-        token: "lsidjciuhsdyuweduhweiudh",
-        role: "User"
-      })
-    );
   };
 
   return (
@@ -58,7 +54,6 @@ const NavBar = () => {
                 <Link
                   to="/login"
                   className="login-button"
-                  onClick={handleLogin}
                 >
                   Log in
                 </Link>
@@ -68,9 +63,14 @@ const NavBar = () => {
               </>
             )}
             {token !== "" && (
-              <button className="logout-button" onClick={() => dispatch(logout())}>
-                Log out
-              </button>
+              <>
+                <Link to="/user-profile">
+                  <UserIcon className="h-6 w-6" strokeWidth={2} />
+                </Link>
+                <button className="logout-button" onClick={() => dispatch(logout())}>
+                  Log out
+                </button>
+              </>
             )}
           </div>
         </div>

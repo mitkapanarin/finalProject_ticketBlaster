@@ -67,22 +67,21 @@ export const updateUser = async (req, res) => {
     const { userID } = req.params;
     const { fullName, email, password } = req.body;
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    // const hashedPassword = await bcrypt.hash(password, 10);
+    const findUser = await UserModel.findOne({_id: userID})
+    if(!findUser){
+      return res.status(404).json({ message: "User not found" });
+    }
     const updatedUser = await UserModel.findOneAndUpdate(
       { _id: userID },
       {
         fullName,
         email,
-        password: hashedPassword,
       },
       { new: true }
     );
 
-    if (!updatedUser) {
-      return res.status(404).json({ message: "User not found" });
-    }
-
-    return res.status(200).json({ message: "Successfully updated user" });
+    return res.status(200).json({ message: "Successfully updated user", findUser });
   } catch (err) {
     console.error(err);
     return res.status(500).json({ message: "Server error" });
