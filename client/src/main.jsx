@@ -20,16 +20,19 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
-import { store } from './store/index.js'
-import { Provider } from 'react-redux'
+import { Provider } from "react-redux";
+import { store, persistedStore } from "./store/index.js";
+import { PersistGate } from "redux-persist/integration/react";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
-      <ToastContainer/>
+      <PersistGate loading={null} persistor={persistedStore}>
+        <App />
+      </PersistGate>
+      <ToastContainer />
     </Provider>
   </React.StrictMode>,
 )

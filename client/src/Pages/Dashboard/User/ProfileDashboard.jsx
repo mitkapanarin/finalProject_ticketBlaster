@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import "./ProfileDashboard.css";
 import Tabs from "../../../components/Layout/Tabs/Tabs";
+import { useSelector, useDispatch } from "react-redux";
 
 const ProfileDashboard = () => {
   const [showPasswordFields, setShowPasswordFields] = useState(false);
   const [password, setPassword] = useState("");
   const [retypePassword, setRetypePassword] = useState("");
+
+  const { fullName, email } = useSelector((state) => state.User);
 
   const handleChangePassword = () => {
     setShowPasswordFields(true);

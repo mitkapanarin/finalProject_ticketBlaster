@@ -35,7 +35,7 @@ const App = () => {
           <Route path="/create-user" element={<Signup />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="*" element={<ErrorPage />} />
-          <Route path="/user-profile" element={<ProfileDashboard />} />
+
         </Routes>
       </div>
       <Footer />

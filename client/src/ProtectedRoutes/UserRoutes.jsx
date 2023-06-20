@@ -4,9 +4,9 @@ import { useSelector, useDispatch } from "react-redux";
 
 const UserRoutes = () => {
   const dispatch = useDispatch();
-  const { token, role } = useSelector((state) => state.userData);
+  const { token, role } = useSelector((state) => state.User);
 
-  return token && role === "User" ? (
+  return token && role === "user" ? (
     <Outlet />
   ) : token ? (
     <Navigate to="/" />

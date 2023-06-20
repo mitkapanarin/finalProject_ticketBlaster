@@ -56,7 +56,7 @@ export const login = async (req, res) => {
         expiresIn: process.env.JWT_EXPIRES_IN,
       }
     );
-    res.status(200).json({ message: "user logged in successfully", token });
+    res.status(200).json({ message: "user logged in successfully", token, role: findUser.role, _id: findUser._id, email: findUser.email, fullName: findUser.fullName });
   } catch (err) {
     res.status(500).json({ message: "Server Error", log: err.message });
   }
@@ -68,8 +68,8 @@ export const updateUser = async (req, res) => {
     const { fullName, email, password } = req.body;
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    const updatedUser = await UserModel.findByIdAndUpdate(
-      userID,
+    const updatedUser = await UserModel.findOneAndUpdate(
+      { _id: userID },
       {
         fullName,
         email,
@@ -133,7 +133,6 @@ export const getAllUsers = async (req, res) => {
   }
 };
 
-// export const forgotPassword = async (req, res) => {
 //   try {
 //     const user = await UserModel.findOne({ email: req.body.email });
 
