@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import InputField from '../../components/Form/InputField';
+import { useNavigate } from 'react-router-dom';
 import "../Checkout/Checkout.css";
 
 
@@ -9,6 +10,8 @@ const Checkout = () => {
     cardNo: "",
     password: ""
 });
+
+const navigate = useNavigate()
 
 const handleInput = (e) => {
     setData({
@@ -23,6 +26,11 @@ const handleSubmit = async (e) => {
 
 const handleLogin = () => {
     navigate("/login");
+  };
+
+  const handleLogout = () => {
+    dispatch(logout());
+    window.location.href = '/';
   };
 
   return (

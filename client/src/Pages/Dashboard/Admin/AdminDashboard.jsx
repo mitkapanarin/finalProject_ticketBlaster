@@ -1,8 +1,11 @@
 import React from 'react'
+import Events from '../../Events/Events'
 
 const AdminDashboard = () => {
   return (
-    <div>AdminDashboard</div>
+    <div>
+      <Events/>
+    </div>
   )
 }
 

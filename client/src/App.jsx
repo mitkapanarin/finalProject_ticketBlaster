@@ -8,6 +8,10 @@ import {
   ForgotPassword,
   Signup,
   ShoppingCart,
+  TicketHistory,
+  Events,
+  AllUsers,
+  AdminDetails,
 } from "./Pages";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { AdminRoutes, UserRoutes } from "./ProtectedRoutes";
@@ -37,6 +41,10 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/create-user" element={<Signup />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/ticket-history" element={<TicketHistory/>}/>
+          <Route path="/events" element={<Events/>}/>
+          <Route path="/all-users" element={<AllUsers/>}/>
+          <Route path="/admin-details" element={<AdminDetails/>}/>
           <Route path="*" element={<ErrorPage />} />
 
         </Routes>

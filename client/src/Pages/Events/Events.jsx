@@ -1,12 +1,19 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import InputField from "../../components/Form/InputField";
 import "../Events/Events.css";
+import { logout } from "../../store/Slices/userSlice";
+import { useNavigate } from 'react-router-dom';
 
 const Events = () => {
   const [data, setData] = useState({
     email: "",
     password: ""
   });
+
+  const dispatch = useDispatch()
+
+  const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,17 +31,24 @@ const Events = () => {
     });
   };
 
+  const handleLogout = () => {
+    dispatch(logout());
+    window.location.href = '/';
+  };
+
   return (
     <div className="card-events-details">
       <div className="navbar-events-details">
         <h2>Events</h2>
         <nav>
           <ul>
-            <li><a href="#">Events</a></li>
-            <li><a href="#">Users</a></li>
-            <li><a href="#">Ticket History</a></li>
-            <li><a href="#">User Details</a></li>
-            <li><a href="#">Logout</a></li>
+            <li><a href="/events">Events</a></li>
+            <li><a href="/all-users">Users</a></li>
+            <li><a href="/ticket-history">Ticket History</a></li>
+            <li><a href="/admin-details">User Details</a></li>
+            <li>
+              <a className="logout-button" onClick={handleLogout}>Logout</a>
+            </li>
           </ul>
         </nav>
       </div>
@@ -172,7 +186,7 @@ const Events = () => {
             <button className="botom-event-card-button">Remove</button>
           </div>
         </div>
-      <button className="botom-right-btn">Save</button>
+        <button className="botom-right-btn">Save</button>
       </div>
     </div>
   );

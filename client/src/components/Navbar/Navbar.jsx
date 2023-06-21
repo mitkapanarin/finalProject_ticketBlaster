@@ -68,18 +68,23 @@ const NavBar = () => {
               </>
             )}
             {token !== "" && role === "user" && (
-              <Link to="/user-profile">
-                <UserIcon className="user-profile-button" strokeWidth={2} />
-              </Link>
-            )}
-            
-            {token !== "" && role === "admin" && (
               <>
-                <Link to="/admin-dashboard">
-                  <PresentationChartLineIcon className="user-profile-button" />
-                </Link>
                 <Link to="/shopping-cart">
                   <ShoppingCartIcon className="user-shopping-button" />
+                </Link>
+                <Link to="/user-profile">
+                  <UserIcon className="user-profile-button" strokeWidth={2} />
+                </Link>
+              </>
+            )}
+
+            {token !== "" && role === "admin" && (
+              <>
+                <Link to="/shopping-cart">
+                  <ShoppingCartIcon className="user-shopping-button" />
+                </Link>
+                <Link to="/admin-dashboard">
+                  <PresentationChartLineIcon className="user-profile-button" />
                 </Link>
               </>
             )}
