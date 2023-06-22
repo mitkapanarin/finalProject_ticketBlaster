@@ -95,3 +95,31 @@
 .checkout-right-section{
   width: 357px;
 }
+
+.checkout-bottom-section{
+  display: flex;
+  justify-content: space-between;
+}
+
+.back-bottom-btn {
+  background-color: black;
+  color: white;
+  border-radius: 20px;
+  width: 126px;
+  padding: 5px;
+  cursor: pointer;
+  margin-bottom: 100px;
+  margin-top: 330px;
+}
+
+.checkout-bottom-btn {
+  background-color: #ff00ff;
+  color: white;
+  border-radius: 20px;
+  width: 126px;
+  padding: 5px;
+  cursor: pointer;
+  border: #ff00ff;
+  margin-bottom: 100px;
+  margin-top: 330px;
+}

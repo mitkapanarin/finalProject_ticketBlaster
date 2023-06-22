@@ -103,6 +103,10 @@ const handleLogin = () => {
           className="checkout-input"
         />
       </div>
+      <div className="checkout-bottom-section" >
+        <button className="back-bottom-btn">Back</button>
+        <button className="checkout-bottom-btn">Checkout</button>
+      </div>
     </div>
   );
 };

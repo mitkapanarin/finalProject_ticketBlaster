@@ -5,6 +5,8 @@ import TopCard from "../../components/TopCard/TopCard";
 import "./Home.css";
 import Checkout from "../Checkout/Checkout";
 import ShoppingCart from "../ShoppingCart/ShoppingCart";
+import Purchase from "../Purchase/Purchase";
+import PrintModal from "../../components/PrintModal/PrintModal";
 
 const Home = () => {
   return (
@@ -28,6 +30,8 @@ const Home = () => {
       </div>
       <Checkout/>
       <ShoppingCart/>
+      <Purchase/>
+      <PrintModal/>
     </div>
   );
 };
