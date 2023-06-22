@@ -49,7 +49,6 @@ const handleLogin = () => {
             <h5 className="left-checkout-card-title">Name of artist</h5>
             <p className="left-checkout-card-date">June 9th 2023</p>
             <p className="left-checkout-card-location">Skopje, Macedonia</p>
-            <button className="left-checkout-card-button">Remove</button>
           </div>
         </div>
         <div className="checkout-price">

@@ -1,2 +1,2 @@
 
-in app.jas temporay added Event.jsx and Checkout.jsx
+in app.jas temporay added ShoppingCart.jsx and Checkout.jsx

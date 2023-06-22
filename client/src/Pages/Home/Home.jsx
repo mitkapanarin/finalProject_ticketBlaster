@@ -1,12 +1,10 @@
 import React from "react";
 import Cards from "../../components/Cards/Cards";
 import { concerts } from "../../temporaryDB";
-import { comedies } from "../../comediesTemporaryDb";
 import TopCard from "../../components/TopCard/TopCard";
-import ProfileDashboard from "../Dashboard/User/ProfileDashboard";
-import Events from "../Events/Events";
 import "./Home.css";
 import Checkout from "../Checkout/Checkout";
+import ShoppingCart from "../ShoppingCart/ShoppingCart";
 
 const Home = () => {
   return (
@@ -29,6 +27,7 @@ const Home = () => {
         </div>
       </div>
       <Checkout/>
+      <ShoppingCart/>
     </div>
   );
 };
