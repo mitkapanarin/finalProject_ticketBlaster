@@ -10,7 +10,7 @@ export const eventApi = createApi({
 
   // Define a base query to use for all requests, with the base URL for the API
   baseQuery: fetchBaseQuery({
-    baseUrl: `${import.meta.env.VITE_APP_API_BASE_URL}/events`, // we imprt this from the client/.env
+    baseUrl: `${import.meta.env.VITE_APP_API_EVENT_URL}/api/v1/events`, // we imprt this from the client/.env
   }), //we use import.meta.env instead f process.env beacuse this is Vite project, not React
 
   // Define the expected endpoints for this API, using a builder object
@@ -49,4 +49,9 @@ export const eventApi = createApi({
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useCreateEventMutation, useGetEventQuery, useUpdateEventMutation, useGetAllEventsQuery } = eventApi
+export const {
+  useCreateEventMutation,
+  useGetEventQuery,
+  useUpdateEventMutation,
+  useGetAllEventsQuery,
+} = eventApi;

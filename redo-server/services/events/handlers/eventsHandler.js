@@ -6,12 +6,12 @@ import bcrypt from "bcryptjs";
 export const createEvent = async (req, res) => {
   const {
     role,
-    // eventName,
-    // eventDescription,
-    // eventDate,
-    // price,
-    // eventLocation,
-    // eventType,
+    eventName,
+    eventDescription,
+    eventDate,
+    price,
+    eventLocation,
+    eventType,
   } = req.body;
   try {
     if (role !== "admin") {

@@ -5,7 +5,13 @@ import storage from "redux-persist/lib/storage";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import { userApi } from "./API/userApi";
 import { userSlice } from "./Slices/userSlice";
-import { eventApi } from "./API/eventApi";
+import {
+  eventApi,
+  useCreateEventMutation,
+  useGetEventQuery,
+  useUpdateEventMutation,
+  useGetAllEventsQuery,
+} from "./API/eventApi";
 
 // Configures the Redux store with the reducers and middleware
 
@@ -34,3 +40,11 @@ export const persistedStore = persistStore(store);
 
 // Sets up the listeners for the store, allowing RTK Query to automatically handle cache updates and error handling
 setupListeners(store.dispatch);
+
+export {
+  // event API actions
+  useCreateEventMutation,
+  useGetEventQuery,
+  useUpdateEventMutation,
+  useGetAllEventsQuery,
+};
