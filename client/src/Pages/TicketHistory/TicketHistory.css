@@ -1,0 +1,33 @@
+.card-ticket-history-details {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+  
+  .navbar-ticket-history-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .navbar-ticket-history-details ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+  }
+  
+  .navbar-ticket-history-details li {
+    margin-right: 10px;
+  }
+  
+  .navbar-ticket-history-details a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+
+  }
+  
+  

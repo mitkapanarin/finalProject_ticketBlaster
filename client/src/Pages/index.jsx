@@ -11,7 +11,7 @@ import Events from "./Events/Events";
 import AllUsers from "./AllUsers/AllUsers";
 import AdminDetails from "./AdminDetails/AdminDetails";
 import Purchase from "./Purchase/Purchase";
-
+import EventDetails from "./EventDetails/EventDetails"
 export {
   Signup,
   ForgotPassword,
@@ -26,4 +26,5 @@ export {
   AllUsers,
   AdminDetails,
   Purchase,
+  EventDetails,
 };
