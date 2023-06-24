@@ -1,31 +1,23 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import InputField from "../Form/InputField";
 import "./Events.css";
 
 const Events = ({ handleSubmit, handleInput, data }) => {
 
+  const dispatch = useDispatch()
+
   return (
     <div className="card-events-details">
       <div className="navbar-events-details">
         <h2>Events</h2>
-        {/* Tabs */}
         <nav>
           <ul>
-            <li>
-              <a href="#">Events</a>
-            </li>
-            <li>
-              <a href="#">Users</a>
-            </li>
-            <li>
-              <a href="#">Ticket History</a>
-            </li>
-            <li>
-              <a href="#">User Details</a>
-            </li>
-            <li>
-              <a href="#">Logout</a>
-            </li>
+            <li><a href="/events">Events</a></li>
+            <li><a href="/all-users">Users</a></li>
+            <li><a href="/ticket-history">Ticket History</a></li>
+            <li><a href="/admin-details">User Details</a></li>
+            <li><a onClick={() => dispatch(logout())} >Logout</a></li>
           </ul>
         </nav>
       </div>
@@ -55,7 +47,6 @@ const Events = ({ handleSubmit, handleInput, data }) => {
               <option value="comedy">Stand-Up Comedy</option>
             </select>
           </div>
-
           <InputField
             className="inputField"
             type="date"
@@ -102,6 +93,16 @@ const Events = ({ handleSubmit, handleInput, data }) => {
                 label="Event price"
               />
             </div>
+            <InputField
+              className="inputField"
+              type="text"
+              name="eventLocation"
+              value={data.eventLocation}
+              onChange={handleInput}
+              placeholder="Event Location"
+              required={true}
+              label="Event Location"
+            />
           </div>
         </div>
         <div className="related-events">

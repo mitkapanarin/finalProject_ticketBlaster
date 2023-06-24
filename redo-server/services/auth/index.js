@@ -13,9 +13,9 @@ app.use(cors());
 app.post("/api/v1/auth/create-user", signup);
 app.post("/api/v1/auth/login", login);
 app.put("/api/v1/auth/update-user/:_id", updateUser);
-app.get("/api/v1/auth/get-one-user/:userID", getOneUser);
+app.get("/api/v1/auth/get-one-user/:_id", getOneUser);
 app.get("/api/v1/auth/get-all-users", getAllUsers);
-app.delete("/api/v1/auth/delete-user/:userID", deleteUser);
+app.delete("/api/v1/auth/delete-user/:_id", deleteUser);
 
 // app.post("/api/v1/auth/forgot-password", forgotPassword);
 // app.post("/api/v1/auth/reset-password", resetPassword);

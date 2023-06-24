@@ -5,11 +5,10 @@ import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 
 export const initialEventFormState = {
-  role: "",
   eventName: "",
   eventDescription: "",
   price: 0,
-  eventLocation: "local, host",
+  eventLocation: "",
   eventType: "",
   eventDate: new Date(),
 };
@@ -20,13 +19,14 @@ const AdminDashboard = () => {
 
   const [data, setData] = useState(initialEventFormState);
 
-  console.log(data);
+  // console.log(data);
   const [createEvent, { isLoading, isError, error }] = useCreateEventMutation();
   const handleInput = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(data)
     try {
       await toast.promise(createEvent(data), {
         pending: "Creating Event",
