@@ -11,6 +11,9 @@ import AllUsers from "./AllUsers/AllUsers";
 import AdminDetails from "./AdminDetails/AdminDetails";
 import Purchase from "./Purchase/Purchase";
 import EventDetails from "./EventDetails/EventDetails"
+import GetAllEvents from "./GetAllEvents/GetAllEvents";
+import StandUpComedies from "./StandUpComedies/StandUpComedies";
+import MusicalConcerts from "./MusicalConcerts/MusicalConcerts";
 export {
   Signup,
   ForgotPassword,
@@ -25,4 +28,7 @@ export {
   AdminDetails,
   Purchase,
   EventDetails,
+  GetAllEvents,
+  StandUpComedies,
+  MusicalConcerts
 };

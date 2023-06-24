@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import InputField from "../Form/InputField";
 import "./Events.css";
 
@@ -12,12 +13,22 @@ const Events = ({ handleSubmit, handleInput, data }) => {
       <div className="navbar-events-details">
         <h2>Events</h2>
         <nav>
-          <ul>
-            <li><a href="/events">Events</a></li>
-            <li><a href="/all-users">Users</a></li>
-            <li><a href="/ticket-history">Ticket History</a></li>
-            <li><a href="/admin-details">User Details</a></li>
-            <li><a onClick={() => dispatch(logout())} >Logout</a></li>
+        <ul>
+            <li>
+              <Link to="/events">Events</Link>
+            </li>
+            <li>
+              <Link to="/all-users">Users</Link>
+            </li>
+            <li>
+              <Link to="/ticket-history">Ticket History</Link>
+            </li>
+            <li>
+              <Link to="/admin-details">User Details</Link>
+            </li>
+            <li>
+              <a onClick={() => dispatch(logout())}>Logout</a>
+            </li>
           </ul>
         </nav>
       </div>
@@ -33,7 +44,6 @@ const Events = ({ handleSubmit, handleInput, data }) => {
             required={true}
             label="Event Name"
           />
-
           <div>
             <label htmlFor="eventType">Category:</label>
             <select

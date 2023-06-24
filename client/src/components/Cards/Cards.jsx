@@ -7,6 +7,7 @@ const Cards = ({
   date = "",
   description = "",
   location = { city: "", country: "" },
+  btnText = ""
 }) => {
   return (
     <div className="card-parent">
@@ -25,7 +26,7 @@ const Cards = ({
           <h6 className="location">
             {location.city}, {location.country}
           </h6>
-          <button className="black-button">Get ticket</button>
+          <button className="black-button">{btnText}</button>
         </div>
       </div>
     </div>

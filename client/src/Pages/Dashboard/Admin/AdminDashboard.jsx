@@ -3,6 +3,7 @@ import Events from "../../../components/Events/Events";
 import { useCreateEventMutation } from "../../../store/index";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
+import GetAllEvents from "../../GetAllEvents/GetAllEvents";
 
 export const initialEventFormState = {
   eventName: "",
@@ -46,6 +47,7 @@ const AdminDashboard = () => {
         handleSubmit={handleSubmit}
         handleInput={handleInput}
       />
+      <GetAllEvents/>
     </div>
   );
 };
