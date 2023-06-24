@@ -1,14 +1,18 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../../store/Slices/userSlice";
-
+import AllEventsCard from "../../components/AllEventsCard/AllEventsCard";
+import {useGetAllEventsQuery} from "../../store/API/eventApi"
 import "./GetAllEvents.css";
 
 const GetAllEvents = () => {
 
+  const store = useSelector(x=>x)
+  console.log(store)
   const dispatch = useDispatch()
-
+  const {data} = useGetAllEventsQuery()
+  console.log(data)
   return (
     <div className="card-all-events-details">
       <div className="navbar-all-events-details">
@@ -36,7 +40,9 @@ const GetAllEvents = () => {
           </ul>
         </nav>
       </div>
-      <div className="botom-all-events-card-container">
+      {Array.isArray(data) &&
+        data.map((item) => <AllEventsCard _id={item._id} {...item} />)}
+      {/* <div className="botom-all-events-card-container">
         <div className="botom-all-events-card-content">
           <img
             className="botom-all-events-card-image"
@@ -54,7 +60,7 @@ const GetAllEvents = () => {
           </div>
         </div>
         <button className="botom-all-events-card-button">Delete Event</button>
-      </div>
+      </div> */}
     </div>
   );
 };
