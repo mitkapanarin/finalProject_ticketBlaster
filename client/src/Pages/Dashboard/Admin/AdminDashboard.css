@@ -1,10 +1,10 @@
-.card-all-users-details {
+.card-all-events-details {
     display: flex;
     flex-direction: column;
     margin: 30px 60px;
 }
 
-.navbar-all-users-details {
+.navbar-all-events-details {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -15,11 +15,11 @@
     display: flex;
 }
 
-.navbar-all-users-details h2 {
+.navbar-all-events-details h2 {
     margin-right: auto;
 }
 
-.navbar-all-users-details ul {
+.navbar-all-events-details ul {
     list-style-type: none;
     padding: 0;
     margin: 0;
@@ -27,18 +27,18 @@
     align-items: center;
 }
 
-.navbar-all-users-details li {
+.navbar-all-events-details li {
     margin-left: 15px;
 }
 
-.navbar-all-users-details a {
+.navbar-all-events-details a {
     text-decoration: none;
     color: #333;
     font-weight: bold;
     cursor: pointer;
 }
 
-.all-users-btn {
+.all-events-btn {
     background-color: #ff00ff;
     border: none;
     color: white;
@@ -50,7 +50,7 @@
     margin-bottom: 15px;
 }
 
-.botom-all-users-card-container {
+.botom-all-events-card-container {
     display: flex;
     margin-top: 15px;
     align-items: center;
@@ -60,14 +60,14 @@
 }
 
 
-.botom-all-users-card-image {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
+.botom-all-events-card-image {
+    width: 200px;
+    height: 153px;
+    border-radius: 20px;
     object-fit: cover;
 }
 
-.botom-all-users-card-content {
+.botom-all-events-card-content {
     padding: 16px;
     display: flex;
     align-items: center;
@@ -81,23 +81,23 @@
     margin-top: 10px;
 }
 
-.botom-all-users-card-title {
+.botom-all-events-card-title {
     font-size: 24px;
     font-weight: bold;
 }
 
-.botom-all-users-card-date {
+.botom-all-events-card-date {
     color: #ff00ff;
     font-size: 18px;
     font-weight: bold;
 }
 
-.botom-all-users-card-location {
+.botom-all-events-card-location {
     font-size: 14px;
     font-weight: bold;
 }
 
-.botom-all-users-card-button {
+.botom-all-events-card-button {
     padding: 8px 16px;
     background-color: black;
     color: white;
@@ -105,15 +105,4 @@
     border-radius: 20px;
     margin-top: 16px;
     cursor: pointer;
-}
-
-.botom-all-users-action-button{
-    padding: 8px 16px;
-    color: #ff00ff;;
-    border: none;
-    border-radius: 20px;
-    margin-top: 16px;
-    cursor: pointer;
-    border: 1px solid #ff00ff;
-    margin-right: 10px;
 }

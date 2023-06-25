@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import "./AdminDetails.css";
+import "./UpdateUserDetails.css";
 import { useSelector, useDispatch } from "react-redux";
 import { useUpdateUserMutation } from "../../store/API/userApi";
 import { logout } from "../../store/Slices/userSlice";
 import { toast } from "react-toastify";
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from "react-router-dom";
+import InputField from "../../components/Form/InputField";
 
-const AdminDetails = () => {
+const UpdateUserDetails = () => {
   const [updateUser] = useUpdateUserMutation();
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -60,14 +61,26 @@ const AdminDetails = () => {
   return (
     <div className="card-user-details">
       <div className="navbar-user-details">
-        <h2>User Details</h2>
+        <div className="h-b">
+          <h2>User Details</h2>
+        </div>
         <nav>
           <ul>
-            <li><a href="/events">Events</a></li>
-            <li><a href="/all-users">Users</a></li>
-            <li><a href="/ticket-history">Ticket History</a></li>
-            <li><a href="/admin-details">User Details</a></li>
-            <li><a onClick={() => dispatch(logout())} >Logout</a></li>
+            <li>
+              <Link to="/admin-dashboard">Events</Link>
+            </li>
+            <li>
+              <Link to="/all-users">Users</Link>
+            </li>
+            <li>
+              <Link to="/ticket-history">Ticket History</Link>
+            </li>
+            <li>
+              <Link to="/update-user-details">User Details</Link>
+            </li>
+            <li>
+              <a onClick={() => dispatch(logout())}>Logout</a>
+            </li>
           </ul>
         </nav>
       </div>
@@ -81,15 +94,15 @@ const AdminDetails = () => {
             />
           </div>
           <div className="right-user-details">
-            <label htmlFor="full-name-user">Full Name</label>
-            <input
-              id="full-name-user"
+            <InputField
+              className="inputField"
               type="text"
-              className="input-field-user"
-              placeholder="Enter your full name"
-              value={userData?.fullName}
               name="fullName"
+              value={userData?.fullName}
               onChange={handleUserDataChange}
+              placeholder="Full Name"
+              required={true}
+              label="Full Name"
             />
           </div>
         </div>
@@ -98,15 +111,15 @@ const AdminDetails = () => {
             <button className="upload-avatar-button-user">Upload Avatar</button>
           </div>
           <div className="right-user-details">
-            <label htmlFor="email-user">Email</label>
-            <input
-              id="email-user"
+            <InputField
+              className="inputField"
               type="email"
               name="email"
-              className="input-field-user"
-              placeholder="Enter your email"
               value={userData?.email}
               onChange={handleUserDataChange}
+              placeholder="Enter your email"
+              required={true}
+              label="Email"
             />
           </div>
         </div>
@@ -133,23 +146,25 @@ const AdminDetails = () => {
       {showPasswordFields && (
         <>
           <div className="password-fields">
-            <label className="label-psw" htmlFor="password">Password</label>
-            <input
-              id="password"
+          <InputField
+              className="inputField"
               type="password"
-              className="input-field-user"
-              placeholder="Enter your new password"
-              value={password}
+              name="Password"
+              value={userData?.password}
               onChange={(e) => setPassword(e.target.value)}
+              placeholder="Enter your new Password"
+              required={true}
+              label="Password"
             />
-            <label className="label-psw" htmlFor="retype-password">Re-Type Password</label>
-            <input
-              id="retype-password"
+          <InputField
+              className="inputField"
               type="password"
-              className="input-field-user"
-              placeholder="Re-type your new password"
-              value={retypePassword}
-              onChange={(e) => setRetypePassword(e.target.value)}
+              name="Password"
+              value={userData?.password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Re-type your new Password"
+              required={true}
+              label="Re-Type Password"
             />
           </div>
           <button
@@ -164,4 +179,4 @@ const AdminDetails = () => {
   );
 };
 
-export default AdminDetails;
+export default UpdateUserDetails;

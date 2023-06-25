@@ -3,7 +3,7 @@ in app.jas temporay added ShoppingCart.jsx and Checkout.jsx
 
 
 
-when i am loged in as admin firs I should see Get All Events, and when I click on btn Create Event I should see AdminDashboard ?????????
+when i am logged in as admin first I should see Get All Events, and when I click on btn Create Event I should see AdminDashboard ?????????
 
 
 

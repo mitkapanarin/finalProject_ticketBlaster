@@ -21,6 +21,11 @@ export const userApi = createApi({
       providesTags: ["Users"], // if we have a query, we use providesTags
     }),
 
+    getAllUsers: builder.query({
+      query: () => "/get-all-users",
+      providesTags: ["Users"],
+    }),
+
     updateUser: builder.mutation({
       query: (body) => ({
         url: `/update-user/${body._id}`,
@@ -57,4 +62,5 @@ export const {
   useGetUserQuery,
   useLoginUserMutation,
   useUpdateUserMutation,
+  useGetAllUsersQuery,
 } = userApi;

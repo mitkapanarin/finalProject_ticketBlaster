@@ -1,55 +1,77 @@
-import React, { useState } from "react";
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { logout } from "../../../store/Slices/userSlice";
+import { useGetAllEventsQuery } from "../../../store/API/eventApi";
+import "./AdminDashboard.css";
 import Events from "../../../components/Events/Events";
-import { useCreateEventMutation } from "../../../store/index";
-import { toast } from "react-toastify";
-import { useSelector } from "react-redux";
-import GetAllEvents from "../../GetAllEvents/GetAllEvents";
-
-export const initialEventFormState = {
-  eventName: "",
-  eventDescription: "",
-  price: 0,
-  eventLocation: "",
-  eventType: "",
-  eventDate: new Date(),
-};
 
 const AdminDashboard = () => {
-  const store = useSelector((state) => state);
+  const store = useSelector((x) => x);
   console.log(store);
+  const dispatch = useDispatch();
+  const { data } = useGetAllEventsQuery();
+  console.log(data);
 
-  const [data, setData] = useState(initialEventFormState);
+  const navigate = useNavigate();
 
-  // console.log(data);
-  const [createEvent, { isLoading, isError, error }] = useCreateEventMutation();
-  const handleInput = (e) => {
-    setData({ ...data, [e.target.name]: e.target.value });
+  const handleCreateEvent = () => {
+    navigate("/create-event");
   };
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    console.log(data)
-    try {
-      await toast.promise(createEvent(data), {
-        pending: "Creating Event",
-        success: "Event Created",
-        error: "Error Creating Event",
-      });
-      setData(initialEventFormState);
-    } catch (err) {
-      console.log(err);
-      toast.error("Error Creating Event");
-    }
-  };
+
   return (
-    <div>
-      <Events
-        data={data}
-        handleSubmit={handleSubmit}
-        handleInput={handleInput}
-      />
-      <GetAllEvents/>
-    </div>
-  );
-};
+    <div className="card-all-events-details">
+      <div className="navbar-all-events-details">
+        <div className="h-b">
+          <h2>Events</h2>
+          <button className="all-events-btn" onClick={handleCreateEvent}>
+            Create Event
+          </button>
+        </div>
+        <nav>
+          <ul>
+            <li>
+              <Link to="/admin-dashboard">Events</Link>
+            </li>
+            <li>
+              <Link to="/all-users">Users</Link>
+            </li>
+            <li>
+              <Link to="/ticket-history">Ticket History</Link>
+            </li>
+            <li>
+              <Link to="/update-user-details">User Details</Link>
+            </li>
+            <li>
+              <a onClick={() => dispatch(logout())}>Logout</a>
+            </li>
+          </ul>
+        </nav>
+        </div>
+        {/* {Array.isArray(data) &&
+          data.map((item) => <AllEventsCard _id={item._id} image={image} eventName={eventName} eventDate={eventDate} eventLocation={eventLocation} button={button} />)} */}
+    <div className="botom-all-events-card-container"> 
+          <div className="botom-all-events-card-content">
+            <img
+              className="botom-all-events-card-image"
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/World_Map_%28political%29.svg/1024px-World_Map_%28political%29.svg.png"
+              alt="World Map"
+              width="200"
+              height="153"
+            />
+            <div className="parent">
+              <h5 className="botom-all-events-card-title">Name of artist</h5>
+              <div className="p-div">
+                <p className="botom-all-events-card-date">June 9th 2023</p>
+                <p className="botom-all-events-card-location">Skopje, Macedonia</p>
+              </div>
+            </div>
+          </div>
+          <button className="botom-all-events-card-button">Delete Event</button>
+        </div>
+      </div>
+    );
+  };
+  
 
 export default AdminDashboard;

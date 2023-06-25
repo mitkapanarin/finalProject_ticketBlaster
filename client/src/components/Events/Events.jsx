@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import InputField from "../Form/InputField";
+import { logout } from "../../store/Slices/userSlice";
 import "./Events.css";
 
 const Events = ({ handleSubmit, handleInput, data }) => {
@@ -15,7 +16,7 @@ const Events = ({ handleSubmit, handleInput, data }) => {
         <nav>
         <ul>
             <li>
-              <Link to="/events">Events</Link>
+              <Link to="/admin-dashboard">Events</Link>
             </li>
             <li>
               <Link to="/all-users">Users</Link>
@@ -24,7 +25,7 @@ const Events = ({ handleSubmit, handleInput, data }) => {
               <Link to="/ticket-history">Ticket History</Link>
             </li>
             <li>
-              <Link to="/admin-details">User Details</Link>
+              <Link to="/update-user-details">User Details</Link>
             </li>
             <li>
               <a onClick={() => dispatch(logout())}>Logout</a>
