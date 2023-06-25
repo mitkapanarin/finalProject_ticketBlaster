@@ -4,40 +4,6 @@
     margin: 30px 60px;
 }
 
-.navbar-all-users-details {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 30px;
-}
-
-.h-b {
-    display: flex;
-}
-
-.navbar-all-users-details h2 {
-    margin-right: auto;
-}
-
-.navbar-all-users-details ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    align-items: center;
-}
-
-.navbar-all-users-details li {
-    margin-left: 15px;
-}
-
-.navbar-all-users-details a {
-    text-decoration: none;
-    color: #333;
-    font-weight: bold;
-    cursor: pointer;
-}
-
 .all-users-btn {
     background-color: #ff00ff;
     border: none;

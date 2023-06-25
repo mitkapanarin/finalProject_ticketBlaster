@@ -6,10 +6,9 @@ const initialState = {
   token: "",
   _id: "",
 };
-// Defining the initial state object with properties retrieved from "readData"
-// If any property is missing or undefined, it falls back to an empty string
 
-export const userSlice = createSlice({ // Creating a Redux slice named "userSlice" with initial state and reducer functions
+
+export const userSlice = createSlice({ 
   name: "User",
   initialState,
   reducers: {
@@ -29,4 +28,3 @@ export const userSlice = createSlice({ // Creating a Redux slice named "userSlic
 });
 
 export const { login, logout, updateUserStateData } = userSlice.actions;
-// Exporting the generated action creators for the login, logout, and updateUserStateData reducers

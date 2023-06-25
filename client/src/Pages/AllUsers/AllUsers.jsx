@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../../store/Slices/userSlice";
 import { useGetAllUsersQuery } from "../../store/API/userApi";
 import "./AllUsers.css";
+import AdminTab from "../../components/Layout/AdminTab/AdminTab";
 
 const AllUsers = () => {
   const store = useSelector((x) => x);
@@ -17,30 +18,7 @@ const AllUsers = () => {
 
   return (
     <div className="card-all-users-details">
-      <div className="navbar-all-users-details">
-        <div className="h-b">
-          <h2>Users</h2>
-        </div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/admin-dashboard">Events</Link>
-            </li>
-            <li>
-              <Link to="/all-users">Users</Link>
-            </li>
-            <li>
-              <Link to="/ticket-history">Ticket History</Link>
-            </li>
-            <li>
-              <Link to="/update-user-details">User Details</Link>
-            </li>
-            <li>
-              <a onClick={() => dispatch(logout())}>Logout</a>
-            </li>
-          </ul>
-        </nav>
-      </div>
+<AdminTab pageName={"Users"}/>
       {/* {Array.isArray(data) &&
           data.map((item) => <AllEventsCard _id={item._id} image={image} eventName={eventName} eventDate={eventDate} eventLocation={eventLocation} button={button} />)} */}
       <div className="botom-all-users-card-container">

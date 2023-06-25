@@ -2,27 +2,22 @@ import React from "react";
 import "./Tabs.css";
 import { useDispatch } from "react-redux";
 import { logout } from "../../../store/Slices/userSlice";
-import { useNavigate } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 const Tabs = () => {
 const dispatch = useDispatch();
-const navigate = useNavigate()
-const handleLogout = () => {
-  dispatch(logout());
-  window.location.href = '/';
-};
 
   return (
     <nav>
       <ul>
-        <li>
-          <a href="/ticket-history">Ticket History</a>
+      <li>
+          <Link to="/ticket-history">Ticket History</Link>
         </li>
         <li>
-          <a href="/user-profile">User Details</a>
+          <Link to="/user-profile">User Details</Link>
         </li>
-         <li>
-          <a className="logout-button" onClick={handleLogout}>Logout</a>
+        <li>
+          <a onClick={() => dispatch(logout())}>Logout</a>
         </li>
       </ul>
     </nav>
