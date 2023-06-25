@@ -1,11 +1,11 @@
 
-in app.jas temporay added ShoppingCart.jsx and Checkout.jsx
+in home.jas temporay added Checkout.jsx (dont know where should be added?)
 
 
-
-when i am logged in as admin first I should see Get All Events, and when I click on btn Create Event I should see AdminDashboard ?????????
-
-
-
-
-i Should use component Card in every page that is needed????
+Create acount---done
+Login as admin---done
+Login as user---done
+Update user Details---done (it is working, user data are updated in database) 
+In page Update User Details button CHANGE PASSWORD it is not working???
+Admin can Create Event----done (event is saved in database) (Events are created without image, I didnt know how to save images in database??)
+When user is logged in he shouldnt see btn CREATE EVENT (how to hide that???) He also shouldnt be able to see EVENTS and USERS from nav bar
