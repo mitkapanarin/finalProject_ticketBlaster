@@ -143,8 +143,60 @@ export const getAllUsers = async (req, res) => {
 };
 
 
+export const forgotPassword = async (req, res) => {
+  const { email } = req.body;
+
+  try {
+    // Find the user by their email
+    const user = await UserModel.findOne({ email });
+
+    if (!user) {
+      // User with the given email does not exist
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Generate a password reset token (e.g., using uuid or random string generator)
+    const resetToken = generateResetToken();
+
+    // Save the reset token and its expiration in the user document
+    user.resetToken = resetToken;
+    user.resetTokenExpiration = Date.now() + 3600000; // Token expires in 1 hour
+    await user.save();
+
+    // Send an email to the user with the reset password instructions
+    sendResetPasswordEmail(user.email, resetToken);
+
+    return res.status(200).json({ message: 'Password reset instructions sent' });
+  } catch (error) {
+    return res.status(500).json({ message: 'Server Error', log: error.message });
+  }
+};
 
 
+export const resetPassword = async (req, res) => {
+  const { resetToken, newPassword } = req.body;
 
+  try {
+    // Find the user with the given reset token and token expiration
+    const user = await UserModel.findOne({
+      resetToken,
+      resetTokenExpiration: { $gt: Date.now() },
+    });
 
+    if (!user) {
+      // Invalid or expired token
+      return res.status(400).json({ message: 'Invalid or expired reset token' });
+    }
 
+    // Update the user's password with the new password
+    const hashedPassword = await bcrypt.hash(newPassword, 12);
+    user.password = hashedPassword;
+    user.resetToken = undefined;
+    user.resetTokenExpiration = undefined;
+    await user.save();
+
+    return res.status(200).json({ message: 'Password reset successful' });
+  } catch (error) {
+    return res.status(500).json({ message: 'Server Error', log: error.message });
+  }
+};

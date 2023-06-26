@@ -5,12 +5,12 @@ import { logout } from "../../../store/Slices/userSlice";
 import { Link } from "react-router-dom";
 
 const Tabs = () => {
-const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   return (
     <nav>
       <ul>
-      <li>
+        <li>
           <Link to="/ticket-history">Ticket History</Link>
         </li>
         <li>
