@@ -1,8 +1,7 @@
 import express from "express";
-import { login, signup, updateUser, getOneUser, getAllUsers, deleteUser } from "./handlers/authHandler.js";
+import { login, signup, updateUser, getOneUser, getAllUsers, deleteUser, forgotPassword, resetPassword } from "./handlers/authHandler.js";
 import cors from "cors";
 import { initializeDatabase } from "../../pkg/db/index.js";
-import { forgotPassword, resetPassword } from './handlers/authHandler.js'; // Import the forgotPassword and resetPassword functions
 
 const app = express();
 
