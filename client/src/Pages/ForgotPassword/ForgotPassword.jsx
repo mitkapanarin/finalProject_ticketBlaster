@@ -1,26 +1,28 @@
-import './ForgotPassword.css';
 import React, { useState } from 'react';
+import { useForgotPasswordMutation } from '../../store/API/userApi';
 import InputField from '../../components/Form/InputField';
-import axios from 'axios';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 const ForgotPassword = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
+  const forgotPasswordMutation = useForgotPasswordMutation();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      // Send a request to the server to initiate the password reset process
-      await axios.post('/api/v1/auth/forgot-password', { email });
-      alert('Password reset instructions sent');
+      await forgotPasswordMutation.mutateAsync(email);
+      toast.success('Password reset instructions sent');
     } catch (error) {
-      alert('Failed to send password reset instructions');
+      toast.error('Failed to send password reset instructions');
       console.log(error);
     }
   };
 
   const handleBackToLogin = () => {
-    // Handle navigation to the login page
+    navigate('/login');
   };
 
   return (
@@ -43,10 +45,10 @@ const ForgotPassword = () => {
                 <button type="submit" className="btn-password-reset-email">
                   Send password reset email
                 </button>
-                <button type="button" className="back-to-login" onClick={handleBackToLogin}>
-                  Back to login
-                </button>
               </form>
+              <button className="btn-back-to-login" onClick={handleBackToLogin}>
+                Back to Login
+              </button>
             </div>
           </div>
         </div>

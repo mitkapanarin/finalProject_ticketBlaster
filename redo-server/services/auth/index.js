@@ -19,6 +19,7 @@ app.delete("/api/v1/auth/delete-user/:_id", deleteUser);
 app.post('/api/v1/auth/forgot-password', forgotPassword);
 app.post('/api/v1/auth/reset-password', resetPassword);
 
+
 app.listen(process.env.PORT_AUTH, () =>
   console.log(`Auth server listening on port ${process.env.PORT_AUTH}`)
 );

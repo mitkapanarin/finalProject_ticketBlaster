@@ -1,22 +1,31 @@
-// server/utils/resetPassword.js
+import nodemailer from 'nodemailer';
 
-const nodemailer = require('nodemailer');
 
 // Send Reset Password Email
-const sendResetPasswordEmail = (email, resetToken) => {
+export const sendResetPasswordEmail = (email, resetToken) => {
   const transporter = nodemailer.createTransport({
-  host: "mail.ekhein-llc.com ",
+  host: "mail.ekhein-llc.com", //ovde izmeni
   port: 465,
   secure: true,
-
     auth: {
-      user: 'app-test@ekhein-llc.com',
-      pass: 'FNeuJv!56%[D',
+      user: 'app-test@ekhein-llc.com', //ovde izmeni
+      pass: 'FNeuJv!56%[D', //ovde izmeni
     },
+    tls: {
+    // do not fail on invalid certs
+    rejectUnauthorized: false,
+  },
   });
-
+  // verify connection configuration
+ transporter.verify(function (error, success) {
+   if (error) {
+     console.log(error);
+   } else {
+     console.log("Server is ready to take our messages");
+   }
+ });
   const mailOptions = {
-    from: 'your-email@gmail.com',
+    from: 'app-test@ekhein-llc.com', //ovde izmeni
     to: email,
     subject: 'Reset Your Password',
     html: `<p>Please click the following link to reset your password:</p>
@@ -32,9 +41,6 @@ const sendResetPasswordEmail = (email, resetToken) => {
   });
 };
 
-module.exports = {
-  sendResetPasswordEmail,
-};
 // const nodemailer = require("nodemailer");
 
 // const sendEmail = async (options) => {

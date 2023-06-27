@@ -9,6 +9,8 @@ import {
   PresentationChartLineIcon,
   ShoppingCartIcon
 } from "@heroicons/react/24/outline";
+import { SearchEvents } from "../Search/SearchEvents";
+
 
 const NavBar = () => {
   const dispatch = useDispatch();
@@ -54,14 +56,7 @@ const NavBar = () => {
           </div>
           <div className="right-container">
             <div className="search-container">
-              <input
-                type="text"
-                placeholder="Search..."
-                className="search-input"
-                //value={searchTerm}
-                //onChange={(e) => setSearchTerm(e.target.value)}
-                //onClick={handleSearch} //can be button if needed
-              />
+              <SearchEvents/>
 
             </div>
             {token === "" && (

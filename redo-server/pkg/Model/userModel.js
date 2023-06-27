@@ -1,8 +1,6 @@
 import mongoose from "mongoose";
 import validator from "validator";
 
-// complete
-
 const UserSchema = new mongoose.Schema({
   fullName: {
     type: String,
@@ -35,6 +33,14 @@ const UserSchema = new mongoose.Schema({
     enum: ["user", "admin"],
     default: "user",
     trim: true,
+  },
+  resetToken: {
+    type: String,
+    default: "",
+  },
+  resetTokenExpiration: {
+    type: Date,
+    default: null,
   },
 });
 

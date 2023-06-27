@@ -1,31 +1,20 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-// Define a service using a base URL and expected endpoints
 export const userApi = createApi({
-  // Define a reducer path for this API, which will be used internally by Redux Toolkit
   reducerPath: "userApi",
-
-  // Define an array of tag types to be used in caching API responses
   tagTypes: ["Users"],
-
-  // Define a base query to use for all requests, with the base URL for the API
   baseQuery: fetchBaseQuery({
-    baseUrl: `${import.meta.env.VITE_APP_API_BASE_URL}/api/v1/auth`, // we imprt this from the client/.env
-  }), //we use import.meta.env instead of process.env beacuse this is Vite project, not React
-
-  // Define the expected endpoints for this API, using a builder object
+    baseUrl: `${import.meta.env.VITE_APP_API_BASE_URL}/api/v1/auth`,
+  }),
   endpoints: (builder) => ({
-    // Define a "getUser" endpoint that sends a GET request to the root URL of the API
     getUser: builder.query({
       query: (name) => `/get-one-user/:userID`,
-      providesTags: ["Users"], // if we have a query, we use providesTags
+      providesTags: ["Users"],
     }),
-
     getAllUsers: builder.query({
       query: () => "/get-all-users",
       providesTags: ["Users"],
     }),
-
     updateUser: builder.mutation({
       query: (body) => ({
         url: `/update-user/${body._id}`,
@@ -34,7 +23,6 @@ export const userApi = createApi({
       }),
       invalidatesTags: ["Users"],
     }),
-
     createUser: builder.mutation({
       query: (body) => ({
         url: "/create-user",
@@ -43,7 +31,6 @@ export const userApi = createApi({
       }),
       invalidatesTags: ["Users"],
     }),
-
     loginUser: builder.mutation({
       query: (body) => ({
         url: "/login",
@@ -52,15 +39,29 @@ export const userApi = createApi({
       }),
       invalidatesTags: ["Users"],
     }),
+    forgotPassword: builder.mutation({
+      queryFn: async (email) => {
+        const response = await fetch("/forgot-password", {
+          method: "POST",
+          body: JSON.stringify({ email }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        if (!response.ok) {
+          throw new Error("Failed to send password reset instructions");
+        }
+      },
+      invalidatesTags: ["Users"],
+    }),
   }),
 });
 
-// Export hooks for usage in functional components, which are
-// auto-generated based on the defined endpoints
 export const {
   useCreateUserMutation,
   useGetUserQuery,
   useLoginUserMutation,
   useUpdateUserMutation,
   useGetAllUsersQuery,
+  useForgotPasswordMutation,
 } = userApi;

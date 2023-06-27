@@ -53,7 +53,7 @@ export const getOneEvent = async (req, res) => {
 };
 
 // update
-export const updateEvent = async (req, res) => {  
+export const updateEvent = async (req, res) => {
   try {
   const { eventID } = req.params;
   const { eventName, eventDescription, eventDate, price, eventLocation, eventType } = req.body;
@@ -91,4 +91,17 @@ export const deleteEvent = async (req, res) => { try {
   console.error(err);
   res.status(500).json({ message: "Server error" });
 }
+};
+
+export const searchEvents = async (req, res) => {
+  try {
+    const { search } = req.query;
+
+    // Perform event search based on the search query
+    const events = await EventModel.find({ eventName: { $regex: search, $options: 'i' } });
+    res.json(events);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server Error' });
+  }
 };

@@ -1,7 +1,22 @@
 import { UserModel } from "../../../pkg/Model/userModel.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
+import { sendResetPasswordEmail } from './nodemailer.js';
 
+import crypto from "crypto";
+
+function generateResetToken(length = 32) {
+  return new Promise((resolve, reject) => {
+    crypto.randomBytes(length, (err, buffer) => {
+      if (err) {
+        reject(err);
+      } else {
+        const token = buffer.toString('hex');
+        resolve(token);
+      }
+    });
+  });
+}
 export const signup = async (req, res) => {
   const { fullName, email, password } = req.body;
   try {
@@ -142,7 +157,6 @@ export const getAllUsers = async (req, res) => {
   }
 };
 
-
 export const forgotPassword = async (req, res) => {
   const { email } = req.body;
 
@@ -156,7 +170,7 @@ export const forgotPassword = async (req, res) => {
     }
 
     // Generate a password reset token (e.g., using uuid or random string generator)
-    const resetToken = generateResetToken();
+    const resetToken = await generateResetToken();
 
     // Save the reset token and its expiration in the user document
     user.resetToken = resetToken;
@@ -171,7 +185,6 @@ export const forgotPassword = async (req, res) => {
     return res.status(500).json({ message: 'Server Error', log: error.message });
   }
 };
-
 
 export const resetPassword = async (req, res) => {
   const { resetToken, newPassword } = req.body;
