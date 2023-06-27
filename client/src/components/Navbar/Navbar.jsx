@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "./Navbar.css";
 import { useSelector, useDispatch } from "react-redux";
 // import { resetUserData, registerUser } from "../../../store/Slices/UserData";
+//import React, { useState } from 'react'; // for search
 import {
   UserIcon,
   PresentationChartLineIcon,
@@ -21,7 +22,13 @@ const NavBar = () => {
       })
     );
   };
+  //const [searchTerm, setSearchTerm] = useState('');
 
+  //const handleSearch = () => {
+    // Implement the search logic here
+  //  console.log('Searching for:', searchTerm);
+  //};
+  //
   return (
     <div className="">
       <nav className="navbar">
@@ -51,7 +58,11 @@ const NavBar = () => {
                 type="text"
                 placeholder="Search..."
                 className="search-input"
+                //value={searchTerm}
+                //onChange={(e) => setSearchTerm(e.target.value)}
+                //onClick={handleSearch} //can be button if needed
               />
+
             </div>
             {token === "" && (
               <>
