@@ -39,6 +39,10 @@
 * ! card right section
 **/
 
+.card__right {
+  width: 100%;
+}
+
 .card__right--text>.title {
   font-size: 24px;
   font-weight: bold;

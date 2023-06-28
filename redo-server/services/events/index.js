@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(cors());
 
 // routes
-app.get("/api/v1/events/get-all-events", getAllEvents);
+app.get("/api/v1/events/get-all", getAllEvents);
 app.get("/api/v1/events/get-one/:eventID", getOneEvent);
 app.post("/api/v1/events/create-event", createEvent);
 app.put("/api/v1/events/update-event/:eventID", updateEvent);
