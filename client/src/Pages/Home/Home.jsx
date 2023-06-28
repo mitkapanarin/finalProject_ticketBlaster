@@ -7,6 +7,7 @@ import Checkout from "../Checkout/Checkout";
 import ShoppingCart from "../ShoppingCart/ShoppingCart";
 import Purchase from "../Purchase/Purchase";
 import PrintModal from "../../components/PrintModal/PrintModal";
+import EventDetails from "../EventDetails/EventDetails";
 
 const Home = () => {
   return (
@@ -32,6 +33,7 @@ const Home = () => {
       <ShoppingCart/>
       <Purchase/>
       <PrintModal/>
+      <EventDetails/>
     </div>
   );
 };

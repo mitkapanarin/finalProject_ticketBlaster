@@ -14,7 +14,8 @@ import {
   // GetAllEvents, 
   StandUpComedies,
   MusicalConcerts,
-  AdminCreateEvent
+  AdminCreateEvent,
+  EventDetails
 } from "./Pages";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { AdminRoutes, UserRoutes } from "./ProtectedRoutes";
@@ -47,6 +48,7 @@ const App = () => {
           <Route path="/create-event" element={<AdminCreateEvent />} />
           {/* <Route path="/all-events" element={<GetAllEvents/>}/> */}
           <Route path="/update-user-details" element={<UpdateUserDetails/>}/>
+          <Route path="/event-detais" element={<EventDetails/>}/>
           <Route path="*" element={<ErrorPage />} />
         </Routes>
       </div>
