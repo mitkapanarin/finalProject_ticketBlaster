@@ -3,11 +3,11 @@ import Cards from "../../components/Cards/Cards";
 import TopCard from "../../components/TopCard/TopCard";
 import "./Home.css";
 import Checkout from "../Checkout/Checkout";
+import { useGetAllEventsQuery } from "../../store";
 import ShoppingCart from "../ShoppingCart/ShoppingCart";
 import Purchase from "../Purchase/Purchase";
-import PrintModal from "../../components/PrintModal/PrintModal";
-import EventDetails from "../EventDetails/EventDetails";
-import {useGetAllEventsQuery} from "../../store/API/eventApi"
+import PrintModal from "../../components/PrintModal/PrintModal"
+
 
 const Home = () => {
   const { data } = useGetAllEventsQuery();
@@ -27,18 +27,17 @@ const Home = () => {
           <button className="home__page--exploreBtn">See All</button>
         </div>
         <div className="home__pageItems--right">
-          <h3 className="home__page__h3">standup comedy</h3>
+          <h3 className="home__page__h3">Standup comedy</h3>
           {comedies?.map((item) => (
             <Cards key={item._id} {...item} />
           ))}
           <button className="home__page--exploreBtn">See All</button>
         </div>
       </div>
-      <Checkout/>
+      <Checkout />
       <ShoppingCart/>
       <Purchase/>
       <PrintModal/>
-      <EventDetails/>
     </div>
   );
 };

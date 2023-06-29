@@ -10,7 +10,7 @@ const SalesSchema = new mongoose.Schema({
   },
   eventID: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Event",
+    ref: "EventModel",
   },
 });
 

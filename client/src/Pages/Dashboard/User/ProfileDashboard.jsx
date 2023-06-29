@@ -4,6 +4,7 @@ import Tabs from "../../../components/Layout/Tabs/Tabs";
 import { useSelector, useDispatch } from "react-redux";
 import { useUpdateUserMutation } from "../../../store/API/userApi";
 import { toast } from "react-toastify";
+import ChangePassword from "./ChangePassword";
 
 const ProfileDashboard = () => {
   const [updateUser] = useUpdateUserMutation();
@@ -145,6 +146,8 @@ const ProfileDashboard = () => {
               </button>
            </>
           )}
+      <ChangePassword email={userData.email} />
+
     </div>
   );
 };

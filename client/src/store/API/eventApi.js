@@ -23,7 +23,7 @@ export const eventApi = createApi({
 
     // Define a "getAllEvents" endpoint that sends a GET request to the root URL of the API
     getAllEvents: builder.query({
-      query: () => "/get-all",
+      query: () => "/get-all-events",
       providesTags: ["Events"],
     }),
 

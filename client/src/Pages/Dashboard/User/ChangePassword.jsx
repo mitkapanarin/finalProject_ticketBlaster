@@ -1,24 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 
-const ResetPassword = () => {
+const ChangePassword = ({ userId, email }) => {
+  const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [message, setMessage] = useState('');
-  const [resetToken, setResetToken] = useState('');
 
-  useEffect(() => {
-    // Extract the reset token from the URL
-    const token = window.location.pathname.split('/').pop();
-    console.log(token);
-    if (token) {
-      // Store the reset token in the component state
-      // You can also use a state management library like Redux to store the token globally
-      setResetToken(token);
-    }
-  }, []);
-
-  const handleSubmit = async (e) => {
+  const handleChangePassword = async (e) => {
     e.preventDefault();
 
     if (newPassword !== confirmPassword) {
@@ -27,15 +16,19 @@ const ResetPassword = () => {
     }
 
     try {
-      const response = await axios.post('http://localhost:9000/api/v1/auth/reset-password', {
-        resetToken,
-        newPassword,
+      const response = await axios.post('http://localhost:9000/api/v1/auth/change-password', {
+          currentPassword: currentPassword,
+          newPassword: newPassword,
+          email: email,
       });
 
       if (response.status === 200) {
         setMessage(response.data.message);
+        setCurrentPassword('');
+        setNewPassword('');
+        setConfirmPassword('');
       } else {
-        setMessage('Invalid or expired reset token');
+        setMessage('Failed to change password');
       }
     } catch (error) {
       setMessage('Server Error');
@@ -45,8 +38,17 @@ const ResetPassword = () => {
 
   return (
     <div>
-      <h2>Reset Password</h2>
-      <form onSubmit={handleSubmit}>
+      <h2>Change Password</h2>
+      <form onSubmit={handleChangePassword}>
+        <label htmlFor="currentPassword">Current Password</label>
+        <input
+          type="password"
+          id="currentPassword"
+          value={currentPassword}
+          onChange={(e) => setCurrentPassword(e.target.value)}
+          required
+        />
+
         <label htmlFor="newPassword">New Password</label>
         <input
           type="password"
@@ -65,11 +67,11 @@ const ResetPassword = () => {
           required
         />
 
-        <button type="submit">Reset Password</button>
+        <button type="submit">Change Password</button>
       </form>
       {message && <p>{message}</p>}
     </div>
   );
 };
 
-export default ResetPassword;
+export default ChangePassword;

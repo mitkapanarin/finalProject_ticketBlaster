@@ -6,17 +6,20 @@ import {
   Login,
   ProfileDashboard,
   ForgotPassword,
+  ResetPassword,
   Signup,
   ShoppingCart,
   TicketHistory,
   AllUsers,
   UpdateUserDetails,
-  // GetAllEvents, 
+  // GetAllEvents,
   StandUpComedies,
   MusicalConcerts,
   AdminCreateEvent,
-  EventDetails
+  CartPage,
 } from "./Pages";
+import { EventPage } from "./components/DetailedEvent/EventPage";
+import { EventDetails } from "./components/DetailedEvent/EventDetails";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { AdminRoutes, UserRoutes } from "./ProtectedRoutes";
 import { NavBar, Footer } from "./components/Layout/index";
@@ -38,17 +41,21 @@ const App = () => {
           <Route element={<AdminRoutes />}>
             <Route path="/admin-dashboard" element={<AdminDashboard />} />
             <Route path="/shopping-cart" element={<ShoppingCart/>}/>
+
           </Route>
 
           <Route path="/login" element={<Login />} />
           <Route path="/create-user" element={<Signup />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password/:token" element={<ResetPassword/>} />
           <Route path="/ticket-history" element={<TicketHistory/>}/>
           <Route path="/all-users" element={<AllUsers/>}/>
           <Route path="/create-event" element={<AdminCreateEvent />} />
           {/* <Route path="/all-events" element={<GetAllEvents/>}/> */}
           <Route path="/update-user-details" element={<UpdateUserDetails/>}/>
-          <Route path="/event-detais" element={<EventDetails/>}/>
+          <Route exact path="/events" element={<EventPage/>} />
+          <Route exact path="/events/:eventId" element={<EventDetails/>} />
+          <Route exact path="/cart-page" element={<CartPage />}/>
           <Route path="*" element={<ErrorPage />} />
         </Routes>
       </div>

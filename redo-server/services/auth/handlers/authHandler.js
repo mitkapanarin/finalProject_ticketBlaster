@@ -213,3 +213,37 @@ export const resetPassword = async (req, res) => {
     return res.status(500).json({ message: 'Server Error', log: error.message });
   }
 };
+
+
+//
+
+export const changePassword = async (req, res) => {
+  const { currentPassword, newPassword, email } = req.body;
+
+  try {
+    // Find the user by their Email
+    const user = await UserModel.findOne({ email })
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Check if the current password matches the one stored in the database
+    const isMatch = await bcrypt.compare(currentPassword, user.password);
+    if (!isMatch) {
+      return res.status(400).json({ message: 'Invalid current password' });
+    }
+
+    // Update the user's password with the new password
+    const hashedPassword = await bcrypt.hash(newPassword, 12);
+    user.password = hashedPassword;
+    await user.save();
+
+    // Get the updated user object
+    const updatedUser = await UserModel.findOne({ email })
+
+    return res.status(200).json(updatedUser);
+  } catch (error) {
+    return res.status(500).json({ message: 'Server Error', log: error.message });
+  }
+};

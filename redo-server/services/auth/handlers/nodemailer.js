@@ -6,7 +6,7 @@ export const sendResetPasswordEmail = (email, resetToken) => {
   const transporter = nodemailer.createTransport({
   host: "mail.ekhein-llc.com", //ovde izmeni
   port: 465,
-  secure: true,
+  secure: true, 
     auth: {
       user: 'app-test@ekhein-llc.com', //ovde izmeni
       pass: 'FNeuJv!56%[D', //ovde izmeni
@@ -29,7 +29,7 @@ export const sendResetPasswordEmail = (email, resetToken) => {
     to: email,
     subject: 'Reset Your Password',
     html: `<p>Please click the following link to reset your password:</p>
-           <a href="http://your-app.com/reset-password/${resetToken}">Reset Password</a>`,
+           <a href="http://localhost:5173/reset-password/${resetToken}">Reset Password</a>`,
   };
 
   transporter.sendMail(mailOptions, (error, info) => {

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import InputField from "../Form/InputField";
 import { logout } from "../../store/Slices/userSlice";
 import "./Events.css";
+import { EventPage } from "../DetailedEvent/EventPage";
 
 const Events = ({ handleSubmit, handleInput, data }) => {
 
@@ -33,8 +34,9 @@ const Events = ({ handleSubmit, handleInput, data }) => {
           </ul>
         </nav>
       </div>
+      <EventPage/>
       <form onSubmit={handleSubmit}>
-        <div className="input-row">
+        {/* <div className="input-row">
           <InputField
             className="inputField"
             type="text"
@@ -68,8 +70,8 @@ const Events = ({ handleSubmit, handleInput, data }) => {
             required={true}
             label="Event Date"
           />
-        </div>
-        <div className="events-content">
+        </div> */}
+        {/* <div className="events-content">
           <div className="events-left-section">
             <div className="events-upload-button">
               <button className="events-black-button">Upload Event Art</button>
@@ -115,7 +117,7 @@ const Events = ({ handleSubmit, handleInput, data }) => {
               label="Event Location"
             />
           </div>
-        </div>
+        </div> */}
         <div className="related-events">
           {/* <label htmlFor="category" className="related-events-label">
             Related Events
@@ -131,9 +133,9 @@ const Events = ({ handleSubmit, handleInput, data }) => {
               <option value="Concert1">Concert1</option>
               <option value="Concert2">Concert2</option>
             </select> */}
-            <button type="submit" className="related-events-btn">
+            {/* <button type="submit" className="related-events-btn">
               Add
-            </button>
+            </button> */}
           </div>
         </div>
       </form>
