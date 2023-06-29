@@ -1,58 +1,52 @@
 import React, { useState } from 'react';
-import { useForgotPasswordMutation } from '../../store/API/userApi';
-import InputField from '../../components/Form/InputField';
-import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const ForgotPassword = () => {
-  const navigate = useNavigate();
   const [email, setEmail] = useState('');
-  const forgotPasswordMutation = useForgotPasswordMutation();
+  const [message, setMessage] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!validateEmail(email)) {
+      setMessage('Please enter a valid email address');
+      return;
+    }
+
     try {
-      await forgotPasswordMutation.mutateAsync(email);
-      toast.success('Password reset instructions sent');
+      const response = await axios.post('http://localhost:9000/api/v1/auth/forgot-password', { email });
+
+      if (response.status === 200) {
+        setMessage(response.data.message);
+      } else {
+        setMessage('User not found');
+      }
     } catch (error) {
-      toast.error('Failed to send password reset instructions');
-      console.log(error);
+      setMessage('Server Error');
+      console.error(error);
     }
   };
 
-  const handleBackToLogin = () => {
-    navigate('/login');
+  const validateEmail = (email) => {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
   };
 
   return (
-    <div className="psw-reset-container">
-      <section>
-        <div className="reset-form-container">
-          <div className="reset-form-card">
-            <div className="reset-form-content">
-              <h1 className="reset-form-title">Forgot Password</h1>
-              <form onSubmit={handleSubmit} className="login-form">
-                <InputField
-                  type="email"
-                  name="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  label="Email"
-                  placeholder="name@company.com"
-                  required={true}
-                />
-                <button type="submit" className="btn-password-reset-email">
-                  Send password reset email
-                </button>
-              </form>
-              <button className="btn-back-to-login" onClick={handleBackToLogin}>
-                Back to Login
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
+    <div>
+      <h2>Forgot Password</h2>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <button type="submit">Reset Password</button>
+      </form>
+      {message && <p>{message}</p>}
     </div>
   );
 };

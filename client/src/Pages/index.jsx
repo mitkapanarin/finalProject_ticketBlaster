@@ -15,6 +15,8 @@ import EventDetails from "./EventDetails/EventDetails"
 import StandUpComedies from "./StandUpComedies/StandUpComedies";
 import MusicalConcerts from "./MusicalConcerts/MusicalConcerts";
 import AdminCreateEvent from "./Dashboard/Admin/AdminCreateEvent";
+import ResetPassword from "./ResetPassword/ResetPassword"
+
 export {
   Signup,
   ForgotPassword,
@@ -32,5 +34,6 @@ export {
   // GetAllEvents,
   StandUpComedies,
   MusicalConcerts,
-  AdminCreateEvent
+  ResetPassword,
+  AdminCreateEvent,
 };
