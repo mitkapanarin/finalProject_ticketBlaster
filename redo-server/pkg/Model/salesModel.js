@@ -1,7 +1,5 @@
 import mongoose from "mongoose";
-import validator from "validator";
 
-// complete, maybe required some testing
 
 const SalesSchema = new mongoose.Schema({
   customerID: {
