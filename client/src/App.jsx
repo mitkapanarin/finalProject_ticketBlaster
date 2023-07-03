@@ -18,9 +18,9 @@ import {
   AdminCreateEvent,
   CartPage,
   DisplaySearchResult,
+  EventDetails, 
+  EventPage
 } from "./Pages";
-import { EventPage } from "./components/DetailedEvent/EventPage";
-import { EventDetails } from "./components/DetailedEvent/EventDetails";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { AdminRoutes, UserRoutes } from "./ProtectedRoutes";
 import { NavBar, Footer } from "./components/Layout/index";

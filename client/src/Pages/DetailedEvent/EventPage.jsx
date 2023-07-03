@@ -2,10 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 // import { useSelector, useDispatch } from "react-redux";
 // import { useGetAllEventsQuery } from "../../store/API/eventApi"
-
 import axios from 'axios';
 
-export const EventPage = () => {
+ const EventPage = () => {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -62,3 +61,6 @@ export const EventPage = () => {
     </div>
   );
 };
+
+
+export default EventPage
