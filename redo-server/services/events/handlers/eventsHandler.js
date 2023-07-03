@@ -55,53 +55,73 @@ export const getOneEvent = async (req, res) => {
 // update
 export const updateEvent = async (req, res) => {
   try {
-  const { eventID } = req.params;
-  const { eventName, eventDescription, eventDate, price, eventLocation, eventType } = req.body;
+    const { eventID } = req.params;
+    const {
+      eventName,
+      eventDescription,
+      eventDate,
+      price,
+      eventLocation,
+      eventType,
+    } = req.body;
 
-  const updatedEvent = await EventModel.findByIdAndUpdate(
-    eventID,
-    {eventName, eventDescription, eventDate, price, eventLocation, eventType},
-    { new: true }
-  );
+    const updatedEvent = await EventModel.findByIdAndUpdate(
+      eventID,
+      {
+        eventName,
+        eventDescription,
+        eventDate,
+        price,
+        eventLocation,
+        eventType,
+      },
+      { new: true }
+    );
 
-  if (!updatedEvent) {
-    res.status(404).json({ message: "Event not found" });
-    return;
+    if (!updatedEvent) {
+      res.status(404).json({ message: "Event not found" });
+      return;
+    }
+
+    res.json({ message: "Successfully updated Event" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error" });
   }
-
-  res.json({ message: "Successfully updated Event" });
-} catch (err) {
-  console.error(err);
-  res.status(500).json({ message: "Server error" });
-}
 };
 // delete
 
-export const deleteEvent = async (req, res) => { try {
-  const eventID = req.params.id;
-  const deletedEvent = await EventModel.findByIdAndDelete(eventID);
+export const deleteEvent = async (req, res) => {
+  try {
+    const eventID = req.params.id;
+    const deletedEvent = await EventModel.findByIdAndDelete(eventID);
 
-  if (!deletedEvent) {
-    res.status(404).json({ message: "Event not found" });
-    return;
+    if (!deletedEvent) {
+      res.status(404).json({ message: "Event not found" });
+      return;
+    }
+
+    res.status(204).json({ message: "Event deleted successfully" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error" });
   }
-
-  res.status(204).json({ message: "Event deleted successfully" });
-} catch (err) {
-  console.error(err);
-  res.status(500).json({ message: "Server error" });
-}
 };
+
+// search events against the query provided
 
 export const searchEvents = async (req, res) => {
   try {
     const { search } = req.query;
 
     // Perform event search based on the search query
-    const events = await EventModel.find({ eventName: { $regex: search, $options: 'i' } });
-    res.json(events);
+    const events = await EventModel.find({
+      eventName: { $regex: search, $options: "i" },
+    });
+
+    res.status(200).json({ message: "Search Termsssssss", events });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Server Error' });
+    res.status(500).json({ message: "Server Error" });
   }
 };
