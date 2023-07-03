@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import InputField from "../Form/InputField";
 import { logout } from "../../store/Slices/userSlice";
 import "./Events.css";
+import { EventPage } from "../../Pages";
 
 const Events = ({ handleSubmit, handleInput, data }) => {
 
