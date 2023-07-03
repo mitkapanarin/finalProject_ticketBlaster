@@ -1,5 +1,7 @@
 
 
+
+
 export const handleSearch = async () => {
   try {
     const response = await fetch(`/api/events?search=${searchTerm}`);

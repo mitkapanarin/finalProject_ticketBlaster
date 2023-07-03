@@ -1,6 +1,6 @@
 import React from 'react';
 
-const SearchResult = ({ results }) => {
+function SearchResult({ results }) {
   return (
     <div>
       <h2>Search Results</h2>

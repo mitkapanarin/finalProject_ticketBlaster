@@ -1,31 +1,35 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { changeSearchTerm } from "../../store/Slices/Search";
 
 export const SearchEvents = () => {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [searchResults, setSearchResults] = useState([]);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [searchQuery, setSearchQuery] = useState({
+    searchTerm: "",
+  });
 
-  const handleSearch = async () => {
-    try {
-      const response = await axios.get(`http://localhost:9001/api/v1/events/search-events?search=${searchQuery}`);
-      setSearchResults(response.data);
-    } catch (error) {
-      console.error(error);
-    }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(changeSearchTerm(searchQuery));
+    navigate("/DisplaySearchResult");
   };
 
   return (
-    <div>
+    <form onSubmit={handleSubmit}>
       <input
         type="text"
-        value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
+        value={searchQuery.searchTerm}
+        onChange={(e) =>
+          setSearchQuery({
+            ...searchQuery,
+            searchTerm: e.target.value,
+          })
+        }
         placeholder="Enter search query"
       />
-      <button onClick={handleSearch}>Search</button>
-      {searchResults.map((event) => (
-        <div key={event._id}>{event.eventName}</div>
-      ))}
-    </div>
+      <button type="submit">Search</button>
+    </form>
   );
 };

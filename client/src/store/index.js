@@ -5,6 +5,7 @@ import storage from "redux-persist/lib/storage";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import { userApi } from "./API/userApi";
 import { userSlice } from "./Slices/userSlice";
+import { searchSlice } from "./Slices/Search";
 import {
   eventApi,
   useCreateEventMutation,
@@ -22,11 +23,21 @@ const persistedUserData = persistReducer(
   },
   userSlice.reducer
 );
+
+const persistedSearchTerm = persistReducer(
+  {
+    key: "Search Term",
+    storage,
+  },
+  searchSlice.reducer
+);
+
 export const store = configureStore({
   reducer: {
     [userApi.reducerPath]: userApi.reducer, // Configures the reducer for the userApi slice
     [eventApi.reducerPath]: eventApi.reducer, // Configures the reducer for the eventApi slice
     User: persistedUserData, // Configures the reducer for the userSlice
+    SearchTerm: persistedSearchTerm,
   },
 
   // Combines the middleware used by Redux Toolkit Query with the default middleware for Redux

@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "",
+    "start": "nodemon ./services/auth/index.js && nodemon ./services/events/index.js && nodemon ./services/sales/index.js && nodemon ./services/proxy/index.js",
     "startauth": "nodemon ./services/auth/index.js",
     "startevent": "nodemon ./services/events/index.js",
     "startsales": "nodemon ./services/sales/index.js",

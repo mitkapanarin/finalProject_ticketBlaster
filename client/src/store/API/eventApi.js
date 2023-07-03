@@ -44,6 +44,11 @@ export const eventApi = createApi({
       }),
       invalidatesTags: ["Events"],
     }),
+
+    searchEvents: builder.query({
+      query: (searchTerm) => `/search-events?search=${searchTerm}`,
+      providesTags: ["Events"],
+    })
   }),
 });
 
@@ -54,4 +59,5 @@ export const {
   useGetEventQuery,
   useUpdateEventMutation,
   useGetAllEventsQuery,
+  useSearchEventsQuery
 } = eventApi;
