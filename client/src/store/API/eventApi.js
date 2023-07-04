@@ -17,7 +17,7 @@ export const eventApi = createApi({
   endpoints: (builder) => ({
     // Define a "getEvent" endpoint that sends a GET request to the root URL of the API
     getEvent: builder.query({
-      query: (name) => `/get-one-event/:eventID`,
+      query: (eventID) => `/get-one/${eventID}`,
       providesTags: ["Events"], // if we have query we use providesTags
     }),
 

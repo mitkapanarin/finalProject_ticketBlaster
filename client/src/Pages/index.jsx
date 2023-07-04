@@ -10,7 +10,6 @@ import TicketHistory from "./TicketHistory/TicketHistory";
 import AllUsers from "./AllUsers/AllUsers";
 import UpdateUserDetails from "./UpdateUserDetails/UpdateUserDetails";
 import Purchase from "./Purchase/Purchase";
-import EventDetails from "./EventDetails/EventDetails";
 import GetAllEvents from "./GetAllEvents/GetAllEvents";
 import StandUpComedies from "./StandUpComedies/StandUpComedies";
 import MusicalConcerts from "./MusicalConcerts/MusicalConcerts";
@@ -33,7 +32,6 @@ export {
   AllUsers,
   UpdateUserDetails,
   Purchase,
-  EventDetails,
   GetAllEvents,
   StandUpComedies,
   MusicalConcerts,

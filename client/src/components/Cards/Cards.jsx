@@ -1,6 +1,7 @@
 import React from "react";
 import "./Cards.css";
 import dayjs from "dayjs";
+import { useNavigate } from "react-router-dom";
 
 const Cards = ({
   eventName = "",
@@ -10,9 +11,11 @@ const Cards = ({
   eventLocation = "",
   eventType,
   price,
+  _id
 }) => {
+  const navigate = useNavigate();
   return (
-    <div className="card-parent">
+    <div onClick={()=>navigate(`/events/${_id}`)} className="card-parent">
       {/* Left section */}
       <img src={image} alt="" className="card__left" />
       {/* Right section */}
@@ -20,7 +23,10 @@ const Cards = ({
         {/* Top section */}
         <div className="card__right--text">
           <h3 className="title">{eventName}</h3>
-          <h6 className="card-date"> {dayjs(eventDate).format("DD MMM, YYYY")}</h6>
+          <h6 className="card-date">
+            {" "}
+            {dayjs(eventDate).format("DD MMM, YYYY")}
+          </h6>
           <p>{eventDescription}</p>
         </div>
         {/* Bottom section */}

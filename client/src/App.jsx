@@ -18,11 +18,11 @@ import {
   AdminCreateEvent,
   CartPage,
   DisplaySearchResult,
-  EventDetails, 
-  EventPage
+  EventPage,
 } from "./Pages";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { AdminRoutes, UserRoutes } from "./ProtectedRoutes";
+import { EventDetails } from "./components/DetailedEvent/EventDetails";
 import { NavBar, Footer } from "./components/Layout/index";
 
 const App = () => {
@@ -58,7 +58,7 @@ const App = () => {
           {/* <Route path="/all-events" element={<GetAllEvents/>}/> */}
           <Route path="/update-user-details" element={<UpdateUserDetails />} />
           <Route exact path="/events" element={<EventPage />} />
-          <Route exact path="/events/:eventId" element={<EventDetails />} />
+          <Route path="/events/:eventId" element={<EventDetails />} />
           <Route exact path="/cart-page" element={<CartPage />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>

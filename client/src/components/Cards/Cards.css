@@ -3,6 +3,7 @@
   align-items: center;
   gap: 30px;
   margin: 10px 0;
+  cursor: pointer;
 }
 
 .card-parent .card__left {
