@@ -1,0 +1,11 @@
+.ticket_parent {
+  background-color: red;
+  height: 100px;
+  color: black;
+  padding: 30px;
+  font-size: 22px;
+}
+
+.ticket_parent_fade {
+  opacity: 0.3;
+}

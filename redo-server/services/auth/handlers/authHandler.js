@@ -1,7 +1,7 @@
 import { UserModel } from "../../../pkg/Model/userModel.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
-import { sendResetPasswordEmail } from './nodemailer.js';
+import { sendResetPasswordEmail } from "./nodemailer.js";
 
 import crypto from "crypto";
 
@@ -11,7 +11,7 @@ function generateResetToken(length = 32) {
       if (err) {
         reject(err);
       } else {
-        const token = buffer.toString('hex');
+        const token = buffer.toString("hex");
         resolve(token);
       }
     });
@@ -76,18 +76,17 @@ export const login = async (req, res) => {
       role: findUser.role,
       _id: findUser._id,
       email: findUser.email,
-      fullName: findUser.fullName
+      fullName: findUser.fullName,
     });
   } catch (err) {
     res.status(500).json({ message: "Server Error", log: err.message });
   }
 };
 
-
 export const updateUser = async (req, res) => {
   try {
     const { _id } = req.params;
-    const { fullName, email, password } = req.body;
+    const { fullName, email, role } = req.body;
 
     // const hashedPassword = await bcrypt.hash(password, 10);
     const findUser = await UserModel.findOne({ _id });
@@ -99,20 +98,19 @@ export const updateUser = async (req, res) => {
       {
         fullName,
         email,
+        role
       },
       { new: true }
     );
 
-    return res.status(200).json({ message: "Successfully updated user", updateUser });
+    return res
+      .status(200)
+      .json({ message: "Successfully updated user", updateUser });
   } catch (err) {
     console.error(err);
     return res.status(500).json({ message: "Server error" });
   }
 };
-
-
-
-
 
 export const getOneUser = async (req, res) => {
   try {
@@ -130,11 +128,10 @@ export const getOneUser = async (req, res) => {
   }
 };
 
-
 export const deleteUser = async (req, res) => {
   try {
-    const { userID } = req.params;
-    const deletedUser = await UserModel.findByIdAndDelete(userID);
+    const { _id } = req.params;
+    const deletedUser = await UserModel.findByIdAndDelete(_id);
 
     if (!deletedUser) {
       res.status(404).json({ message: "User not found" });
@@ -166,7 +163,7 @@ export const forgotPassword = async (req, res) => {
 
     if (!user) {
       // User with the given email does not exist
-      return res.status(404).json({ message: 'User not found' });
+      return res.status(404).json({ message: "User not found" });
     }
 
     // Generate a password reset token (e.g., using uuid or random string generator)
@@ -180,9 +177,13 @@ export const forgotPassword = async (req, res) => {
     // Send an email to the user with the reset password instructions
     sendResetPasswordEmail(user.email, resetToken);
 
-    return res.status(200).json({ message: 'Password reset instructions sent' });
+    return res
+      .status(200)
+      .json({ message: "Password reset instructions sent" });
   } catch (error) {
-    return res.status(500).json({ message: 'Server Error', log: error.message });
+    return res
+      .status(500)
+      .json({ message: "Server Error", log: error.message });
   }
 };
 
@@ -198,7 +199,9 @@ export const resetPassword = async (req, res) => {
 
     if (!user) {
       // Invalid or expired token
-      return res.status(400).json({ message: 'Invalid or expired reset token' });
+      return res
+        .status(400)
+        .json({ message: "Invalid or expired reset token" });
     }
 
     // Update the user's password with the new password
@@ -208,12 +211,13 @@ export const resetPassword = async (req, res) => {
     user.resetTokenExpiration = undefined;
     await user.save();
 
-    return res.status(200).json({ message: 'Password reset successful' });
+    return res.status(200).json({ message: "Password reset successful" });
   } catch (error) {
-    return res.status(500).json({ message: 'Server Error', log: error.message });
+    return res
+      .status(500)
+      .json({ message: "Server Error", log: error.message });
   }
 };
-
 
 //
 
@@ -222,16 +226,16 @@ export const changePassword = async (req, res) => {
 
   try {
     // Find the user by their Email
-    const user = await UserModel.findOne({ email })
+    const user = await UserModel.findOne({ email });
 
     if (!user) {
-      return res.status(404).json({ message: 'User not found' });
+      return res.status(404).json({ message: "User not found" });
     }
 
     // Check if the current password matches the one stored in the database
     const isMatch = await bcrypt.compare(currentPassword, user.password);
     if (!isMatch) {
-      return res.status(400).json({ message: 'Invalid current password' });
+      return res.status(400).json({ message: "Invalid current password" });
     }
 
     // Update the user's password with the new password
@@ -240,10 +244,12 @@ export const changePassword = async (req, res) => {
     await user.save();
 
     // Get the updated user object
-    const updatedUser = await UserModel.findOne({ email })
+    const updatedUser = await UserModel.findOne({ email });
 
     return res.status(200).json(updatedUser);
   } catch (error) {
-    return res.status(500).json({ message: 'Server Error', log: error.message });
+    return res
+      .status(500)
+      .json({ message: "Server Error", log: error.message });
   }
 };
