@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./ProfileDashboard.css";
-import Tabs from "../../../components/Layout/Tabs/Tabs";
+import AdminTab from "../../../Components/AdminTab/AdminTab";
 import { useSelector, useDispatch } from "react-redux";
 import { useUpdateUserMutation } from "../../../store/API/userApi";
 import { toast } from "react-toastify";
@@ -55,7 +55,7 @@ const ProfileDashboard = () => {
     <div className="card-user-details">
       <div className="navbar-user-details">
         <h2>User Details</h2>
-        <Tabs />
+        <AdminTab />
       </div>
       <form action="" onSubmit={handleSubmit}>
         <div className="top-user-details">

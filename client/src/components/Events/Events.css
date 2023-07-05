@@ -216,6 +216,7 @@
   align-self: flex-end;
   margin-top: auto;
   margin-left: auto;
+  margin-bottom: 100px;
 }
 
 .event-image{

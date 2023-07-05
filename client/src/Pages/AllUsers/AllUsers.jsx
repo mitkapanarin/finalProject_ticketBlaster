@@ -6,7 +6,7 @@ import {
   useUpdateUserMutation,
   useDeleteUserMutation,
 } from "../../store/API/userApi";
-import AdminTab from "../../components/Layout/AdminTab/AdminTab";
+import AdminTab from "../../Components/AdminTab/AdminTab";
 import { toast } from "react-toastify";
 
 const AllUsers = () => {

@@ -20,10 +20,12 @@ import {
   DisplaySearchResult,
   EventPage,
 } from "./Pages";
+import NavBar from "../src/Components/Navbar/Navbar"
+import Footer from "../src/Components/Footer/Footer"
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { AdminRoutes, UserRoutes } from "./ProtectedRoutes";
 import { EventDetails } from "./components/DetailedEvent/EventDetails";
-import { NavBar, Footer } from "./components/Layout/index";
+
 
 const App = () => {
   return (

@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
 import ChangePassword from "../../Pages/Dashboard/User/ChangePassword";
 import InputField from "../../components/Form/InputField";
-import AdminTab from "../../components/Layout/AdminTab/AdminTab";
+import AdminTab from "../../Components/AdminTab/AdminTab";
 
 const UpdateUserDetails = () => {
   const [updateUser] = useUpdateUserMutation();
