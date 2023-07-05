@@ -6,7 +6,7 @@ import { logout } from "../../store/Slices/userSlice";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
 import ChangePassword from "../../Pages/Dashboard/User/ChangePassword";
-import InputField from "../../components/Form/InputField";
+import InputField from "../../Components/Form/InputField";
 import AdminTab from "../../Components/AdminTab/AdminTab";
 
 const UpdateUserDetails = () => {

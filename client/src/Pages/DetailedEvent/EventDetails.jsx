@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useGetEventQuery } from "../../store/API/eventApi";
 
-export const EventDetails = () => {
+const EventDetails = () => {
   const params = useParams();
   const { data, isLoading, isError } = useGetEventQuery(params.eventId);
   console.log(data)
@@ -12,3 +12,5 @@ export const EventDetails = () => {
 
   return <div>An event Details - {params.eventId}</div>;
 };
+
+export default EventDetails

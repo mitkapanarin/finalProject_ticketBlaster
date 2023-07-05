@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import InputField from "../Form/InputField";
 import { logout } from "../../store/Slices/userSlice";
+import AdminTab from "../AdminTab/AdminTab"
 import "./Events.css";
 
 const Events = ({ handleSubmit, handleInput, data }) => {
@@ -13,25 +14,7 @@ const Events = ({ handleSubmit, handleInput, data }) => {
     <div className="card-events-details">
       <div className="navbar-events-details">
         <h2>Events</h2>
-        <nav>
-        <ul>
-            <li>
-              <Link to="/admin-dashboard">Events</Link>
-            </li>
-            <li>
-              <Link to="/all-users">Users</Link>
-            </li>
-            <li>
-              <Link to="/ticket-history">Ticket History</Link>
-            </li>
-            <li>
-              <Link to="/update-user-details">User Details</Link>
-            </li>
-            <li>
-              <a onClick={() => dispatch(logout())}>Logout</a>
-            </li>
-          </ul>
-        </nav>
+        <AdminTab />
       </div>
       <form onSubmit={handleSubmit}>
         <div className="input-row">
