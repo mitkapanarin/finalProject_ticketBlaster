@@ -12,7 +12,6 @@ import {
   TicketHistory,
   AllUsers,
   UpdateUserDetails,
-  // GetAllEvents,
   StandUpComedies,
   MusicalConcerts,
   AdminCreateEvent,
@@ -56,7 +55,6 @@ const App = () => {
           <Route path="/ticket-history" element={<TicketHistory />} />
           <Route path="/all-users" element={<AllUsers />} />
           <Route path="/create-event" element={<AdminCreateEvent />} />
-          {/* <Route path="/all-events" element={<GetAllEvents/>}/> */}
           <Route path="/update-user-details" element={<UpdateUserDetails />} />
           <Route path="/events/:eventId" element={<EventDetails />} />
           <Route exact path="/cart-page" element={<CartPage />} />
