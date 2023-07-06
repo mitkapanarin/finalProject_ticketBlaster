@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { UserModel } from "./userModel.js"; // Update the path to your UserModel file
+import { UserModel } from "./userModel.js"; 
 import dotenv from "dotenv";
 
 dotenv.config();

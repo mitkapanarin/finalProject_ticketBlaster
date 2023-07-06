@@ -9,7 +9,7 @@ import {
   PresentationChartLineIcon,
   ShoppingCartIcon
 } from "@heroicons/react/24/outline";
-import { SearchEvents } from "../Search/SearchEvents";
+import { SearchEvents } from "../../Pages/Search/SearchEvents";
 
 
 const NavBar = () => {

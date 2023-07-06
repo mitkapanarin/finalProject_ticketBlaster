@@ -1,0 +1,119 @@
+.card-events-details {
+    display: flex;
+    flex-direction: column;
+    margin: 30px 60px;
+}
+
+.event-details-card-container {
+    display: flex;
+    margin-top: 15px;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 16px;
+    text-decoration: none;
+}
+
+.event-details-card-image {
+    width: 576px;
+    height: 340px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.event-details-card-content {
+    padding: 16px;
+}
+
+.event-details-card-title {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.event-details-description {
+    margin-bottom: 10px;
+}
+
+.event-details-card-date {
+    color: #ff00ff;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.event-details-card-button {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    margin-top: 16px;
+    cursor: pointer;
+}
+
+.bottom-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.related-events-card-container {
+    display: flex;
+    margin-top: 15px;
+    flex-direction: row;
+    align-items: center;
+    max-width: 480px;
+    margin-bottom: 16px;
+    text-decoration: none;
+  }
+
+  .related-events-card-image {
+    width: 200px;
+    height: 153px;
+    border-radius: 20px;
+    object-fit: cover;
+  }
+
+  .related-events-card-content {
+    padding: 16px;
+  }
+
+  .related-events-card-title {
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  .related-events-card-date {
+    color: #ff00ff;
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  .related-events-card-location {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .related-events-card-button {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    margin-top: 16px;
+    cursor: pointer;
+  }
+
+  .related-events-save-btn {
+    background-color: black;
+    color: white;
+    border-radius: 20px;
+    width: 116px;
+    height: 24px;
+    font-size: 16px;
+    cursor: pointer;
+    align-self: flex-end;
+    margin-top: auto;
+    margin-left: auto;
+  }

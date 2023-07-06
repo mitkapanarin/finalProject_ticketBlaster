@@ -1,7 +1,7 @@
 import React from "react";
 import { useSearchEventsQuery } from "../../store/API/eventApi";
 import { useSelector } from "react-redux";
-import Cards from "../../Components/Cards/Cards";
+import Cards from "../../components/Cards/Cards";
 
 const DisplaySearchResult = () => {
   const searchTerm = useSelector((state) => state.SearchTerm.searchTerm);
