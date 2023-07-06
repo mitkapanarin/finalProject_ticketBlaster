@@ -3,18 +3,18 @@ import "./DetailsCard.css";
 import dayjs from "dayjs";
 
 const DetailsCard = ({
-    eventName = "",
+    eventName,
     image = "https://dev-to-uploads.s3.amazonaws.com/uploads/articles/emqhuigtaseacrhvgfcr.png",
-    eventDate = "",
-    eventDescription = "",
-    eventLocation = "",
+    eventDate,
+    eventDescription,
+    eventLocation,
     eventType,
     price,
     _id }) => {
     return (
         <div className="card-events-details">
             <div className="events-details">
-                <h2>{eventName} Name {dayjs(eventDate).format("DD MMM, YYYY")} date, Location{eventLocation}</h2>
+                <h2>{eventName} Name {" "} {dayjs(eventDate).format("DD MMM, YYYY")} date, Location{eventLocation}</h2>
             </div>
             <div className="event-details-card-container">
                 <img
@@ -47,7 +47,7 @@ const DetailsCard = ({
                     <div className="related-events-card-content">
                         <h5 className="related-events-card-title">Name of artist</h5>
                         <p className="related-events-card-date">
-                            {dayjs(eventDate).format("DD MMM, YYYY")}
+                        {" "} {dayjs(eventDate).format("DD MMM, YYYY")}
                         </p>
                         <p className="related-events-card-location">Skopje, Macedonia</p>
                         <button className="related-events-card-button">Get Ticket</button>
@@ -64,7 +64,7 @@ const DetailsCard = ({
                     <div className="related-events-card-content">
                         <h5 className="related-events-card-title">Name of artist</h5>
                         <p className="related-events-card-date">
-                            {dayjs(eventDate).format("DD MMM, YYYY")}
+                        {" "} {dayjs(eventDate).format("DD MMM, YYYY")}
                         </p>
                         <p className="related-events-card-location">Skopje, Macedonia</p>
                         <button className="related-events-card-button">Get Ticket</button>

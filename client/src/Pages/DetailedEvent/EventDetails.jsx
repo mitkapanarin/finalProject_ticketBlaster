@@ -12,9 +12,7 @@ const EventDetails = () => {
   if (isError) return <div>Something went wrong...</div>;
 
   return <div>An event Details - {params.eventId}
-        {data?.events?.map((event) => {
-        return <DetailsCard key={event?._id} {...event} />;
-      })}
+       <DetailsCard {...data}/>
   </div>;
 };
 
