@@ -1,7 +1,4 @@
 import mongoose from "mongoose";
-import validator from "validator";
-
-// complete, maybe required some testing
 
 const SalesSchema = new mongoose.Schema({
   customerID: {
@@ -10,7 +7,12 @@ const SalesSchema = new mongoose.Schema({
   },
   eventID: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "EventModel",
+    ref: "Event",
+  },
+  quantity: {
+    type: Number,
+    required: true,
+    default: 1,
   },
 });
 

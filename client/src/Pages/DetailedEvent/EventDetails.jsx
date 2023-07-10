@@ -6,14 +6,17 @@ import DetailsCard from "../../components/DetailsCard/DetailsCard";
 const EventDetails = () => {
   const params = useParams();
   const { data, isLoading, isError } = useGetEventQuery(params.eventId);
-  console.log(data)
+  console.log(data);
 
   if (isLoading) return <div>Loading...</div>;
   if (isError) return <div>Something went wrong...</div>;
 
-  return <div>An event Details - {params.eventId}
-       <DetailsCard {...data}/>
-  </div>;
+  return (
+    <div>
+      An event Details - {params.eventId}
+      <DetailsCard {...data?.data} />
+    </div>
+  );
 };
 
-export default EventDetails
+export default EventDetails;

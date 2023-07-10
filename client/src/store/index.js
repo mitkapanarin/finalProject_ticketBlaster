@@ -5,6 +5,7 @@ import storage from "redux-persist/lib/storage";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import { userApi } from "./API/userApi";
 import { userSlice } from "./Slices/userSlice";
+import { basketSlice } from "./Slices/basket";
 import { searchSlice } from "./Slices/Search";
 import {
   eventApi,
@@ -13,6 +14,8 @@ import {
   useUpdateEventMutation,
   useGetAllEventsQuery,
 } from "./API/eventApi";
+
+import { salesAPI, usePurchaseTicketMutation } from "./API/salesAPI";
 
 // Configures the Redux store with the reducers and middleware
 
@@ -32,19 +35,29 @@ const persistedSearchTerm = persistReducer(
   searchSlice.reducer
 );
 
+const persistedBasket = persistReducer(
+  {
+    key: "Basket",
+    storage,
+  },
+  basketSlice.reducer
+);
+
 export const store = configureStore({
   reducer: {
     [userApi.reducerPath]: userApi.reducer, // Configures the reducer for the userApi slice
     [eventApi.reducerPath]: eventApi.reducer, // Configures the reducer for the eventApi slice
+    [salesAPI.reducerPath]: salesAPI.reducer,
     User: persistedUserData, // Configures the reducer for the userSlice
     SearchTerm: persistedSearchTerm,
+    Basket: persistedBasket,
   },
 
   // Combines the middleware used by Redux Toolkit Query with the default middleware for Redux
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,
-    }).concat(userApi.middleware, eventApi.middleware),
+    }).concat(userApi.middleware, eventApi.middleware, salesAPI.middleware),
 });
 
 export const persistedStore = persistStore(store);
@@ -58,4 +71,6 @@ export {
   useGetEventQuery,
   useUpdateEventMutation,
   useGetAllEventsQuery,
+  // sales API actions
+  usePurchaseTicketMutation,
 };
