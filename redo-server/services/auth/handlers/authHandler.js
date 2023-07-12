@@ -17,7 +17,6 @@ function generateResetToken(length = 32) {
     });
   });
 }
-
 export const signup = async (req, res) => {
   const { fullName, email, password } = req.body;
   try {
@@ -89,6 +88,7 @@ export const updateUser = async (req, res) => {
     const { _id } = req.params;
     const { fullName, email, role } = req.body;
 
+    // const hashedPassword = await bcrypt.hash(password, 10);
     const findUser = await UserModel.findOne({ _id });
     if (!findUser) {
       return res.status(404).json({ message: "User not found" });
@@ -218,6 +218,8 @@ export const resetPassword = async (req, res) => {
       .json({ message: "Server Error", log: error.message });
   }
 };
+
+//
 
 export const changePassword = async (req, res) => {
   const { currentPassword, newPassword, email } = req.body;

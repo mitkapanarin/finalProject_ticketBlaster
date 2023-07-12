@@ -5,6 +5,12 @@
 }
 
 
+.divider {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
 .checkout-card-container {
   display: flex;
 }
@@ -84,7 +90,7 @@
   opacity: 1;
 }
 
-.total{
+.total {
   justify-content: space-between;
   display: flex;
   width: 448px;
@@ -92,11 +98,11 @@
   font-weight: bold;
 }
 
-.checkout-right-section{
+.checkout-right-section {
   width: 357px;
 }
 
-.checkout-bottom-section{
+.checkout-bottom-section {
   display: flex;
   justify-content: space-between;
 }

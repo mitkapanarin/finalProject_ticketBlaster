@@ -5,7 +5,12 @@ import storage from "redux-persist/lib/storage";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import { userApi } from "./API/userApi";
 import { userSlice } from "./Slices/userSlice";
-import { basketSlice } from "./Slices/basket";
+import {
+  basketSlice,
+  addToCart,
+  removeOneItemFromCart,
+  resetCart,
+} from "./Slices/basket";
 import { searchSlice } from "./Slices/Search";
 import {
   eventApi,
@@ -49,7 +54,7 @@ export const store = configureStore({
     [eventApi.reducerPath]: eventApi.reducer, // Configures the reducer for the eventApi slice
     [salesAPI.reducerPath]: salesAPI.reducer,
     User: persistedUserData, // Configures the reducer for the userSlice
-    SearchTerm: persistedSearchTerm,
+    SearchTerm: searchSlice.reducer,
     Basket: persistedBasket,
   },
 
@@ -73,4 +78,9 @@ export {
   useGetAllEventsQuery,
   // sales API actions
   usePurchaseTicketMutation,
+
+  // basket API Actions
+  addToCart,
+  removeOneItemFromCart,
+  resetCart,
 };

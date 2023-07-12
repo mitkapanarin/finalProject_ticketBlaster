@@ -11,11 +11,16 @@ const Cards = ({
   eventLocation = "",
   eventType,
   price,
-  _id
+  _id,
 }) => {
+  const isExpired = dayjs(eventDate).isBefore(dayjs());
   const navigate = useNavigate();
   return (
-    <div onClick={()=>navigate(`/events/${_id}`)} className="card-parent">
+    <div
+      onClick={() => isExpired || navigate(`/events/${_id}`)}
+      // onClick={() => navigate(`/events/${_id}`)}
+      className={`card-parent ${isExpired && "fade"}`}
+    >
       {/* Left section */}
       <img src={image} alt="" className="card__left" />
       {/* Right section */}

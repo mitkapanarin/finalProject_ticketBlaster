@@ -17,13 +17,13 @@ import {
   AdminCreateEvent,
   CartPage,
   DisplaySearchResult,
-  EventDetails
+  EventDetails,
+  Checkout,
 } from "./Pages";
-import NavBar from "../src/Components/Navbar/Navbar"
-import Footer from "../src/Components/Footer/Footer"
+import NavBar from "../src/Components/Navbar/Navbar";
+import Footer from "../src/Components/Footer/Footer";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { AdminRoutes, UserRoutes } from "./ProtectedRoutes";
-
 
 const App = () => {
   return (
@@ -57,6 +57,7 @@ const App = () => {
           <Route path="/create-event" element={<AdminCreateEvent />} />
           <Route path="/update-user-details" element={<UpdateUserDetails />} />
           <Route path="/events/:eventId" element={<EventDetails />} />
+          <Route path="/checkout" element={<Checkout />} />
           <Route exact path="/cart-page" element={<CartPage />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>

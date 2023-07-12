@@ -21,7 +21,7 @@ export const refund = async (req, res) => {
   try {
     res.status(200).json({ message: "Refund successful" });
   } catch (err) {
-    res.status(500).json({ message: "Server Error", log: err.message });
+    res.status(500).json({ message: "Server Error", log: error.message });
   }
 };
 

@@ -6,14 +6,22 @@ import Checkout from "../Checkout/Checkout";
 import { useGetAllEventsQuery } from "../../store";
 import ShoppingCart from "../ShoppingCart/ShoppingCart";
 import Purchase from "../Purchase/Purchase";
-import PrintModal from "../../components/PrintModal/PrintModal"
-
+import PrintModal from "../../components/PrintModal/PrintModal";
 
 const Home = () => {
   const { data } = useGetAllEventsQuery();
-  console.log(data?.data)
-  const concerts = data?.data?.filter((item) => item?.eventType === "concert");
-  const comedies = data?.data?.filter((item) => item?.eventType === "comedy");
+  const sortDate = (a, b) => {
+    return new Date(a.eventDate) - new Date(b.eventDate);
+  };
+
+  const concerts = data?.data
+    ?.filter((item) => item?.eventType === "concert")
+    .slice()
+    .sort((a, b) => sortDate(a, b));
+  const comedies = data?.data
+    ?.filter((item) => item?.eventType === "comedy")
+    .slice()
+    .sort((a, b) => sortDate(a, b));
 
   return (
     <div>
@@ -35,9 +43,9 @@ const Home = () => {
         </div>
       </div>
       <Checkout />
-      <ShoppingCart/>
-      <Purchase/>
-      <PrintModal/>
+      <ShoppingCart />
+      <Purchase />
+      <PrintModal />
     </div>
   );
 };

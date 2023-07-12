@@ -16,7 +16,8 @@ import AdminCreateEvent from "./Dashboard/Admin/AdminCreateEvent";
 import ResetPassword from "./ResetPassword/ResetPassword";
 import CartPage from "./CartPage/CartPage";
 import DisplaySearchResult from "./DisplaySearchResult/DisplaySearchResult";
-import EventDetails from "./DetailedEvent/EventDetails"
+import EventDetails from "./DetailedEvent/EventDetails";
+import Checkout from "./Checkout/Checkout";
 export {
   EventDetails,
   Signup,
@@ -37,4 +38,5 @@ export {
   AdminCreateEvent,
   CartPage,
   DisplaySearchResult,
+  Checkout,
 };

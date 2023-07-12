@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./DetailsCard.css";
 import dayjs from "dayjs";
 import { addToCart } from "../../store/Slices/basket";
@@ -16,11 +16,27 @@ const DetailsCard = ({
 }) => {
   const dispatch = useDispatch();
 
+  const [quantity, setQuantity] = useState(0);
+
   const customerID = useSelector((state) => state.User._id);
   console.log(customerID);
 
-  const addToCartAction = () =>
-    dispatch(addToCart({ customerID, eventID: _id, quanity: 3 }));
+  const handleForm = (e) => {
+    e.preventDefault();
+    dispatch(
+      addToCart({
+        quantity,
+        eventName,
+        image,
+        eventDate,
+        eventDescription,
+        eventLocation,
+        eventType,
+        price,
+        _id,
+      })
+    );
+  };
 
   return (
     <div className="card-events-details">
@@ -44,16 +60,17 @@ const DetailsCard = ({
             {" "}
             event Description{eventDescription}
           </p>
-          <div>
+          <form onSubmit={handleForm}>
             <p className="event-details-card-date">Tickets ${price} USD</p>
-            <input type="number" defaultValue={0} />
-            <button
-              onClick={addToCartAction}
-              className="event-details-card-button"
-            >
+            <input
+              type="number"
+              value={quantity}
+              onChange={(e) => setQuantity(+e.target.value)}
+            />
+            <button type="submit" className="event-details-card-button">
               Add to cart
             </button>
-          </div>
+          </form>
         </div>
       </div>
       <div className="bottom-cards">
