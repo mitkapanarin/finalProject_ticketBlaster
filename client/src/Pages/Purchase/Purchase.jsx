@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../Purchase/Purchase.css";
+import PrintModal from "../../Components/PrintModal/PrintModal";
 
 const Purchase = () => {
   const [data, setData] = useState({
@@ -8,7 +9,7 @@ const Purchase = () => {
     cardNo: "",
     password: "",
   });
-
+  
   const navigate = useNavigate();
 
   return (
@@ -32,10 +33,11 @@ const Purchase = () => {
         <div className="Purchase-price">
           <p className="Purchase-total-price">$120.00</p>
           <p className="Purchase-total-tickets">2x60.00USD</p>
-          <button className="left-Purchase-card-button">Print</button>
         </div>
       </div>
       <hr className="hr-sc" />
+
+      <PrintModal />
     </div>
   );
 };

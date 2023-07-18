@@ -19,7 +19,7 @@ const UserSchema = new mongoose.Schema({
     trim: true,
     unique: true,
     default: "",
-    // validate: [validator.isEmail, "Please enter valid email address"],
+    validate: [validator.isEmail, "Please enter valid email address"],
   },
   password: {
     type: String,
@@ -36,7 +36,7 @@ const UserSchema = new mongoose.Schema({
   },
   resetToken: {
     type: String,
-    default: "",
+    default: null,
   },
   resetTokenExpiration: {
     type: Date,

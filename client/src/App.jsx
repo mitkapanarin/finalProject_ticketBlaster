@@ -19,6 +19,7 @@ import {
   DisplaySearchResult,
   EventDetails,
   Checkout,
+  Purchase,
 } from "./Pages";
 import NavBar from "../src/Components/Navbar/Navbar";
 import Footer from "../src/Components/Footer/Footer";
@@ -42,10 +43,12 @@ const App = () => {
           <Route element={<UserRoutes />}>
             <Route path="/user-profile" element={<ProfileDashboard />} />
             <Route path="/shopping-cart" element={<ShoppingCart />} />
+            <Route path="/purchase" element={<Purchase />} />
           </Route>
           <Route element={<AdminRoutes />}>
             <Route path="/admin-dashboard" element={<AdminDashboard />} />
             <Route path="/shopping-cart" element={<ShoppingCart />} />
+            <Route path="/purchase" element={<Purchase />} />
           </Route>
 
           <Route path="/login" element={<Login />} />

@@ -13,7 +13,6 @@ const EventDetails = () => {
 
   return (
     <div>
-      An event Details - {params.eventId}
       <DetailsCard {...data?.data} />
     </div>
   );

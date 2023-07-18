@@ -44,18 +44,18 @@
 //   }
 
 //   return (
-//     <div>
-//       <h2>Cart</h2>
-//       {cartItems.map((item) => (
-//         <div key={item._id}>
-//           <h3>{item.event.eventName}</h3>
-//           <p>Date: {item.event.eventDate}</p>
-//           <p>Location: {item.event.eventLocation}</p>
-//           <p>Price: {item.event.price}</p>
-//           <button onClick={() => handleRemoveItem(item._id)}>Remove</button>
-//         </div>
-//       ))}
-//     </div>
+    // <div>
+    //   <h2>Cart</h2>
+    //   {cartItems.map((item) => (
+    //     <div key={item._id}>
+    //       <h3>{item.event.eventName}</h3>
+    //       <p>Date: {item.event.eventDate}</p>
+    //       <p>Location: {item.event.eventLocation}</p>
+    //       <p>Price: {item.event.price}</p>
+    //       <button onClick={() => handleRemoveItem(item._id)}>Remove</button>
+    //     </div>
+    //   ))}
+    // </div>
 //   );
 // };
 

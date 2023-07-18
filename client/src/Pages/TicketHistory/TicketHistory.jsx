@@ -5,8 +5,8 @@ import "./TicketHistory.css";
 import AdminTab from "../../Components/AdminTab/AdminTab";
 import Ticket from "../../components/Ticket/Ticket";
 import { useGetMultipleEventsMutation } from "../../store/API/eventApi";
-import PrintModal from "../../Components/PrintModal/PrintModal";
 import Purchase from "../Purchase/Purchase"
+import Cards from "../../components/Cards/Cards";
 
 const TicketHistory = () => {
   const [eventData, setEventData] = useState([]);
@@ -32,8 +32,8 @@ const TicketHistory = () => {
       {isError && <div>Something went wrong...</div>}
       {eventData?.map((event) => (
         <>
+        <Cards/>
           <Ticket key={event?._id} {...event} />
-          <PrintModal />
           <Purchase/>
         </>
       ))}
