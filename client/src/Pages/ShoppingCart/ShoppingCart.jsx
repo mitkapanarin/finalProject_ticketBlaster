@@ -11,13 +11,16 @@ const ShoppingCart = () => {
   const navigate = useNavigate();
   const basketItems = useSelector((state) => state?.Basket?.basketItems);
 
-  const removeItem = (id) => dispatch(removeOneItemFromCart(id));
+  const removeItem = (id) => {
+    dispatch(removeOneItemFromCart(id));
+  };
+  
 
   return (
     <div>
       <h2 className="ShoppingCart-card-h">ShoppingCart</h2>
       {basketItems?.map((item) => (
-        <div key={nanoid()} className="ShoppingCart-card-container">
+        <div key={item._id} className="ShoppingCart-card-container">
           <div className="left-ShoppingCart-card-container">
             <img
               className="left-ShoppingCart-card-image"
@@ -56,7 +59,9 @@ const ShoppingCart = () => {
       ))}
       <hr className="hr-sc" />
       <div className="ShoppingCart-right-section">
-        <button className="ShoppingCart-back-btn">Back</button>
+        <button onClick={() => navigate(-1)} className="ShoppingCart-back-btn">
+          Back
+        </button>
         <button
           onClick={() => navigate("/checkout")}
           className="ShoppingCart-checkout-btn"

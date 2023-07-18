@@ -3,12 +3,11 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import InputField from "../Form/InputField";
 import { logout } from "../../store/Slices/userSlice";
-import AdminTab from "../AdminTab/AdminTab"
+import AdminTab from "../AdminTab/AdminTab";
 import "./Events.css";
 
 const Events = ({ handleSubmit, handleInput, data }) => {
-
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   return (
     <div className="card-events-details">

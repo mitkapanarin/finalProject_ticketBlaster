@@ -15,7 +15,7 @@ import {
   StandUpComedies,
   MusicalConcerts,
   AdminCreateEvent,
-  CartPage,
+  // CartPage,
   DisplaySearchResult,
   EventDetails,
   Checkout,
@@ -58,7 +58,7 @@ const App = () => {
           <Route path="/update-user-details" element={<UpdateUserDetails />} />
           <Route path="/events/:eventId" element={<EventDetails />} />
           <Route path="/checkout" element={<Checkout />} />
-          <Route exact path="/cart-page" element={<CartPage />} />
+          {/* <Route exact path="/cart-page" element={<CartPage />} /> */}
           <Route path="*" element={<ErrorPage />} />
         </Routes>
       </div>

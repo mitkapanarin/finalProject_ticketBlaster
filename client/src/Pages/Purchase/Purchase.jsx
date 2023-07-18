@@ -1,36 +1,15 @@
-import React, {useState} from "react";
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../Purchase/Purchase.css";
-
 
 const Purchase = () => {
   const [data, setData] = useState({
     name: "",
     cardNo: "",
-    password: ""
-});
+    password: "",
+  });
 
-const navigate = useNavigate()
-
-const handleInput = (e) => {
-    setData({
-        ...data,
-        [e.target.name]: e.target.value,
-    });
-};
-
-const handleSubmit = async (e) => {
-    e.preventDefault();
-};
-
-const handleLogin = () => {
-    navigate("/login");
-  };
-
-  const handleLogout = () => {
-    dispatch(logout());
-    window.location.href = '/';
-  };
+  const navigate = useNavigate();
 
   return (
     <div>
@@ -62,5 +41,3 @@ const handleLogin = () => {
 };
 
 export default Purchase;
-
-

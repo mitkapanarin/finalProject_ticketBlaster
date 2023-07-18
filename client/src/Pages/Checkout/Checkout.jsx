@@ -2,8 +2,27 @@ import React, { useState } from "react";
 import InputField from "../../components/Form/InputField";
 import { useNavigate } from "react-router-dom";
 import "../Checkout/Checkout.css";
+import { useSelector, useDispatch } from "react-redux";
+import { usePurchaseTicketMutation } from "../../store";
+import { toast } from "react-toastify";
+import { resetCart } from "../../store";
 
 const Checkout = () => {
+  const dispatch = useDispatch();
+  const [purchaseTicket] = usePurchaseTicketMutation();
+
+  const customerID = useSelector((state) => state?.User?._id);
+  console.log(customerID);
+  const basket = useSelector((state) => state.Basket.basketItems);
+  const modifyBasket = basket.map((item) => {
+    return {
+      eventID: item._id,
+      quantity: item.quantity,
+      customerID,
+      status: "completed",
+    };
+  });
+  console.log(modifyBasket);
   const [data, setData] = useState({
     name: "",
     cardNo: "",
@@ -19,17 +38,16 @@ const Checkout = () => {
     });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-  };
-
-  const handleLogin = () => {
-    navigate("/login");
-  };
-
-  const handleLogout = () => {
-    dispatch(logout());
-    window.location.href = "/";
+  const handleSales = async () => {
+    try {
+      const x = await purchaseTicket(modifyBasket).then(() => {
+        dispatch(resetCart());
+        navigate("/ticket-history");
+      });
+    } catch (err) {
+      toast.error(err.message);
+      console.log(err);
+    }
   };
 
   return (
@@ -109,8 +127,12 @@ const Checkout = () => {
         </div>
       </div>
       <div className="checkout-bottom-section">
-        <button className="back-bottom-btn">Back</button>
-        <button className="checkout-bottom-btn">Checkout</button>
+        <button onClick={() => navigate(-1)} className="back-bottom-btn">
+          Back
+        </button>
+        <button onClick={handleSales} className="checkout-bottom-btn">
+          Pay Now
+        </button>
       </div>
     </div>
   );

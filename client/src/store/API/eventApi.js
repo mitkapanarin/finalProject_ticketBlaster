@@ -27,9 +27,18 @@ export const eventApi = createApi({
       providesTags: ["Events"],
     }),
 
+    getMultipleEvents: builder.mutation({
+      query: (body) => ({
+        url: "/multiple-events",
+        method: "POST",
+        body,
+      }),
+      providesTags: ["Events"],
+    }),
+
     updateEvent: builder.mutation({
       query: (body) => ({
-        url: `/update-event/${eventID}`,
+        url: `/update-event/${body.eventID}`,
         method: "PUT",
         body,
       }),
@@ -48,7 +57,7 @@ export const eventApi = createApi({
     searchEvents: builder.query({
       query: (searchTerm) => `/search-events?search=${searchTerm}`,
       providesTags: ["Events"],
-    })
+    }),
   }),
 });
 
@@ -59,5 +68,6 @@ export const {
   useGetEventQuery,
   useUpdateEventMutation,
   useGetAllEventsQuery,
-  useSearchEventsQuery
+  useSearchEventsQuery,
+  useGetMultipleEventsMutation,
 } = eventApi;

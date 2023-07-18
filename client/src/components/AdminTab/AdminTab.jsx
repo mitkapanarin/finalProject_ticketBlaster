@@ -1,13 +1,13 @@
-import React from 'react'
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../../store/Slices/userSlice";
 import "./AdminTab.css";
 
 const AdminTab = ({ pageName }) => {
-  const { role } = useSelector(store => store.User)
+  const { role } = useSelector((store) => store.User);
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   return (
     <div className="navbar-admin">
@@ -16,7 +16,7 @@ const AdminTab = ({ pageName }) => {
       </div>
       <nav>
         <ul>
-          {role === 'admin' &&
+          {role === "admin" && (
             <>
               <li>
                 <Link to="/admin-dashboard">Events</Link>
@@ -25,8 +25,7 @@ const AdminTab = ({ pageName }) => {
                 <Link to="/all-users">Users</Link>
               </li>
             </>
-
-          }
+          )}
 
           <li>
             <Link to="/ticket-history">Ticket History</Link>
@@ -40,7 +39,7 @@ const AdminTab = ({ pageName }) => {
         </ul>
       </nav>
     </div>
-  )
-}
+  );
+};
 
-export default AdminTab
+export default AdminTab;

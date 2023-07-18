@@ -45,12 +45,12 @@ const AdminDashboard = () => {
   return (
     <>
       <div>
-      <Events
-        data={data}
-        handleSubmit={handleSubmit}
-        handleInput={handleInput}
-      />
-    </div>
+        <Events
+          data={data}
+          handleSubmit={handleSubmit}
+          handleInput={handleInput}
+        />
+      </div>
     </>
   );
 };

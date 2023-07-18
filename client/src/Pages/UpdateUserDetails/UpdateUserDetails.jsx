@@ -11,8 +11,8 @@ import AdminTab from "../../Components/AdminTab/AdminTab";
 
 const UpdateUserDetails = () => {
   const [updateUser] = useUpdateUserMutation();
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [showPasswordFields, setShowPasswordFields] = useState(false);
   const [password, setPassword] = useState("");
   const [retypePassword, setRetypePassword] = useState("");
@@ -22,7 +22,7 @@ const UpdateUserDetails = () => {
   const [userData, setUserData] = useState({
     fullName,
     email,
-    _id
+    _id,
   });
 
   const handleUserDataChange = (e) => {
@@ -58,12 +58,11 @@ const UpdateUserDetails = () => {
 
   const handleLogout = () => {
     dispatch(logout());
-    window.location.href = '/';
+    window.location.href = "/";
   };
   return (
     <div className="card-user-details">
-
-<AdminTab pageName={"User Details"}/>
+      <AdminTab pageName={"User Details"} />
       <form action="" onSubmit={handleSubmit}>
         <div className="top-user-details">
           <div className="left-user-details">
@@ -126,7 +125,7 @@ const UpdateUserDetails = () => {
       {showPasswordFields && (
         <>
           <div className="password-fields">
-          <InputField
+            <InputField
               className="inputField"
               type="password"
               name="Password"
@@ -136,7 +135,7 @@ const UpdateUserDetails = () => {
               required={true}
               label="Password"
             />
-          <InputField
+            <InputField
               className="inputField"
               type="password"
               name="Password"
@@ -147,10 +146,7 @@ const UpdateUserDetails = () => {
               label="Re-Type Password"
             />
           </div>
-          <button
-            className="submit-button-user"
-            onClick={handleSubmitPassword}
-          >
+          <button className="submit-button-user" onClick={handleSubmitPassword}>
             Submit
           </button>
         </>

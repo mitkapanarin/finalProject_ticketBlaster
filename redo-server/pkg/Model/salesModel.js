@@ -14,6 +14,12 @@ const SalesSchema = new mongoose.Schema({
     required: true,
     default: 1,
   },
+  status: {
+    type: String,
+    enum: ["pending", "completed"],
+    default: "pending",
+    required: true,
+  },
 });
 
 export const SalesModel = mongoose.model("Sales", SalesSchema);

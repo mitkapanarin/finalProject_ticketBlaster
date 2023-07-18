@@ -7,23 +7,24 @@ const initialState = {
   _id: "",
 };
 
-
-export const userSlice = createSlice({ 
+export const userSlice = createSlice({
   name: "User",
   initialState,
   reducers: {
     login: (state, action) => {
       return {
-        ...state, ...action.payload
-      }
+        ...state,
+        ...action.payload,
+      };
     },
     updateUserStateData: (state, action) => {
       return {
-        ...state, ...action.payload
-      }
+        ...state,
+        ...action.payload,
+      };
     },
 
-    logout: (state) => initialState
+    logout: (state) => initialState,
   },
 });
 

@@ -13,13 +13,15 @@ export const basketSlice = createSlice({
       };
     },
     removeOneItemFromCart: (state, action) => {
-      console.log(action.payload);
+      const updatedBasketItems = state.basketItems.filter(
+        (item) => item._id !== action.payload
+      );
       return {
-        basketItems: state.basketItems.filter(
-          (item) => item._id !== action.payload
-        ),
+        ...state,
+        basketItems: updatedBasketItems,
       };
     },
+
     resetCart: () => initialState,
   },
 });

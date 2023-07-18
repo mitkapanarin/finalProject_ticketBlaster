@@ -17,3 +17,12 @@ GET ALL EVENTS OF 1 USER???  PUT THAT IN EVENTPAGE instead of useGetAllEventsQue
 * Add credit card details
 * Add ticket to user dashboard
 *
+
+## Code Quality Checking tools
+
+* prettier
+* eslint
+* pre-commit
+* lint-staged
+* lint
+* husky

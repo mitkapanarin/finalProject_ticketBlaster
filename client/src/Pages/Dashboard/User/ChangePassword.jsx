@@ -1,37 +1,40 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState } from "react";
+import axios from "axios";
 
 const ChangePassword = ({ userId, email }) => {
-  const [currentPassword, setCurrentPassword] = useState('');
-  const [newPassword, setNewPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [message, setMessage] = useState('');
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [message, setMessage] = useState("");
 
   const handleChangePassword = async (e) => {
     e.preventDefault();
 
     if (newPassword !== confirmPassword) {
-      setMessage('Passwords do not match');
+      setMessage("Passwords do not match");
       return;
     }
 
     try {
-      const response = await axios.post('http://localhost:9000/api/v1/auth/change-password', {
+      const response = await axios.post(
+        "http://localhost:9000/api/v1/auth/change-password",
+        {
           currentPassword: currentPassword,
           newPassword: newPassword,
           email: email,
-      });
+        },
+      );
 
       if (response.status === 200) {
         setMessage(response.data.message);
-        setCurrentPassword('');
-        setNewPassword('');
-        setConfirmPassword('');
+        setCurrentPassword("");
+        setNewPassword("");
+        setConfirmPassword("");
       } else {
-        setMessage('Failed to change password');
+        setMessage("Failed to change password");
       }
     } catch (error) {
-      setMessage('Server Error');
+      setMessage("Server Error");
       console.error(error);
     }
   };

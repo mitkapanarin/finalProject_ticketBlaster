@@ -1,44 +1,42 @@
-import React, { useState } from 'react'
-import { useLoginUserMutation } from '../../store/API/userApi'
-import InputField from '../../components/Form/InputField'
-import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { useLoginUserMutation } from "../../store/API/userApi";
+import InputField from "../../components/Form/InputField";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 import { login } from "../../store/Slices/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 const Login = () => {
-  const dispatch = useDispatch() // initialization
-  const store = useSelector((z) => z)
-  console.log(store)
-  const navigate = useNavigate()
+  const dispatch = useDispatch(); // initialization
+  const store = useSelector((z) => z);
+  console.log(store);
+  const navigate = useNavigate();
   const [data, setData] = useState({
     email: "",
-    password: ""
-  })
+    password: "",
+  });
 
-  const [loginUser] = useLoginUserMutation()
+  const [loginUser] = useLoginUserMutation();
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     try {
-      const x = await loginUser(data)
-      dispatch(login(x?.data))
-      toast.success("Logged in successfully")
-      navigate("/")
+      const x = await loginUser(data);
+      dispatch(login(x?.data));
+      toast.success("Logged in successfully");
+      navigate("/");
+    } catch (err) {
+      console.log("error occured");
+      toast.error("Couldn't login, please try again");
     }
-    catch (err) {
-      console.log("error occured")
-      toast.error("Couldn't login, please try again")
-    }
-  }
+  };
 
   const handleInput = (e) => {
     setData({
       ...data,
-      [e.target.name]: e.target.value
-    })
-  }
-
+      [e.target.name]: e.target.value,
+    });
+  };
 
   const handleForgotPassword = () => {
     navigate("/forgot-password");
@@ -76,7 +74,11 @@ const Login = () => {
                 />
 
                 <div className="login-remember-forgot">
-                  <a href="#" className="login-forgot-link" onClick={handleForgotPassword}>
+                  <a
+                    href="#"
+                    className="login-forgot-link"
+                    onClick={handleForgotPassword}
+                  >
                     Forgot password?
                   </a>
                   <button type="submit" className="login-signin-button">
@@ -84,8 +86,12 @@ const Login = () => {
                   </button>
                 </div>
                 <p className="login-signup-text">
-                  <button type="submit" className="login-signup-button" onClick={handleSignup}>
-                    Don't have an account?
+                  <button
+                    type="submit"
+                    className="login-signup-button"
+                    onClick={handleSignup}
+                  >
+                    {`Don't have an account?`}
                   </button>
                 </p>
               </form>

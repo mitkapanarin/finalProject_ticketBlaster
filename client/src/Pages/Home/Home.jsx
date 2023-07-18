@@ -42,10 +42,6 @@ const Home = () => {
           <button className="home__page--exploreBtn">See All</button>
         </div>
       </div>
-      <Checkout />
-      <ShoppingCart />
-      <Purchase />
-      <PrintModal />
     </div>
   );
 };

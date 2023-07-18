@@ -7,27 +7,26 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   UserIcon,
   PresentationChartLineIcon,
-  ShoppingCartIcon
+  ShoppingCartIcon,
 } from "@heroicons/react/24/outline";
 import { SearchEvents } from "../../Pages/Search/SearchEvents";
-
 
 const NavBar = () => {
   const dispatch = useDispatch();
   const { token, role } = useSelector((state) => state.User);
 
   const handleLogin = () => {
-    dispatch(
-      registerUser({
-        token: "lsidjciuhsdyuweduhweiudh",
-        role: "User",
-      })
-    );
+    // dispatch(
+    //   registerUser({
+    //     token: "lsidjciuhsdyuweduhweiudh",
+    //     role: "User",
+    //   }),
+    // );
   };
   //const [searchTerm, setSearchTerm] = useState('');
 
   //const handleSearch = () => {
-    // Implement the search logic here
+  // Implement the search logic here
   //  console.log('Searching for:', searchTerm);
   //};
   //
@@ -56,8 +55,7 @@ const NavBar = () => {
           </div>
           <div className="right-container">
             <div className="search-container">
-              <SearchEvents/>
-
+              <SearchEvents />
             </div>
             {token === "" && (
               <>

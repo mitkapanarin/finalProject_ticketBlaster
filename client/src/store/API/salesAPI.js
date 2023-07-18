@@ -5,7 +5,7 @@ export const salesAPI = createApi({
   tagTypes: ["Sales"],
 
   baseQuery: fetchBaseQuery({
-    baseUrl: `${import.meta.env.VITE_APP_API_EVENT_URL}/api/v1/sales`,
+    baseUrl: `${import.meta.env.VITE_APP_API_SALES_URL}/api/v1/sales`,
   }),
 
   endpoints: (builder) => ({
@@ -17,7 +17,11 @@ export const salesAPI = createApi({
       }),
       invalidatesTags: ["Sales"],
     }),
+    purchaseHistory: builder.query({
+      query: (customerID) => `/purchase-history/${customerID}`,
+      providesTags: ["Sales"], // if we have query we use providesTags
+    }),
   }),
 });
 
-export const { usePurchaseTicketMutation } = salesAPI;
+export const { usePurchaseTicketMutation, usePurchaseHistoryQuery } = salesAPI;

@@ -52,6 +52,22 @@ export const getOneEvent = async (req, res) => {
   }
 };
 
+// get multiple events
+export const getMultipleEvents = async (req, res) => {
+  try {
+    // Retrieve the event IDs from the request body or query parameters
+    const { eventIDs } = req.body; // Assuming eventIDs is an array of event IDs
+
+    // Use the retrieved event IDs to fetch the corresponding events
+    const events = await EventModel.find({ _id: { $in: eventIDs } });
+
+    // Return the found events
+    res.status(200).json({ message: "Multiple Events found", data: events });
+  } catch (err) {
+    res.status(500).json({ message: "Server Error", log: err.message });
+  }
+};
+
 // update
 export const updateEvent = async (req, res) => {
   try {

@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 const ResetPassword = () => {
-  const [newPassword, setNewPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [message, setMessage] = useState('');
-  const [resetToken, setResetToken] = useState('');
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [message, setMessage] = useState("");
+  const [resetToken, setResetToken] = useState("");
 
   useEffect(() => {
     // Extract the reset token from the URL
-    const token = window.location.pathname.split('/').pop();
+    const token = window.location.pathname.split("/").pop();
     console.log(token);
     if (token) {
       // Store the reset token in the component state
@@ -22,23 +22,26 @@ const ResetPassword = () => {
     e.preventDefault();
 
     if (newPassword !== confirmPassword) {
-      setMessage('Passwords do not match');
+      setMessage("Passwords do not match");
       return;
     }
 
     try {
-      const response = await axios.post('http://localhost:9000/api/v1/auth/reset-password', {
-        resetToken,
-        newPassword,
-      });
+      const response = await axios.post(
+        "http://localhost:9000/api/v1/auth/reset-password",
+        {
+          resetToken,
+          newPassword,
+        },
+      );
 
       if (response.status === 200) {
         setMessage(response.data.message);
       } else {
-        setMessage('Invalid or expired reset token');
+        setMessage("Invalid or expired reset token");
       }
     } catch (error) {
-      setMessage('Server Error');
+      setMessage("Server Error");
       console.error(error);
     }
   };

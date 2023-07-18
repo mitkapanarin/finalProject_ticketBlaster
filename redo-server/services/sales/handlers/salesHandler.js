@@ -1,17 +1,27 @@
 import { SalesModel } from "../../../pkg/Model/salesModel.js";
 
-export const makeSales = async (req, res) => {
-  const { customerID, eventID } = req.body;
+// how to get all the data that is related to customerID
+
+export const ticketHistory = async (req, res) => {
+  const { customerID } = req.params;
   try {
-    const newSale = new SalesModel({
-      customerID,
-      eventID,
-      quantity,
-    });
-    const savedSale = await newSale.save();
-    res
-      .status(201)
-      .json({ message: "Sale made successfully", data: savedSale });
+    const history = await SalesModel.find({ customerID });
+    res.status(200).json({ message: "Ticket history", data: history });
+  } catch (error) {
+    res.status(500).json({ message: "Server Error", log: error.message });
+  }
+};
+
+// how to save multiple objects of an array at once
+
+export const makeSales = async (req, res) => {
+  const x = req.body; // array of objects
+
+  try {
+    const newSales = await SalesModel.insertMany(x);
+    // The insertMany method saves the objects automatically, so you don't need to call save() on newSales.
+
+    res.status(201).json({ message: "Sale made successfully", data: newSales });
   } catch (error) {
     res.status(500).json({ message: "Server Error", log: error.message });
   }
@@ -21,50 +31,6 @@ export const refund = async (req, res) => {
   try {
     res.status(200).json({ message: "Refund successful" });
   } catch (err) {
-    res.status(500).json({ message: "Server Error", log: error.message });
-  }
-};
-
-// Get cart items ❌
-export const getCartItems = async (req, res) => {
-  try {
-    const cartItems = await SalesModel.find().populate("event");
-    res.status(200).json({ data: cartItems });
-  } catch (error) {
-    res.status(500).json({ message: "Server Error", log: error.message });
-  }
-};
-
-// Remove item from cart ❌
-export const removeCartItem = async (req, res) => {
-  try {
-    const { itemId } = req.params;
-    await SalesModel.findByIdAndRemove(itemId);
-    res.status(200).json({ message: "Item removed from cart" });
-  } catch (error) {
-    res.status(500).json({ message: "Server Error", log: error.message });
-  }
-};
-// Add item to cart ❌
-export const addItemToCart = async (req, res) => {
-  try {
-    const { eventID } = req.body;
-    const { email } = req.params;
-    const customerEmail = email;
-
-    // Create a new SalesModel instance
-    const newItem = new SalesModel({
-      eventID,
-      customerEmail,
-    });
-
-    // Save the new item to the database
-    const savedItem = await newItem.save();
-
-    res
-      .status(201)
-      .json({ message: "Item added to cart successfully", data: savedItem });
-  } catch (error) {
     res.status(500).json({ message: "Server Error", log: error.message });
   }
 };

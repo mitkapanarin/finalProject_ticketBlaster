@@ -29,7 +29,7 @@ const persistedUserData = persistReducer(
     key: "User Data",
     storage,
   },
-  userSlice.reducer
+  userSlice.reducer,
 );
 
 const persistedSearchTerm = persistReducer(
@@ -37,7 +37,7 @@ const persistedSearchTerm = persistReducer(
     key: "Search Term",
     storage,
   },
-  searchSlice.reducer
+  searchSlice.reducer,
 );
 
 const persistedBasket = persistReducer(
@@ -45,7 +45,7 @@ const persistedBasket = persistReducer(
     key: "Basket",
     storage,
   },
-  basketSlice.reducer
+  basketSlice.reducer,
 );
 
 export const store = configureStore({

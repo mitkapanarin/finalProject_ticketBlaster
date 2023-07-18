@@ -1,28 +1,31 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState } from "react";
+import axios from "axios";
 
 const ForgotPassword = () => {
-  const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!validateEmail(email)) {
-      setMessage('Please enter a valid email address');
+      setMessage("Please enter a valid email address");
       return;
     }
 
     try {
-      const response = await axios.post('http://localhost:9000/api/v1/auth/forgot-password', { email });
+      const response = await axios.post(
+        "http://localhost:9000/api/v1/auth/forgot-password",
+        { email },
+      );
 
       if (response.status === 200) {
         setMessage(response.data.message);
       } else {
-        setMessage('User not found');
+        setMessage("User not found");
       }
     } catch (error) {
-      setMessage('Server Error');
+      setMessage("Server Error");
       console.error(error);
     }
   };

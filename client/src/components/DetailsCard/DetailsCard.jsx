@@ -3,6 +3,7 @@ import "./DetailsCard.css";
 import dayjs from "dayjs";
 import { addToCart } from "../../store/Slices/basket";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 const DetailsCard = ({
   eventName,
@@ -21,29 +22,36 @@ const DetailsCard = ({
   const customerID = useSelector((state) => state.User._id);
   console.log(customerID);
 
-  const handleForm = (e) => {
+  const handleForm = async (e) => {
     e.preventDefault();
-    dispatch(
-      addToCart({
-        quantity,
-        eventName,
-        image,
-        eventDate,
-        eventDescription,
-        eventLocation,
-        eventType,
-        price,
-        _id,
-      })
-    );
+    try {
+      await dispatch(
+        addToCart({
+          quantity,
+          eventName,
+          image,
+          eventDate,
+          eventDescription,
+          eventLocation,
+          eventType,
+          price,
+          _id,
+        })
+      );
+      toast.success("Item added to cart successfully 👌");
+    } catch (err) {
+      console.log(err);
+      toast.error("Couldn't add item to cart, please try again");
+    }
   };
+  
 
   return (
     <div className="card-events-details">
       <div className="events-details">
         <h2>
-          {eventName} Name {dayjs(eventDate).format("DD MMM, YYYY")} date,
-          Location{eventLocation}
+          {eventName} {dayjs(eventDate).format("DD MMM, YYYY")},
+          {eventLocation}
         </h2>
       </div>
       <div className="event-details-card-container">

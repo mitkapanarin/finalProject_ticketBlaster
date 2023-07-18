@@ -14,7 +14,7 @@ import StandUpComedies from "./StandUpComedies/StandUpComedies";
 import MusicalConcerts from "./MusicalConcerts/MusicalConcerts";
 import AdminCreateEvent from "./Dashboard/Admin/AdminCreateEvent";
 import ResetPassword from "./ResetPassword/ResetPassword";
-import CartPage from "./CartPage/CartPage";
+// import CartPage from "./CartPage/CartPage";
 import DisplaySearchResult from "./DisplaySearchResult/DisplaySearchResult";
 import EventDetails from "./DetailedEvent/EventDetails";
 import Checkout from "./Checkout/Checkout";
@@ -36,7 +36,7 @@ export {
   StandUpComedies,
   MusicalConcerts,
   AdminCreateEvent,
-  CartPage,
+  // CartPage,
   DisplaySearchResult,
   Checkout,
 };
