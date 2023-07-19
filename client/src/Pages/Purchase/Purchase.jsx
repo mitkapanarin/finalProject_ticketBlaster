@@ -1,38 +1,49 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { usePurchaseHistoryQuery } from "../../store/API/salesAPI";
+import { useGetMultipleEventsMutation } from "../../store/API/eventApi";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import Loader from "../../Components/Loader/Loader";
+import PurchaseCard from "../../Components/PurchaseCard/PurchaseCard";
 import "../Purchase/Purchase.css";
-import PrintModal from "../../Components/PrintModal/PrintModal";
+
 
 const Purchase = () => {
 
-    const navigate = useNavigate();
+    const [eventData, setEventData] = useState([]);
+  const [
+    getMultipleEvents,
+    { isLoading: eventsLoading, isError: eventsError },
+  ] = useGetMultipleEventsMutation();
+  const customerID = useSelector((state) => state?.User?._id);
+  const { data: purchaseHistoryData, isLoading: purchaseHistoryLoading } =
+    usePurchaseHistoryQuery(customerID);
+  const eventIDs = purchaseHistoryData?.data?.map((event) => event.eventID);
 
+  async function fetchMultipleEventsData() {
+    const fetchedData = await getMultipleEvents({
+      eventIDs,
+    });
+    setEventData(fetchedData?.data?.data);
+  }
+
+  useEffect(() => {
+    if (eventIDs?.length === 0) return;
+    else {
+      fetchMultipleEventsData();
+    }
+  }, [purchaseHistoryData]);
+
+  
+  if (purchaseHistoryLoading || eventsLoading) return <Loader />;
+
+  if (eventsError) <h1>Something went wrong</h1>;
     return (
         <div>
             <h2 className="Purchase-card-h">Thank you for your purchase!</h2>
-            <div className="Purchase-card-container">
-                <div className="left-Purchase-card-container">
-                    <img
-                        className="left-Purchase-card-image"
-                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/World_Map_%28political%29.svg/1024px-World_Map_%28political%29.svg.png"
-                        alt="World Map"
-                        width="200"
-                        height="153"
-                    />
-                    <div className="left-Purchase-card-content">
-                        <h5 className="left-Purchase-card-title">Name of artist</h5>
-                        <p className="left-Purchase-card-date">June 9th 2023</p>
-                        <p className="left-Purchase-card-location">Skopje, Macedonia</p>
-                    </div>
-                </div>
-                <div className="purchase-right-sec">
-                    <div className="Purchase-price">
-                        <p className="Purchase-total-price">$120.00</p>
-                        <p className="Purchase-total-tickets">2x60.00USD</p>
-                    </div>
-                    <PrintModal />
-                </div>
-            </div>
+            {eventData?.map((event) => (
+                <PurchaseCard key={event?._id} {...event} />
+            ))}
             <hr className="hr-sc" />
         </div>
     );
