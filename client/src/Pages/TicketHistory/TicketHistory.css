@@ -1,3 +1,9 @@
+.histroy-parent {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
 .card-ticket-history {
   display: flex;
   flex-direction: column;
@@ -73,13 +79,20 @@
   cursor: pointer;
 }
 
-.botom-all-users-action-button{
+.botom-all-users-action-button {
   padding: 8px 16px;
-  color: #ff00ff;;
+  color: #ff00ff;
+  ;
   border: none;
   border-radius: 20px;
   margin-top: 16px;
   cursor: pointer;
   border: 1px solid #ff00ff;
   margin-right: 10px;
+}
+
+@media(max-width: 1200px) {
+  .histroy-parent {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }

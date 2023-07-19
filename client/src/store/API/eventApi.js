@@ -31,9 +31,9 @@ export const eventApi = createApi({
       query: (body) => ({
         url: "/multiple-events",
         method: "POST",
-        body,
+        body: body,
       }),
-      providesTags: ["Events"],
+      invalidatesTags: ["Events"],
     }),
 
     updateEvent: builder.mutation({

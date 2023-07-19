@@ -4,22 +4,26 @@ import "./PrintModal.css";
 const PrintModal = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  return (
-    <div className="print-user-modal">
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        data-modal-target="popup-modal"
-        data-modal-toggle="popup-modal"
-        className="print-button"
-        type="button"
-      >
-        Print
-      </button>
+  const closeModal = () => {
+    setIsOpen(false);}
 
-      {isOpen && (
-        <div className="modal-overlay">
-          <div className="modal">
-            <div className="modal-body">
+    return (
+      <div className="print-user-modal">
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          data-modal-target="popup-modal"
+          data-modal-toggle="popup-modal"
+          className="print-button"
+          type="button"
+        >
+          Print
+        </button>
+  
+        {isOpen && (
+          <div className="modal-overlay">
+            <div className="modal">
+              <div className="modal-body" onClick={closeModal}>
+                <span className="close-modal-button" onClick={closeModal}></span>
               <h2 className="printModal-card-h">ticketBlaster</h2>
               <img
                 className="left-printModal-card-image"

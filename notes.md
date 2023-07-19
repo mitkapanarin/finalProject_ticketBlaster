@@ -26,3 +26,8 @@ GET ALL EVENTS OF 1 USER???  PUT THAT IN EVENTPAGE instead of useGetAllEventsQue
 * lint-staged
 * lint
 * husky
+
+## Agenda for 18th July, 2023
+
+* ticket history bug
+* dsdc

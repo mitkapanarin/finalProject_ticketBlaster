@@ -79,13 +79,6 @@
   justify-content: center;
 }
 
-.purchase-right-sec{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 20px;
-}
-
 .hr-sc {
   border: 1px solid #9b9a9a;
   opacity: 1;

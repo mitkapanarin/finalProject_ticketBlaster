@@ -3,40 +3,48 @@ import { usePurchaseHistoryQuery } from "../../store/API/salesAPI";
 import { useSelector } from "react-redux";
 import "./TicketHistory.css";
 import AdminTab from "../../Components/AdminTab/AdminTab";
-import Ticket from "../../components/Ticket/Ticket";
 import { useGetMultipleEventsMutation } from "../../store/API/eventApi";
-import Purchase from "../Purchase/Purchase"
-import Cards from "../../components/Cards/Cards";
+import History from "../History/History";
+import Loader from "../../Components/Loader/Loader";
 
 const TicketHistory = () => {
   const [eventData, setEventData] = useState([]);
-  const [getMultipleEvents, { isLoading, isError }] =
-    useGetMultipleEventsMutation();
+  const [
+    getMultipleEvents,
+    { isLoading: eventsLoading, isError: eventsError },
+  ] = useGetMultipleEventsMutation();
   const customerID = useSelector((state) => state?.User?._id);
-  const { data: purchaseHistoryData } = usePurchaseHistoryQuery(customerID);
+  const { data: purchaseHistoryData, isLoading: purchaseHistoryLoading } =
+    usePurchaseHistoryQuery(customerID);
   const eventIDs = purchaseHistoryData?.data?.map((event) => event.eventID);
 
+  async function fetchMultipleEventsData() {
+    const fetchedData = await getMultipleEvents({
+      eventIDs,
+    });
+    setEventData(fetchedData?.data?.data);
+  }
+
   useEffect(() => {
-    async function fetchMultipleEventsData() {
-      const fetchedData = await getMultipleEvents({ eventIDs });
-      setEventData(fetchedData?.data?.data);
-      console.log("fetchedData", fetchedData);
+    if (eventIDs?.length === 0) return;
+    else {
+      fetchMultipleEventsData();
     }
-    fetchMultipleEventsData();
-  }, []);
+  }, [purchaseHistoryData]);
+
+  
+  if (purchaseHistoryLoading || eventsLoading) return <Loader />;
+
+  if (eventsError) <h1>Something went wrong</h1>;
 
   return (
     <div className="card-ticket-history">
       <AdminTab pageName={"Ticket History"} />
-      {isLoading && <div>Loading...</div>}
-      {isError && <div>Something went wrong...</div>}
-      {eventData?.map((event) => (
-        <>
-        <Cards/>
-          <Ticket key={event?._id} {...event} />
-          <Purchase/>
-        </>
-      ))}
+      <div className="histroy-parent">
+        {eventData?.map((event) => (
+          <History key={event?._id} {...event} />
+        ))}
+      </div>
     </div>
   );
 };

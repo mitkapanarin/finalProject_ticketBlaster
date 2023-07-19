@@ -6,31 +6,23 @@ import { useSelector, useDispatch } from "react-redux";
 import { usePurchaseTicketMutation } from "../../store";
 import { toast } from "react-toastify";
 import { resetCart } from "../../store";
-import dayjs from "dayjs";
 
-const Checkout = ({
-  eventName = "",
-  image = "https://dev-to-uploads.s3.amazonaws.com/uploads/articles/emqhuigtaseacrhvgfcr.png",
-  eventDate = "",
-  eventLocation = "",
-  quantity,
-  price,
-  _id,
-}) => {
+const Checkout = () => {
   const dispatch = useDispatch();
   const [purchaseTicket] = usePurchaseTicketMutation();
 
   const customerID = useSelector((state) => state?.User?._id);
   console.log(customerID);
   const basket = useSelector((state) => state.Basket.basketItems);
-  const modifyBasket = basket.map((item) => ({
-    eventID: item._id,
-    quantity: item.quantity,
-    customerID,
-    status: "completed",
-  }));
+  const modifyBasket = basket.map((item) => {
+    return {
+      eventID: item._id,
+      quantity: item.quantity,
+      customerID,
+      status: "completed",
+    };
+  });
   console.log(modifyBasket);
-
   const [data, setData] = useState({
     name: "",
     cardNo: "",
@@ -48,17 +40,15 @@ const Checkout = ({
 
   const handleSales = async () => {
     try {
-      await purchaseTicket(modifyBasket);
-      toast.success("Payed successfully 👌");
-      dispatch(resetCart());
-      navigate("/purchase");
+      const x = await purchaseTicket(modifyBasket).then(() => {
+        dispatch(resetCart());
+        navigate("/purchase");
+      });
     } catch (err) {
-      toast.error("Paying wasnt success, please try again");
+      toast.error(err.message);
       console.log(err);
     }
   };
-
-  const totalBill = quantity * price;
 
   return (
     <div>
@@ -69,28 +59,26 @@ const Checkout = ({
             <div className="left-checkout-card-container">
               <img
                 className="left-checkout-card-image"
-                src={image}
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/World_Map_%28political%29.svg/1024px-World_Map_%28political%29.svg.png"
                 alt="World Map"
                 width="200"
                 height="153"
               />
               <div className="left-checkout-card-content">
-                <h5 className="left-checkout-card-title">{eventName}</h5>
-                <p className="left-checkout-card-date">
-                  {dayjs(eventDate).format("DD MMM, YYYY")}
-                </p>
-                <p className="left-checkout-card-location">{eventLocation}</p>
+                <h5 className="left-checkout-card-title">Name of artist</h5>
+                <p className="left-checkout-card-date">June 9th 2023</p>
+                <p className="left-checkout-card-location">Skopje, Macedonia</p>
               </div>
             </div>
             <div className="checkout-price">
-              <p className="checkout-total-price">${price}</p>
-              <p className="checkout-total-tickets">{quantity} x ${price}</p>
+              <p className="checkout-total-price">$120.00</p>
+              <p className="checkout-total-tickets">2x60.00USD</p>
             </div>
           </div>
           <hr className="hr" />
           <div className="total">
             <p>Total:</p>
-            <p>${totalBill}</p>
+            <p>$120</p>
           </div>
         </div>
         <div className="">
@@ -98,7 +86,7 @@ const Checkout = ({
             <InputField
               type="text"
               name="name"
-              value={data.name}
+              value={data.username}
               onChange={handleInput}
               label="Full Name"
               placeholder="Enter Your name here..."
@@ -118,10 +106,10 @@ const Checkout = ({
             <InputField
               type="date"
               name="expires"
-              value={data.expires}
+              value={data.date}
               onChange={handleInput}
               label="Expires"
-              placeholder="Enter your expiration date"
+              placeholder="Enter your expireing date"
               required={true}
               className="checkout-input"
             />
@@ -131,7 +119,7 @@ const Checkout = ({
               value={data.pin}
               onChange={handleInput}
               label="PIN"
-              placeholder="Enter your PIN"
+              placeholder="Enter your pin"
               required={true}
               className="checkout-input"
             />

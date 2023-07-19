@@ -1,10 +1,10 @@
 .print-button {
-  background-color:black;
+  background-color: black;
   color: white;
   border: none;
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  border-radius: 0.25rem;
+  padding: 8px 16px; 
+  font-size: 16px; /* 1rem */
+  border-radius: 20px;
 }
 
 .modal {
@@ -18,24 +18,21 @@
   align-items: center;
   justify-content: center;
   background-color: rgba(0, 0, 0, 0.5);
-  background-color: #fff;
-}
-
-.modal-content {
-  background-color: white;
-  border-radius: 0.25rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  width: 60%;
-  max-width: 480px;
-}
-
-.modal-title {
-  font-size: 1.25rem;
-  font-weight: 600;
 }
 
 .modal-body {
-  padding: 1rem;
+  background-color: white;
+  border-radius: 4px; 
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  width: 60%;
+  max-width: 360px;
+  cursor: pointer;
+  padding: 16px; /* 1rem */
+}
+
+.modal-title {
+  font-size: 20px; 
+  font-weight: 600;
 }
 
 .printModal-card-h {
@@ -50,8 +47,7 @@
   justify-content: space-between;
 }
 
-
-.left-right-print{
+.left-right-print {
   display: flex;
   flex-direction: row;
   justify-content: space-between;

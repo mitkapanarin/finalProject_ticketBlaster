@@ -6,7 +6,7 @@
 .card-parent {
   display: flex;
   align-items: center;
-  gap: 30px;
+  gap: 15px;
   margin: 10px 0;
   cursor: pointer;
 }
@@ -44,6 +44,10 @@
 /**
 * ! card right section
 **/
+
+.card__right {
+  width: 100%;
+}
 
 .card__right--text>.title {
   font-size: 24px;

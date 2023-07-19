@@ -2,14 +2,11 @@ import React from "react";
 import Cards from "../../components/Cards/Cards";
 import TopCard from "../../components/TopCard/TopCard";
 import "./Home.css";
-import Checkout from "../Checkout/Checkout";
 import { useGetAllEventsQuery } from "../../store";
-import ShoppingCart from "../ShoppingCart/ShoppingCart";
-import Purchase from "../Purchase/Purchase";
-import PrintModal from "../../components/PrintModal/PrintModal";
+import Loader from "../../Components/Loader/Loader";
 
 const Home = () => {
-  const { data } = useGetAllEventsQuery();
+  const { data, isLoading, isFetching, isError } = useGetAllEventsQuery();
   const sortDate = (a, b) => {
     return new Date(a.eventDate) - new Date(b.eventDate);
   };
@@ -22,6 +19,12 @@ const Home = () => {
     ?.filter((item) => item?.eventType === "comedy")
     .slice()
     .sort((a, b) => sortDate(a, b));
+
+  if (isLoading || isFetching) return <Loader />;
+
+  if (isError) {
+    return <h1>Something went wrong</h1>;
+  }
 
   return (
     <div>
