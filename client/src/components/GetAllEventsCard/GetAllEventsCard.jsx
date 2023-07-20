@@ -8,10 +8,7 @@ const GetAllEventsCard = ({
     eventName = "",
     image = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Classical_spectacular10.jpg/1280px-Classical_spectacular10.jpg",
     eventDate = "",
-    eventDescription = "",
     eventLocation = "",
-    eventType,
-    price,
     _id,
 }) => {
     const [deleteEvent] = useDeleteEventMutation();

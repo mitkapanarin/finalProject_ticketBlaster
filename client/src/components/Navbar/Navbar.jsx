@@ -2,8 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 import { useSelector, useDispatch } from "react-redux";
-// import { resetUserData, registerUser } from "../../../store/Slices/UserData";
-//import React, { useState } from 'react'; // for search
+
 import {
   UserIcon,
   PresentationChartLineIcon,
@@ -12,24 +11,8 @@ import {
 import { SearchEvents } from "../../Pages/Search/SearchEvents";
 
 const NavBar = () => {
-  const dispatch = useDispatch();
   const { token, role } = useSelector((state) => state.User);
 
-  const handleLogin = () => {
-    // dispatch(
-    //   registerUser({
-    //     token: "lsidjciuhsdyuweduhweiudh",
-    //     role: "User",
-    //   }),
-    // );
-  };
-  //const [searchTerm, setSearchTerm] = useState('');
-
-  //const handleSearch = () => {
-  // Implement the search logic here
-  //  console.log('Searching for:', searchTerm);
-  //};
-  //
   return (
     <div className="">
       <nav className="navbar">
@@ -62,7 +45,6 @@ const NavBar = () => {
                 <Link
                   to="/login"
                   className="login-button"
-                  onClick={handleLogin}
                 >
                   Log in
                 </Link>
@@ -77,7 +59,7 @@ const NavBar = () => {
                   <ShoppingCartIcon className="user-shopping-button" />
                 </Link>
                 <Link to="/user-profile">
-                  <UserIcon className="user-profile-button" strokeWidth={2} />
+                  <UserIcon className="user-profile-button" />
                 </Link>
               </>
             )}
@@ -100,3 +82,6 @@ const NavBar = () => {
 };
 
 export default NavBar;
+
+
+
