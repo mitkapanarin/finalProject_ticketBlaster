@@ -3,13 +3,15 @@ import Events from "../../../Components/Events/Events";
 import { useCreateEventMutation } from "../../../store";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
 
 const initialEventFormState = {
   role: "",
   eventName: "",
   eventDescription: "",
   price: 0,
-  eventLocation: "local, host",
+  eventLocation: "",
   eventType: "",
   eventDate: new Date(),
 };
@@ -24,6 +26,9 @@ const AdminDashboard = () => {
   });
 
   console.log(data);
+
+  const navigate = useNavigate(); // Add useNavigate hook
+  
   const [createEvent, { isLoading, isError, error }] = useCreateEventMutation();
   const handleInput = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
@@ -37,6 +42,7 @@ const AdminDashboard = () => {
         error: "Error Creating Event",
       });
       setData(initialEventFormState);
+      navigate("/admin-dashboard"); // Navigate to admin dashboard
     } catch (err) {
       console.log(err);
       toast.error("Error Creating Event");

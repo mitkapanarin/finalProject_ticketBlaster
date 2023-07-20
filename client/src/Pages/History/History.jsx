@@ -5,7 +5,7 @@ import PrintModal from "../../Components/PrintModal/PrintModal";
 
 const History = ({
   eventName = "",
-  image = "https://dev-to-uploads.s3.amazonaws.com/uploads/articles/emqhuigtaseacrhvgfcr.png",
+  image = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Classical_spectacular10.jpg/1280px-Classical_spectacular10.jpg",
   eventDate = "",
   eventDescription = "",
   eventLocation = "",

@@ -87,7 +87,7 @@ const NavBar = () => {
                 <Link to="/shopping-cart">
                   <ShoppingCartIcon className="user-shopping-button" />
                 </Link>
-                <Link to="/admin-dashboard">
+                <Link to="/get-all-events">
                   <PresentationChartLineIcon className="user-profile-button" />
                 </Link>
               </>

@@ -58,7 +58,7 @@ const Events = ({ handleSubmit, handleInput, data }) => {
             </div>
             <div className="events-event-photo">
               <img
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Children_Playing_Violin_Suzuki_Institute_2011.JPG/1280px-Children_Playing_Violin_Suzuki_Institute_2011.JPG"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Classical_spectacular10.jpg/1280px-Classical_spectacular10.jpg"
                 alt="Event Art"
                 className="event-image"
               />
@@ -126,7 +126,7 @@ const Events = ({ handleSubmit, handleInput, data }) => {
         <div className="botom-event-card-container">
           <img
             className="botom-event-card-image"
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/World_Map_%28political%29.svg/1024px-World_Map_%28political%29.svg.png"
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Classical_spectacular10.jpg/1280px-Classical_spectacular10.jpg"
             alt="World Map"
             width="200"
             height="153"
@@ -141,7 +141,7 @@ const Events = ({ handleSubmit, handleInput, data }) => {
         <div className="botom-event-card-container">
           <img
             className="botom-event-card-image"
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/World_Map_%28political%29.svg/1024px-World_Map_%28political%29.svg.png"
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Classical_spectacular10.jpg/1280px-Classical_spectacular10.jpg"
             alt="World Map"
             width="200"
             height="153"

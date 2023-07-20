@@ -3,7 +3,7 @@ import "./TopCard.css";
 
 const TopCard = ({
   title = "This is Title",
-  image = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Altja_j%C3%B5gi_Lahemaal.jpg/1280px-Altja_j%C3%B5gi_Lahemaal.jpg",
+  image = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Classical_spectacular10.jpg/1280px-Classical_spectacular10.jpg",
   date = "23.2.2024",
   location = { city: "Skopje", country: "Macedonia" },
 }) => {

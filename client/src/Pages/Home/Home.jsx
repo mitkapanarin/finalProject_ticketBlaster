@@ -1,5 +1,5 @@
 import React from "react";
-import Cards from "../../components/Cards/Cards";
+import Cards from "../../Components/Cards/Cards";
 import TopCard from "../../components/TopCard/TopCard";
 import "./Home.css";
 import { useGetAllEventsQuery } from "../../store";

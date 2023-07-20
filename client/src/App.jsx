@@ -14,7 +14,7 @@ import {
   UpdateUserDetails,
   StandUpComedies,
   MusicalConcerts,
-  AdminCreateEvent,
+  // AdminCreateEvent,
   // CartPage,
   DisplaySearchResult,
   EventDetails,
@@ -25,6 +25,7 @@ import NavBar from "../src/Components/Navbar/Navbar";
 import Footer from "../src/Components/Footer/Footer";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { AdminRoutes, UserRoutes } from "./ProtectedRoutes";
+import GetAllEvents from "./Pages/GetAllEvents/GetAllEvents";
 
 const App = () => {
   return (
@@ -49,6 +50,7 @@ const App = () => {
             <Route path="/admin-dashboard" element={<AdminDashboard />} />
             <Route path="/shopping-cart" element={<ShoppingCart />} />
             <Route path="/purchase" element={<Purchase />} />
+            <Route path="/get-all-events" element={<GetAllEvents />} />
           </Route>
 
           <Route path="/login" element={<Login />} />
@@ -57,7 +59,7 @@ const App = () => {
           <Route path="/reset-password/:token" element={<ResetPassword />} />
           <Route path="/ticket-history" element={<TicketHistory />} />
           <Route path="/all-users" element={<AllUsers />} />
-          <Route path="/create-event" element={<AdminCreateEvent />} />
+          <Route path="/create-event" element={<AdminDashboard />} />
           <Route path="/update-user-details" element={<UpdateUserDetails />} />
           <Route path="/events/:eventId" element={<EventDetails />} />
           <Route path="/checkout" element={<Checkout />} />

@@ -58,6 +58,14 @@ export const eventApi = createApi({
       query: (searchTerm) => `/search-events?search=${searchTerm}`,
       providesTags: ["Events"],
     }),
+
+    deleteEvent: builder.mutation({
+      query: (_id) => ({
+        url: `/delete-event/${_id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Events"],
+    }),
   }),
 });
 
@@ -70,4 +78,5 @@ export const {
   useGetAllEventsQuery,
   useSearchEventsQuery,
   useGetMultipleEventsMutation,
+  useDeleteEventMutation,
 } = eventApi;

@@ -1,5 +1,5 @@
 import React from "react";
-import Cards from "../../components/Cards/Cards";
+import Cards from "../../Components/Cards/Cards";
 import "./MusicalConcerts.css";
 import { useGetAllEventsQuery } from "../../store";
 import Loader from "../../Components/Loader/Loader";

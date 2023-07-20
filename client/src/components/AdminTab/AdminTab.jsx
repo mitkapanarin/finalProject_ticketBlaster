@@ -19,7 +19,7 @@ const AdminTab = ({ pageName }) => {
           {role === "admin" && (
             <>
               <li>
-                <Link to="/admin-dashboard">Events</Link>
+                <Link to="/get-all-events">Events</Link>
               </li>
               <li>
                 <Link to="/all-users">Users</Link>
