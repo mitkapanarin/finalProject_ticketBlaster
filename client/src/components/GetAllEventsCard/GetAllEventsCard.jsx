@@ -1,8 +1,7 @@
-import React from 'react'
+import React from 'react';
 import dayjs from "dayjs";
 import "./GetAllEventsCard.css";
-import {toast} from 'react-toastify'
-import { useDeleteEventMutation } from '../../store/API/eventApi';
+import DeleteCard from '../DeleteCard/DeleteCard';
 
 const GetAllEventsCard = ({
     eventName = "",
@@ -11,19 +10,7 @@ const GetAllEventsCard = ({
     eventLocation = "",
     _id,
 }) => {
-    const [deleteEvent] = useDeleteEventMutation();
 
-    const deleteEventHandler = async (_id) => {
-        try {
-            await toast.promise(deleteEvent(_id), {
-                pending: "Deleting...",
-                success: "Event Deleted",
-                error: "Error Deleting Event",
-            });
-        } catch (err) {
-            console.log(err);
-        }
-    };
     return (
         <div>
             <div className="botom-all-events-card-container">
@@ -39,23 +26,16 @@ const GetAllEventsCard = ({
                         <h5 className="botom-all-events-card-title">{eventName}</h5>
                         <div className="p-div">
                             <p className="botom-all-events-card-date">
-                                {" "}
                                 {dayjs(eventDate).format("DD MMM, YYYY")}
                             </p>
                             <p className="botom-all-events-card-location">{eventLocation}</p>
                         </div>
                     </div>
                 </div>
-                <button
-                    className="botom-all-events-card-button"
-                    onClick={() => deleteEventHandler(_id)}
-                >
-                    Delete Event
-                </button>
-
+<DeleteCard eventID={_id} />
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default GetAllEventsCard
+export default GetAllEventsCard;

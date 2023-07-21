@@ -11,6 +11,7 @@ const GetAllEvents = () => {
   const navigate = useNavigate(); // Move this hook outside the if statements
 
   const { data, isLoading, isFetching, isError } = useGetAllEventsQuery();
+  console.log(data)
   const sortDate = (a, b) => {
     return new Date(a.eventDate) - new Date(b.eventDate);
   };

@@ -14,5 +14,5 @@ app.post("/api/v1/sales/purchase-ticket", makeSales);
 app.get("/api/v1/sales/purchase-history/:customerID", ticketHistory);
 
 app.listen(process.env.PORT_SALES, () =>
-  console.log(`events server listening on port ${process.env.PORT_SALES}`)
+  console.log(`sales server listening on port ${process.env.PORT_SALES}`)
 );
