@@ -1,0 +1,82 @@
+.bottom-cards {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.botom-left-event-card-container {
+  display: flex;
+  margin-top: 15px;
+  align-items: center;
+  max-width: 480px;
+  margin-bottom: 16px;
+  text-decoration: none;
+}
+
+.botom-right-event-card-container {
+  display: flex;
+  margin-top: 15px;
+  align-items: center;
+  max-width: 480px;
+  margin-bottom: 16px;
+  text-decoration: none;
+}
+
+.botom-left-event-card-image {
+  width: 200px;
+  height: 153px;
+  border-radius: 20px;
+  object-fit: cover;
+}
+
+.botom--event-card-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+}
+
+.botom--event-card-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.botom--event-card-date {
+  color: #ff00ff;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.botom--event-card-location {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.botom--event-card-buttons {
+  display: flex;
+  margin-top: 16px;
+}
+
+.botom--event-card-button {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.botom--right-btn {
+  background-color: black;
+  color: white;
+  border-radius: 20px;
+  width: 116px;
+  height: 24px;
+  font-size: 16px;
+  cursor: pointer;
+}

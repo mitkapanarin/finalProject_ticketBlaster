@@ -32,7 +32,7 @@ const GetAllEventsCard = ({
                         </div>
                     </div>
                 </div>
-<DeleteCard eventID={_id} />
+                <DeleteCard eventID={_id} />
             </div>
         </div>
     );

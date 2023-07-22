@@ -5,7 +5,6 @@ import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-
 const initialEventFormState = {
   role: "",
   eventName: "",
@@ -20,28 +19,28 @@ const AdminDashboard = () => {
   const store = useSelector((state) => state);
   console.log(store);
 
-  const [data, setData] = useState({
+  const [eventData, setEventData] = useState({
     ...initialEventFormState,
     role: store.User.role,
   });
 
-  console.log(data);
+  console.log(eventData);
 
   const navigate = useNavigate(); // Add useNavigate hook
-  
+
   const [createEvent, { isLoading, isError, error }] = useCreateEventMutation();
   const handleInput = (e) => {
-    setData({ ...data, [e.target.name]: e.target.value });
+    setEventData({ ...eventData, [e.target.name]: e.target.value });
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await toast.promise(createEvent(data), {
+      await toast.promise(createEvent(eventData), {
         pending: "Creating Event",
         success: "Event Created",
         error: "Error Creating Event",
       });
-      setData(initialEventFormState);
+      setEventData(initialEventFormState);
       navigate("/admin-dashboard"); // Navigate to admin dashboard
     } catch (err) {
       console.log(err);
@@ -52,7 +51,7 @@ const AdminDashboard = () => {
     <>
       <div>
         <Events
-          data={data}
+          eventData={eventData} // Pass eventData as prop to Events
           handleSubmit={handleSubmit}
           handleInput={handleInput}
         />

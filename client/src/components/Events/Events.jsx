@@ -1,13 +1,38 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { useGetAllEventsQuery } from "../../store/API/eventApi"
 import InputField from "../Form/InputField";
-import { logout } from "../../store/Slices/userSlice";
 import AdminTab from "../AdminTab/AdminTab";
 import "./Events.css";
+import RelatedActs from "../RelatedActs/RelatedActs";
+import Loader from "../Loader/Loader";
 
-const Events = ({ handleSubmit, handleInput, data }) => {
+const Events = ({ handleSubmit, handleInput, eventData }) => {
   const dispatch = useDispatch();
+  const { data, isLoading, isFetching, isError } = useGetAllEventsQuery();
+  const sortDate = (a, b) => {
+    return new Date(a.eventDate) - new Date(b.eventDate);
+  };
+
+  const concerts = data?.data
+    ?.filter((item) => item?.eventType === "concert")
+    .slice()
+    .sort((a, b) => sortDate(a, b));
+
+  const comedies = data?.data
+    ?.filter((item) => item?.eventType === "comedy")
+    .slice()
+    .sort((a, b) => sortDate(a, b));
+
+  if (isLoading || isFetching) return <Loader />;
+
+  if (isError) {
+    return <h1>Something went wrong</h1>;
+  }
+
+  // if (!eventData || !eventData.eventType) {
+  //   return <h1>No event data available.</h1>;
+  // }
 
   return (
     <div className="card-events-details">
@@ -120,9 +145,26 @@ const Events = ({ handleSubmit, handleInput, data }) => {
         </div>
       </form>
 
-      {/* keep it in a separate place */}
+      {/* Display related events based on the event type */}
+      {eventData.eventType === "concert" && (
+        <>
+          {concerts?.map((item) => (
+            <RelatedActs key={item._id} {...item} />
+          ))}
+        </>
+      )}
+      {eventData.eventType === "comedy" && (
+        <>
+          {comedies?.map((item) => (
+            <RelatedActs key={item._id} {...item} />
+          ))}
+        </>
+      )}
+    </div>
+  );
+};
 
-      <div className="bottom-cards">
+{/* <div className="bottom-cards">
         <div className="botom-event-card-container">
           <img
             className="botom-event-card-image"
@@ -154,9 +196,6 @@ const Events = ({ handleSubmit, handleInput, data }) => {
           </div>
         </div>
         <button className="botom-right-btn">Save</button>
-      </div>
-    </div>
-  );
-};
+      </div> */}
 
 export default Events;
