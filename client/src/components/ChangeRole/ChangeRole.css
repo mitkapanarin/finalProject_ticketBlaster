@@ -1,0 +1,108 @@
+/* ChangeRole.css */
+
+.change-role-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+  
+  .change-role-modal {
+    background-color: white;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    width: 70%;
+    max-width: 800px;
+    cursor: auto;
+    padding: 60px; 
+    border-radius: 20px;
+  }
+  
+  .change-role-modal-body {
+    cursor: auto;
+    width: 700px;
+    align-items: center;
+
+  }
+  
+  .modal-title {
+    font-size: 40px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    text-align: start;
+    margin-bottom: 20px;
+  }
+  
+  .close-change-role-modal {
+    position: absolute;
+    font-size: 30px;
+    top: 8px;
+    right: 8px;
+    width: 24px;
+    height: 24px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .close-change-role-modal::before,
+  .close-change-role-modal::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 14px;
+    height: 2px;
+    background-color: #333;
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+  
+  .close-change-role-modal::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
+  
+  .modal-btns {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 60px;
+  }
+  
+  .change-role-modal-btn {
+    padding: 5px;
+    font-size: 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    margin: 0 8px;
+    border: 1px solid black;
+  }
+  
+  .change-role-modal-btn:first-child {
+    background-color: black;
+    color: white;
+  }
+  
+  .change-role-modal-btn:last-child {
+    background-color: white;
+    color: black;
+  }
+  
+  /* Additional styles for confirmation modal */
+  
+  .confirmation-modal-title {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  
+  .confirmation-modal-text {
+    text-align: center;
+    margin-bottom: 16px;
+  }
+  
