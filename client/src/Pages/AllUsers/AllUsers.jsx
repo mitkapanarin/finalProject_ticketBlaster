@@ -9,6 +9,7 @@ import {
 import AdminTab from "../../Components/AdminTab/AdminTab";
 import { toast } from "react-toastify";
 import ChangeRole from "../../Components/ChangeRole/ChangeRole";
+import DeleteUserModal from "../../Components/DeleteUserModal/DeleteUserModal";
 
 const AllUsers = () => {
   const store = useSelector((x) => x);
@@ -22,9 +23,22 @@ const AllUsers = () => {
   const [selectedUser, setSelectedUser] = useState(null);
   const [newRole, setNewRole] = useState("user");
 
-  const deleteUserHandler = async (id) => {
+  const [showDeleteUserModal, setShowDeleteUserModal] = useState(false);
+  const [userToDelete, setUserToDelete] = useState(null);
+
+  const deleteUserHandler = (user) => {
+    setUserToDelete(user);
+    setShowDeleteUserModal(true);
+  };
+
+  const cancelDeleteUserHandler = () => {
+    setShowDeleteUserModal(false);
+    setUserToDelete(null);
+  };
+
+  const confirmDeleteUserHandler = async () => {
     try {
-      await toast.promise(deleteUser(id), {
+      await toast.promise(deleteUser(userToDelete._id), {
         pending: "Deleting...",
         success: "User Deleted",
         error: "Error Deleting User",
@@ -32,6 +46,8 @@ const AllUsers = () => {
     } catch (err) {
       console.log(err);
     }
+    setShowDeleteUserModal(false);
+    setUserToDelete(null);
   };
 
   const openChangeRoleModal = (user, role) => {
@@ -96,7 +112,7 @@ const AllUsers = () => {
                   </button>
                 )}
                 <button
-                  onClick={() => deleteUserHandler(user?._id)}
+                  onClick={() => deleteUserHandler(user)}
                   className="user-card-action-button delete-button"
                 >
                   Delete User
@@ -113,6 +129,14 @@ const AllUsers = () => {
           onSave={saveChangeRole}
           onClose={closeChangeRoleModal}
           newRole={newRole}
+        />
+      )}
+
+      {showDeleteUserModal && (
+        <DeleteUserModal
+          user={userToDelete}
+          onCancel={cancelDeleteUserHandler}
+          onConfirm={confirmDeleteUserHandler}
         />
       )}
     </div>
