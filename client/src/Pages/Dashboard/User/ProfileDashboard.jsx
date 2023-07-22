@@ -4,8 +4,7 @@ import AdminTab from "../../../Components/AdminTab/AdminTab";
 import { useSelector, useDispatch } from "react-redux";
 import { useUpdateUserMutation } from "../../../store/API/userApi";
 import { toast } from "react-toastify";
-import ChangePassword from "./ChangePassword";
-
+import ChangePassword from "../../ChangePassword/ChangePassword"
 const ProfileDashboard = () => {
   const [updateUser] = useUpdateUserMutation();
   const [showPasswordFields, setShowPasswordFields] = useState(false);

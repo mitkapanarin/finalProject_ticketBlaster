@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../../store/Slices/userSlice";
 import "./AdminTab.css";
 
@@ -8,6 +8,12 @@ const AdminTab = ({ pageName }) => {
   const { role } = useSelector((store) => store.User);
 
   const dispatch = useDispatch();
+
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    dispatch(logout()); // Dispatch the logout action to clear user authentication state
+    navigate("/login"); // Navigate to the login page after logging out
+  };
 
   return (
     <div className="navbar-admin">
@@ -34,7 +40,7 @@ const AdminTab = ({ pageName }) => {
             <Link to="/update-user-details">User Details</Link>
           </li>
           <li>
-            <a onClick={() => dispatch(logout())}>Logout</a>
+            <a onClick={handleLogout} >Logout</a>
           </li>
         </ul>
       </nav>
