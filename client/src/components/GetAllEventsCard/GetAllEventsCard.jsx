@@ -10,6 +10,7 @@ const GetAllEventsCard = ({
     eventLocation = "",
     _id,
 }) => {
+    console.log(_id)
 
     return (
         <div>

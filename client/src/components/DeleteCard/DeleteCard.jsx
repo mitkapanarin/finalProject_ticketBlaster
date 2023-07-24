@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { deleteEventSuccess } from "../../store/Slices/eventSlice";
 
 
-const DeleteCard = ({ eventName, image, eventDate, eventLocation, _id }) => {
+const DeleteCard = ({ eventID }) => {
     const [isOpen, setIsOpen] = useState(false);
 
     const closeModal = () => {
@@ -18,14 +18,14 @@ const DeleteCard = ({ eventName, image, eventDate, eventLocation, _id }) => {
 
     const deleteEventHandler = async () => {
         try {
-          await toast.promise(deleteEvent(_id), { 
+          await toast.promise(deleteEvent(eventID), { 
             pending: 'Deleting...',
             success: 'Event Deleted',
             error: 'Error Deleting Event',
           });
     
           // Dispatch the deleteEventSuccess action to update the Redux store
-          dispatch(deleteEventSuccess(_id));
+        //   dispatch(deleteEventSuccess(eventID));
         } catch (err) {
           console.log(err);
         }

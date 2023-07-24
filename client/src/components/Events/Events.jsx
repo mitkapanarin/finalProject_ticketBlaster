@@ -146,7 +146,7 @@ const Events = ({ handleSubmit, handleInput, eventData }) => {
       </form>
 
       {/* Display related events based on the event type */}
-      {eventData.eventType === "concert" && (
+      {/* {eventData.eventType === "concert" && (
         <>
           {concerts?.map((item) => (
             <RelatedActs key={item._id} {...item} />
@@ -159,7 +159,7 @@ const Events = ({ handleSubmit, handleInput, eventData }) => {
             <RelatedActs key={item._id} {...item} />
           ))}
         </>
-      )}
+      )} */}
     </div>
   );
 };

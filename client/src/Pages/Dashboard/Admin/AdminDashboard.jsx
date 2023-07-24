@@ -48,7 +48,6 @@ const AdminDashboard = () => {
     }
   };
   return (
-    <>
       <div>
         <Events
           eventData={eventData} // Pass eventData as prop to Events
@@ -56,7 +55,6 @@ const AdminDashboard = () => {
           handleInput={handleInput}
         />
       </div>
-    </>
   );
 };
 

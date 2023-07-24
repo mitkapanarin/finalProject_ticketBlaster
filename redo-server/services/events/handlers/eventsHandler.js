@@ -109,15 +109,16 @@ export const updateEvent = async (req, res) => {
 
 export const deleteEvent = async (req, res) => {
   try {
-    const eventID = req.params.id;
-    const deletedEvent = await EventModel.findByIdAndDelete(eventID);
+    const { eventID } = req.params;
+    const findEvent = await EventModel.findById(eventID);
 
-    if (!deletedEvent) {
-      res.status(404).json({ message: "Event not found" });
-      return;
+    if (!findEvent) {
+      return res.status(404).json({ message: "Event not found" });
     }
 
-    res.status(204).json({ message: "Event deleted successfully" });
+    const deletedEvent = await EventModel.findByIdAndDelete(eventID);
+
+    res.status(201).json({ message: "Event deleted successfully" });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Server error" });

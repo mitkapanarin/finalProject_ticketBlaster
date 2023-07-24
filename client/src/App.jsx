@@ -48,7 +48,6 @@ const App = () => {
           </Route>
           <Route element={<AdminRoutes />}>
             <Route path="/admin-dashboard" element={<AdminDashboard />} />
-            <Route path="/shopping-cart" element={<ShoppingCart />} />
             <Route path="/purchase" element={<Purchase />} />
             <Route path="/get-all-events" element={<GetAllEvents />} />
           </Route>
