@@ -7,12 +7,12 @@ import crypto from "crypto";
 
 function generateResetToken(length = 32) {
   return new Promise((resolve, reject) => {
-    crypto.randomBytes(length, (err, buffer) => {
-      if (err) {
-        reject(err);
+    crypto.randomBytes(length, (err, buffer) => {  // Извршува генерирање на случајни бинарна низа со должина `length`
+      if (err) {    // ако се случи грешка, промисот ќе се отфрли (reject) со грешката како аргумент
+        reject(err); 
       } else {
-        const token = buffer.toString("hex");
-        resolve(token);
+        const token = buffer.toString("hex");    // Ако генерирањето е успешно, тогаш ја конвертира бинарната низа во хексадецимална нотација
+        resolve(token);     // и ја враќа како резултат на промисот (resolve)
       }
     });
   });
@@ -26,6 +26,7 @@ export const signup = async (req, res) => {
     }
 
     const hashedPassword = await bcrypt.hash(password, 12);
+    
     await UserModel.create({
       ...req.body,
       password: hashedPassword,

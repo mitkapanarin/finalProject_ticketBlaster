@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import "./AllUsers.css";
 import {
   useGetAllUsersQuery,
@@ -14,7 +14,6 @@ import DeleteUserModal from "../../Components/DeleteUserModal/DeleteUserModal";
 const AllUsers = () => {
   const store = useSelector((x) => x);
   const currentUserEmail = store.User.email;
-  const dispatch = useDispatch();
   const { data } = useGetAllUsersQuery();
   const [deleteUser] = useDeleteUserMutation();
   const [updateUser] = useUpdateUserMutation();

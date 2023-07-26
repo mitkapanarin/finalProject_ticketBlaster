@@ -13,11 +13,15 @@ in Purchase--->Pusrcase price -->multuply quantity x price
 
 in DetailsCard in Related Events I should add musicalConcerts data if user is buying ticket for music events or StrandUpComedy data if user is buying comedy event ticket
 
-Admin can see list of all events,  delete event-->in network i got event not found
 
-when admin is signed in he cant go to shopping cart
+when admin is signed in he cant go to shopping cart (shoping cart icon exist in admin page to?)
 
 
 IN CREATE EVENTS I GOT ERR to fetch related events
 
-when admin is logged in path to shopping cart is not correct???
+whei user create acount and use email that already exist I dont get msg EMAIL already exist
+
+
+in checkout i have to put correct details in order co continue with paying???
+
+Events can be added to Cart even if its 0 tickets

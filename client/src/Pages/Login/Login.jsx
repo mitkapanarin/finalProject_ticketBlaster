@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useLoginUserMutation } from "../../store/API/userApi";
-import InputField from "../../components/Form/InputField";
+import InputField from "../../Components/Form/InputField";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../store/Slices/userSlice";

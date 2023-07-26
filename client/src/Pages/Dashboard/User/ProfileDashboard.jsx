@@ -101,51 +101,6 @@ const ProfileDashboard = () => {
           </button>
         </div>
       </form>
-      <div className="bottom-psw-details">
-        <div className="left-botton-psw">
-          <h3>Password</h3>
-        </div>
-        <div className="right-botton-psw">
-          <button
-            type="button"
-            onClick={handleChangePassword}
-            className="right-botton-psw"
-          >
-            {showPasswordFields ? "Close" : "Change Password"}
-          </button>
-        </div>
-      </div>
-      {showPasswordFields && (
-        <>
-          <div className="password-fields">
-            <label className="label-psw" htmlFor="password">
-              Password
-            </label>
-            <input
-              id="password"
-              type="password"
-              className="input-field-user"
-              placeholder="Enter your new password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <label className="label-psw" htmlFor="retype-password">
-              Re-Type Password
-            </label>
-            <input
-              id="retype-password"
-              type="password"
-              className="input-field-user"
-              placeholder="Re-type your new password"
-              value={retypePassword}
-              onChange={(e) => setRetypePassword(e.target.value)}
-            />
-          </div>
-          <button className="submit-button-user" onClick={handleSubmitPassword}>
-            Submit
-          </button>
-        </>
-      )}
       <ChangePassword email={userData.email} />
     </div>
   );

@@ -43,7 +43,6 @@ const App = () => {
 
           <Route element={<UserRoutes />}>
             <Route path="/user-profile" element={<ProfileDashboard />} />
-            <Route path="/shopping-cart" element={<ShoppingCart />} />
             <Route path="/purchase" element={<Purchase />} />
           </Route>
           <Route element={<AdminRoutes />}>
@@ -54,6 +53,7 @@ const App = () => {
 
           <Route path="/login" element={<Login />} />
           <Route path="/create-user" element={<Signup />} />
+          <Route path="/shopping-cart" element={<ShoppingCart />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password/:token" element={<ResetPassword />} />
           <Route path="/ticket-history" element={<TicketHistory />} />
