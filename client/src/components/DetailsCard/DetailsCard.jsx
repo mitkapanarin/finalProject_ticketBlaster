@@ -3,8 +3,11 @@ import "./DetailsCard.css";
 import dayjs from "dayjs";
 import { addToCart } from "../../store/Slices/basket";
 import { useDispatch, useSelector } from "react-redux";
+// import RelatedActsDetails from "../../Components/RelatedActs/RelatedActsDetails";
 import { toast } from "react-toastify";
-
+import { useGetAllEventsQuery } from "../../store/API/eventApi";
+import Loader from "../../Components/Loader/Loader";
+import Cards from "../../Components/Cards/Cards";
 const DetailsCard = ({
   eventName,
   image = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Classical_spectacular10.jpg/1280px-Classical_spectacular10.jpg",
@@ -44,15 +47,32 @@ const DetailsCard = ({
       toast.error("Couldn't add item to cart, please try again");
     }
   };
-  
+
+  const { data, isLoading, isFetching, isError } = useGetAllEventsQuery();
+  const sortDate = (a, b) => {
+    return new Date(a.eventDate) - new Date(b.eventDate);
+  };
+
+  console.log("All Events Data:", data);
+
+  const relatedEvents = data?.data
+  ?.filter((item) => item?.eventType === eventType && item._id !== _id)
+  .sort((a, b) => sortDate(a, b))
+  .slice(0, 2); // Get the first two related events  The slice method takes two parameters: the start index and the end index (exclusive). By passing 0 as the start index and 2 as the end index, we are selecting the first two related events from the sorted array.
+
+console.log("Related Events:", relatedEvents);
+
+  if (isLoading || isFetching) return <Loader />;
+
+  if (isError) {
+    return <h1>Something went wrong</h1>;
+  }
 
   return (
     <div className="card-events-details">
       <div className="events-details">
-        <h2>
-          {eventName} {dayjs(eventDate).format("DD MMM, YYYY")},
-          {eventLocation}
-        </h2>
+        <h2>{eventName}</h2>
+        <p>{dayjs(eventDate).format("DD MMM, YYYY")}, {eventLocation}</p>
       </div>
       <div className="event-details-card-container">
         <img
@@ -64,10 +84,7 @@ const DetailsCard = ({
         />
         <div className="event-details-card-content">
           <h5 className="event-details-card-title">About</h5>
-          <p className="event-details-description">
-            {" "}
-            event Description{eventDescription}
-          </p>
+          <p className="event-details-description">event Description{eventDescription}</p>
           <form onSubmit={handleForm}>
             <p className="event-details-card-date">Tickets ${price} USD</p>
             <input
@@ -81,44 +98,11 @@ const DetailsCard = ({
           </form>
         </div>
       </div>
+      <h2>Related Acts</h2>
       <div className="bottom-cards">
-        <h2>Related Acts</h2>
-        <div className="related-events-card-container">
-          <img
-            className="related-events-card-image"
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/World_Map_%28political%29.svg/1024px-World_Map_%28political%29.svg.png"
-            alt="World Map"
-            width="200"
-            height="153"
-          />
-          <div className="related-events-card-content">
-            <h5 className="related-events-card-title">Name of artist</h5>
-            <p className="related-events-card-date">
-              {" "}
-              {dayjs(eventDate).format("DD MMM, YYYY")}
-            </p>
-            <p className="related-events-card-location">Skopje, Macedonia</p>
-            <button className="related-events-card-button">Get Ticket</button>
-          </div>
-        </div>
-        <div className="related-events-card-container">
-          <img
-            className="related-events-card-image"
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/World_Map_%28political%29.svg/1024px-World_Map_%28political%29.svg.png"
-            alt="World Map"
-            width="200"
-            height="153"
-          />
-          <div className="related-events-card-content">
-            <h5 className="related-events-card-title">Name of artist</h5>
-            <p className="related-events-card-date">
-              {" "}
-              {dayjs(eventDate).format("DD MMM, YYYY")}
-            </p>
-            <p className="related-events-card-location">Skopje, Macedonia</p>
-            <button className="related-events-card-button">Get Ticket</button>
-          </div>
-        </div>
+        {relatedEvents?.map((item) => (
+          <Cards key={item._id} {...item} />
+        ))}
       </div>
     </div>
   );

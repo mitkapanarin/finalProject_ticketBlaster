@@ -4,6 +4,13 @@
     margin: 30px 60px;
 }
 
+.events-details{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+}
+
 .event-details-card-container {
     display: flex;
     margin-top: 15px;

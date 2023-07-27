@@ -27,6 +27,7 @@
   height: 153px;
   border-radius: 20px;
   object-fit: cover;
+  margin-right: 10px;
 }
 
 .botom--event-card-details {
@@ -37,7 +38,7 @@
 }
 
 .botom--event-card-title {
-  font-size: 24px;
+  font-size: 22px;
   font-weight: bold;
   margin-bottom: 8px;
 }
@@ -47,6 +48,11 @@
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 8px;
+}
+
+.description{
+  width: 150px;
+  font-size: 10px;
 }
 
 .botom--event-card-location {
@@ -79,4 +85,21 @@
   height: 24px;
   font-size: 16px;
   cursor: pointer;
+}
+
+.botom-left-get-tickets-button{
+  background-color: black;
+  color: white;
+  border-radius: 20px;
+  width: 116px;
+  height: 24px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.location-btn{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }

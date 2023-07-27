@@ -1,3 +1,19 @@
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+/* Individual card style */
+.card-parent {
+  flex: 0 0 calc(50% - 5px); /* Each card takes 50% of the container width minus the gap */
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin: 10px 0;
+  cursor: pointer;
+}
+
 .fade {
   opacity: 0.5;
   cursor: default !important;
