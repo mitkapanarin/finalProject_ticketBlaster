@@ -13,6 +13,7 @@ const Signup = () => {
     fullName: "",
     email: "",
     password: "",
+    retypePassword: ""
   });
   const [createUser, { isLoading, isError, isSuccess }] =
     useCreateUserMutation(); // since this is not query, but it is mutation we put [] and since we are Signup we put the name of the functin createUser
@@ -27,12 +28,16 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await toast.promise(
-        createUser(data),
-        toast.success("Account created successfully 👌"),
-      );
+      await createUser(data)
+      if(isError){
+        toast.error("Some error occured")
+      }
+      if(!isError){
+        toast.success("Account created successfully 👌")
+        navigate("/login");
+      }
       console.log(data);
-      navigate("/login");
+
     } catch (err) {
       console.log(err);
       toast.error("Couldn't create acount, please try again");
@@ -83,8 +88,8 @@ const Signup = () => {
                 />
                 <InputField
                   type="password"
-                  name="reTypePassword"
-                  value={data.password}
+                  name="retypePassword"
+                  value={data.retypePassword}
                   onChange={handleInput}
                   label="Re-type Password"
                   placeholder="Re-enter your password"
