@@ -27,22 +27,62 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Regular expression to validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    // Regular expression to validate full name format
+    const fullNameRegex = /^[A-Za-z]+(\s[A-Za-z]+)+$/;
+
+    // Regular expression to validate password format (at least 6 characters, at least one uppercase letter, one lowercase letter, and one digit)
+    const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+
+    // Extract the data from the form
+    const { fullName, email, password, retypePassword } = data;
+
+    // Verify if the provided email follows a valid format
+    if (!emailRegex.test(email)) {
+      toast.error("Please enter a valid email address");
+      return;
+    }
+
+    // Verify if the provided full name follows a valid format
+    if (!fullNameRegex.test(fullName)) {
+      toast.error("Please enter a valid full name (at least two words without special characters or numbers)");
+      return;
+    }
+
+    // Verify if the provided password follows a valid format
+    if (!passwordRegex.test(password)) {
+      toast.error("Password must be at least 6 characters long and contain at least one uppercase letter, one lowercase letter, and one digit");
+      return;
+    }
+
+    // Verify if the retype password matches the original password
+    if (password !== retypePassword) {
+      toast.error("Retyped password does not match the original password");
+      return;
+    }
+
     try {
-      await createUser(data)
-      if(isError){
-        toast.error("Some error occured")
-      }
-      if(!isError){
-        toast.success("Account created successfully 👌")
+      await createUser(data);
+
+      if (isError) {
+        toast.error("Some error occurred");
+      } else {
+        toast.success("Account created successfully 👌");
         navigate("/login");
       }
       console.log(data);
-
     } catch (err) {
       console.log(err);
-      toast.error("Couldn't create acount, please try again");
+      toast.error("Couldn't create account, please try again");
     }
   };
+
+
+
+
 
   const handleLogin = () => {
     navigate("/login");

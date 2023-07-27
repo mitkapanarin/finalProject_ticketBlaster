@@ -9,7 +9,7 @@ function generateResetToken(length = 32) {
   return new Promise((resolve, reject) => {
     crypto.randomBytes(length, (err, buffer) => {  // Извршува генерирање на случајни бинарна низа со должина `length`
       if (err) {    // ако се случи грешка, промисот ќе се отфрли (reject) со грешката како аргумент
-        reject(err); 
+        reject(err);
       } else {
         const token = buffer.toString("hex");    // Ако генерирањето е успешно, тогаш ја конвертира бинарната низа во хексадецимална нотација
         resolve(token);     // и ја враќа како резултат на промисот (resolve)
@@ -17,16 +17,47 @@ function generateResetToken(length = 32) {
     });
   });
 }
+
 export const signup = async (req, res) => {
-  const { fullName, email, password } = req.body;
+  const { fullName, email, password, retypePassword } = req.body;
+
+  // Regular expression to validate email format
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  // Regular expression to validate full name format
+  const fullNameRegex = /^[A-Za-z]+(\s[A-Za-z]+)+$/;
+
+  // Regular expression to validate password format (at least 6 characters, at least one uppercase letter, one lowercase letter, and one digit)
+  const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+
   try {
     const findUser = await UserModel.findOne({ email });
     if (findUser) {
       return res.status(400).json({ message: "Email already exists" });
     }
 
+    // Verify if the provided email follows a valid format
+    if (!emailRegex.test(email)) {
+      return res.status(400).json({ message: "Invalid email format" });
+    }
+
+    // Verify if the provided full name follows a valid format
+    if (!fullNameRegex.test(fullName)) {
+      return res.status(400).json({ message: "Invalid full name format" });
+    }
+
+    // Verify if the provided password follows a valid format
+    if (!passwordRegex.test(password)) {
+      return res.status(400).json({ message: "Password must be at least 6 characters long and contain at least one uppercase letter, one lowercase letter, and one digit" });
+    }
+
+    // Verify if the retype password matches the original password
+    if (password !== retypePassword) {
+      return res.status(400).json({ message: "Retyped password does not match the original password" });
+    }
+
     const hashedPassword = await bcrypt.hash(password, 12);
-    
+
     await UserModel.create({
       ...req.body,
       password: hashedPassword,
@@ -45,11 +76,13 @@ export const signup = async (req, res) => {
 
     return res
       .status(201)
-      .json({ message: "user created successfully", token });
+      .json({ message: "User created successfully", token });
   } catch (err) {
     return res.status(500).json({ message: "Server Error", log: err.message });
   }
 };
+
+
 
 export const login = async (req, res) => {
   const { email, password } = req.body;

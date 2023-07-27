@@ -2,6 +2,7 @@ import React from 'react';
 import dayjs from "dayjs";
 import "./GetAllEventsCard.css";
 import DeleteCard from '../DeleteCard/DeleteCard';
+import { useNavigate } from 'react-router-dom';
 
 const GetAllEventsCard = ({
     eventName = "",
@@ -10,12 +11,16 @@ const GetAllEventsCard = ({
     eventLocation = "",
     _id,
 }) => {
-    console.log(_id)
+    const navigate = useNavigate();
+
+    const handleCardClick = () => {
+        navigate(`/update-event/${_id}`);
+    };
 
     return (
         <div>
             <div className="botom-all-events-card-container">
-                <div className="botom-all-events-card-content">
+                <div className="botom-all-events-card-content" onClick={handleCardClick}>
                     <img
                         className="botom-all-events-card-image"
                         src={image}

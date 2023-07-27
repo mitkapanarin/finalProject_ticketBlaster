@@ -14,6 +14,7 @@ import {
   UpdateUserDetails,
   StandUpComedies,
   MusicalConcerts,
+  EditEvent,
   // AdminCreateEvent,
   // CartPage,
   DisplaySearchResult,
@@ -49,6 +50,7 @@ const App = () => {
             <Route path="/admin-dashboard" element={<AdminDashboard />} />
             <Route path="/purchase" element={<Purchase />} />
             <Route path="/get-all-events" element={<GetAllEvents />} />
+            <Route path="/update-event/:eventId" element={<EditEvent />} />
           </Route>
 
           <Route path="/login" element={<Login />} />

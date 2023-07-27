@@ -19,8 +19,10 @@ import DisplaySearchResult from "./DisplaySearchResult/DisplaySearchResult";
 import EventDetails from "./DetailedEvent/EventDetails";
 import Checkout from "./Checkout/Checkout";
 import GetAllEvents from "./GetAllEvents/GetAllEvents";
+import EditEvent from "./EditEvent/EditEvent";
 export {
   EventDetails,
+  EditEvent,
   GetAllEvents,
   Signup,
   ForgotPassword,
