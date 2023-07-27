@@ -19,6 +19,8 @@ const DetailsCard = ({
   _id,
 }) => {
   const dispatch = useDispatch();
+  const isAuthenticated = useSelector((state) => state.User.isAuthenticated); // Assuming you have a slice that holds the authentication status
+
 
   const [quantity, setQuantity] = useState(0);
 
@@ -27,6 +29,11 @@ const DetailsCard = ({
 
   const handleForm = async (e) => {
     e.preventDefault();
+    if (!isAuthenticated) {
+      // If user is not logged in, display a message or redirect to the login page
+      toast.error("Please log in to add items to the cart");
+      return;
+    }
     try {
       await dispatch(
         addToCart({

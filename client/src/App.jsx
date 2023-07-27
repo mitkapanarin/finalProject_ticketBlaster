@@ -45,17 +45,18 @@ const App = () => {
           <Route element={<UserRoutes />}>
             <Route path="/user-profile" element={<ProfileDashboard />} />
             <Route path="/purchase" element={<Purchase />} />
+            <Route path="/shopping-cart" element={<ShoppingCart />} />
           </Route>
           <Route element={<AdminRoutes />}>
             <Route path="/admin-dashboard" element={<AdminDashboard />} />
             <Route path="/purchase" element={<Purchase />} />
             <Route path="/get-all-events" element={<GetAllEvents />} />
             <Route path="/update-event/:eventId" element={<EditEvent />} />
+            <Route path="/shopping-cart" element={<ShoppingCart />} />
           </Route>
 
           <Route path="/login" element={<Login />} />
           <Route path="/create-user" element={<Signup />} />
-          <Route path="/shopping-cart" element={<ShoppingCart />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password/:token" element={<ResetPassword />} />
           <Route path="/ticket-history" element={<TicketHistory />} />
