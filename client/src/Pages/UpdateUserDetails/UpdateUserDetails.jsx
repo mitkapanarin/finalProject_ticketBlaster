@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import ChangePassword from "../ChangePassword/ChangePassword";
 import InputField from "../../Components/Form/InputField";
 import AdminTab from "../../Components/AdminTab/AdminTab";
+import ProfilePictureUpload from "../../Components/Upload/ProfilePictureUpload";
 
 const UpdateUserDetails = () => {
   const [updateUser] = useUpdateUserMutation();
@@ -46,11 +47,7 @@ const UpdateUserDetails = () => {
       <form action="" onSubmit={handleSubmit}>
         <div className="top-user-details">
           <div className="left-user-details">
-            <img
-              className="avatar-user"
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Altja_j%C3%B5gi_Lahemaal.jpg/1280px-Altja_j%C3%B5gi_Lahemaal.jpg"
-              alt="Avatar"
-            />
+           <ProfilePictureUpload/>
           </div>
           <div className="right-user-details">
           <InputField

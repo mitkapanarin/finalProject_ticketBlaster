@@ -6,6 +6,7 @@ import AdminTab from "../AdminTab/AdminTab";
 import "./Events.css";
 import RelatedActs from "../RelatedActs/RelatedActs";
 import Loader from "../Loader/Loader";
+import UploadEventImage from "../Upload/UploadEventImage";
 
 const Events = ({ handleSubmit, handleInput, eventData }) => {
   const dispatch = useDispatch();
@@ -78,15 +79,8 @@ const Events = ({ handleSubmit, handleInput, eventData }) => {
         </div>
         <div className="events-content">
           <div className="events-left-section">
-            <div className="events-upload-button">
-              <button className="events-black-button">Upload Event Art</button>
-            </div>
             <div className="events-event-photo">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Classical_spectacular10.jpg/1280px-Classical_spectacular10.jpg"
-                alt="Event Art"
-                className="event-image"
-              />
+              <UploadEventImage/>
             </div>
           </div>
           <div className="events-right-section">

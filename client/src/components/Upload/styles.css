@@ -1,0 +1,9 @@
+.profile-picture-drop-zone-styles {
+    width: 140px;
+}
+
+.upload-image-drop-zone-styles{
+    width: 357px;
+    height: 150px;
+    border-radius: 20px;
+}
