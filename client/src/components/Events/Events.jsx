@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useGetAllEventsQuery } from "../../store/API/eventApi"
+import { useGetAllEventsQuery } from "../../store/API/eventApi";
 import InputField from "../Form/InputField";
 import AdminTab from "../AdminTab/AdminTab";
 import "./Events.css";
@@ -25,15 +25,29 @@ const Events = ({ handleSubmit, handleInput, eventData }) => {
     .slice()
     .sort((a, b) => sortDate(a, b));
 
+  const [relatedEvents, setRelatedEvents] = useState([]);
+
+  const updateRelatedEvents = (eventType) => {
+    if (eventType === "concert") {
+      setRelatedEvents(concerts);
+    } else if (eventType === "comedy") {
+      setRelatedEvents(comedies);
+    } else {
+      setRelatedEvents([]);
+    }
+  };
+
+  const handleEventTypeChange = (event) => {
+    const selectedEventType = event.target.value;
+    handleInput(event);
+    updateRelatedEvents(selectedEventType);
+  };
+
   if (isLoading || isFetching) return <Loader />;
 
   if (isError) {
     return <h1>Something went wrong</h1>;
   }
-
-  // if (!eventData || !eventData.eventType) {
-  //   return <h1>No event data available.</h1>;
-  // }
 
   return (
     <div className="card-events-details">
@@ -58,7 +72,7 @@ const Events = ({ handleSubmit, handleInput, eventData }) => {
             <select
               name="eventType"
               value={data.eventType}
-              onChange={handleInput}
+              onChange={handleEventTypeChange}
               required={true}
             >
               <option value="">Select a category</option>
@@ -80,7 +94,7 @@ const Events = ({ handleSubmit, handleInput, eventData }) => {
         <div className="events-content">
           <div className="events-left-section">
             <div className="events-event-photo">
-              <UploadEventImage/>
+              <UploadEventImage />
             </div>
           </div>
           <div className="events-right-section">
@@ -118,20 +132,23 @@ const Events = ({ handleSubmit, handleInput, eventData }) => {
           </div>
         </div>
         <div className="related-events">
-          {/* <label htmlFor="category" className="related-events-label">
+          <label htmlFor="category" className="related-events-label">
             Related Events
-          </label> */}
+          </label>
           <div className="related-events-input">
-            {/* <select
+            <select
               name="relates-events"
               value={data.eventType}
               onChange={handleInput}
               required={true}
             >
               <option value="">Select a category</option>
-              <option value="Concert1">Concert1</option>
-              <option value="Concert2">Concert2</option>
-            </select> */}
+              {relatedEvents.map((event) => (
+                <option key={event._id} value={event.eventType}>
+                  {event.eventName}
+                </option>
+              ))}
+            </select>
             <button type="submit" className="related-events-btn">
               Add
             </button>
@@ -139,57 +156,16 @@ const Events = ({ handleSubmit, handleInput, eventData }) => {
         </div>
       </form>
 
-      {/* Display related events based on the event type */}
-      {/* {eventData.eventType === "concert" && (
-        <>
-          {concerts?.map((item) => (
-            <RelatedActs key={item._id} {...item} />
-          ))}
-        </>
-      )}
-      {eventData.eventType === "comedy" && (
-        <>
-          {comedies?.map((item) => (
-            <RelatedActs key={item._id} {...item} />
-          ))}
-        </>
-      )} */}
+      {relatedEvents.map((item) => (
+        <RelatedActs key={item._id} {...item} />
+      ))}
+
+      <div className="botom-event-card-buttons">
+        <button className="botom-left-right-btn">Save</button>
+      </div>
     </div>
+
   );
 };
-
-{/* <div className="bottom-cards">
-        <div className="botom-event-card-container">
-          <img
-            className="botom-event-card-image"
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Classical_spectacular10.jpg/1280px-Classical_spectacular10.jpg"
-            alt="World Map"
-            width="200"
-            height="153"
-          />
-          <div className="botom-event-card-content">
-            <h5 className="botom-event-card-title">Name of artist</h5>
-            <p className="botom-event-card-date">June 9th 2023</p>
-            <p className="botom-event-card-location">Skopje, Macedonia</p>
-            <button className="botom-event-card-button">Remove</button>
-          </div>
-        </div>
-        <div className="botom-event-card-container">
-          <img
-            className="botom-event-card-image"
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Classical_spectacular10.jpg/1280px-Classical_spectacular10.jpg"
-            alt="World Map"
-            width="200"
-            height="153"
-          />
-          <div className="botom-event-card-content">
-            <h5 className="botom-event-card-title">Name of artist</h5>
-            <p className="botom-event-card-date">June 9th 2023</p>
-            <p className="botom-event-card-location">Skopje, Macedonia</p>
-            <button className="botom-event-card-button">Remove</button>
-          </div>
-        </div>
-        <button className="botom-right-btn">Save</button>
-      </div> */}
 
 export default Events;

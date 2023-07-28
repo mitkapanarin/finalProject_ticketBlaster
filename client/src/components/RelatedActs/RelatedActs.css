@@ -1,7 +1,18 @@
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
 .bottom-cards {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
+  flex: 0 0 calc(50% - 5px); /* Each card takes 50% of the container width minus the gap */
+  align-items: center;
+  gap: 15px;
+  margin: 10px 0;
+  cursor: pointer;
 }
 
 .botom-left-event-card-container {

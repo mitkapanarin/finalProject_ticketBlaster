@@ -29,9 +29,6 @@ const RelatedActs = ({
                     </div>
                 </div>
             </div>
-            <div className="botom-event-card-buttons">
-                <button className="botom-left-right-btn">Save</button>
-            </div>
         </div>
     );
 }

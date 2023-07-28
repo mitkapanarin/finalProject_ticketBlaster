@@ -1,4 +1,4 @@
-## Code Quality Checking tools
+# Code Quality Checking tools
 
 * prettier
 * eslint
@@ -6,22 +6,9 @@
 * lint-staged
 * lint
 * husky
-
-
-in Purchase--->Pusrcase price -->multuply quantity x price
-
-when I try to remove 1 item from shoping cart all events are removed
-
-
-
-
-IN CREATE EVENTS I GOT ERR to fetch related events
-
-
-
-in checkout i have to put correct details in order co continue with paying???
-
-Events can be added to Cart even if its 0 tickets
-
-
-in ticketHistory, events that are passed should be faded
+* in Purchase--->Pusrcase price -->multuply quantity x price
+* when I try to remove 1 item from shoping cart all events are removed
+* IN CREATE EVENTS I GOT ERR to fetch related events
+* in checkout i have to put correct details in order co continue with paying???
+* Events can be added to Cart even if its 0 tickets
+* in ticketHistory, events that are passed should be faded

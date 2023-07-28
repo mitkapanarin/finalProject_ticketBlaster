@@ -19,8 +19,8 @@ const DetailsCard = ({
   _id,
 }) => {
   const dispatch = useDispatch();
-  const isAuthenticated = useSelector((state) => state.User.isAuthenticated); // Assuming you have a slice that holds the authentication status
-
+  const token = useSelector((state) => state.User.token);
+  console.log("token", token);
 
   const [quantity, setQuantity] = useState(0);
 
@@ -29,13 +29,13 @@ const DetailsCard = ({
 
   const handleForm = async (e) => {
     e.preventDefault();
-    if (!isAuthenticated) {
+    if (!token) {
       // If user is not logged in, display a message or redirect to the login page
       toast.error("Please log in to add items to the cart");
       return;
     }
     try {
-      await dispatch(
+      dispatch(
         addToCart({
           quantity,
           eventName,
@@ -63,11 +63,11 @@ const DetailsCard = ({
   console.log("All Events Data:", data);
 
   const relatedEvents = data?.data
-  ?.filter((item) => item?.eventType === eventType && item._id !== _id)
-  .sort((a, b) => sortDate(a, b))
-  .slice(0, 2); // Get the first two related events  The slice method takes two parameters: the start index and the end index (exclusive). By passing 0 as the start index and 2 as the end index, we are selecting the first two related events from the sorted array.
+    ?.filter((item) => item?.eventType === eventType && item._id !== _id)
+    .sort((a, b) => sortDate(a, b))
+    .slice(0, 2); // Get the first two related events  The slice method takes two parameters: the start index and the end index (exclusive). By passing 0 as the start index and 2 as the end index, we are selecting the first two related events from the sorted array.
 
-console.log("Related Events:", relatedEvents);
+  console.log("Related Events:", relatedEvents);
 
   if (isLoading || isFetching) return <Loader />;
 
@@ -79,7 +79,9 @@ console.log("Related Events:", relatedEvents);
     <div className="card-events-details">
       <div className="events-details">
         <h2>{eventName}</h2>
-        <p>{dayjs(eventDate).format("DD MMM, YYYY")}, {eventLocation}</p>
+        <p>
+          {dayjs(eventDate).format("DD MMM, YYYY")}, {eventLocation}
+        </p>
       </div>
       <div className="event-details-card-container">
         <img
@@ -91,7 +93,9 @@ console.log("Related Events:", relatedEvents);
         />
         <div className="event-details-card-content">
           <h5 className="event-details-card-title">About</h5>
-          <p className="event-details-description">event Description{eventDescription}</p>
+          <p className="event-details-description">
+            event Description{eventDescription}
+          </p>
           <form onSubmit={handleForm}>
             <p className="event-details-card-date">Tickets ${price} USD</p>
             <input
