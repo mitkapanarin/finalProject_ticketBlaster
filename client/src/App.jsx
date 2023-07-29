@@ -44,15 +44,15 @@ const App = () => {
 
           <Route element={<UserRoutes />}>
             <Route path="/user-profile" element={<ProfileDashboard />} />
-            <Route path="/purchase" element={<Purchase />} />
-            <Route path="/shopping-cart" element={<ShoppingCart />} />
+            <Route path="/user-purchase-ticket" element={<Purchase />} />
+            <Route path="/user-shopping-cart" element={<ShoppingCart />} />
           </Route>
           <Route element={<AdminRoutes />}>
             <Route path="/admin-dashboard" element={<AdminDashboard />} />
-            <Route path="/purchase" element={<Purchase />} />
+            <Route path="/admin-purchase-ticket" element={<Purchase />} />
             <Route path="/get-all-events" element={<GetAllEvents />} />
             <Route path="/update-event/:eventId" element={<EditEvent />} />
-            <Route path="/shopping-cart" element={<ShoppingCart />} />
+            <Route path="/admin-shopping-cart" element={<ShoppingCart />} />
           </Route>
 
           <Route path="/login" element={<Login />} />

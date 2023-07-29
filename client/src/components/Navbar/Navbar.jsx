@@ -55,7 +55,7 @@ const NavBar = () => {
             )}
             {token !== "" && role === "user" && (
               <>
-                <Link to="/shopping-cart">
+                <Link to="/user-shopping-cart">
                   <ShoppingCartIcon className="user-shopping-button" />
                 </Link>
                 <Link to="/user-profile">
@@ -66,7 +66,7 @@ const NavBar = () => {
 
             {token !== "" && role === "admin" && (
               <>
-                <Link to="/shopping-cart">
+                <Link to="/admin-shopping-cart">
                   <ShoppingCartIcon className="user-shopping-button" />
                 </Link>
                 <Link to="/get-all-events">

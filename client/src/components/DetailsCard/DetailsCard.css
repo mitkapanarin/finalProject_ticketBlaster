@@ -124,3 +124,8 @@
     margin-top: auto;
     margin-left: auto;
   }
+
+  .error-message{
+    color: red;
+    font-size: 20px;
+  }

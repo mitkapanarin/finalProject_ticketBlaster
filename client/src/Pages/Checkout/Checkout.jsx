@@ -1,15 +1,19 @@
 import React, { useState } from "react";
-import InputField from "../../components/Form/InputField";
+import InputField from "../../Components/Form/InputField";
 import { useNavigate } from "react-router-dom";
 import "../Checkout/Checkout.css";
 import { useSelector, useDispatch } from "react-redux";
 import { usePurchaseTicketMutation } from "../../store";
 import { toast } from "react-toastify";
 import { resetCart } from "../../store";
+import AllItemsCart from "../../Components/AllItemsCart/AllItemsCart";
 
 const Checkout = () => {
   const dispatch = useDispatch();
   const [purchaseTicket] = usePurchaseTicketMutation();
+
+  const userRole = useSelector((state) => state.User.role);
+  console.log("role",userRole)
 
   const customerID = useSelector((state) => state?.User?._id);
   console.log(customerID);
@@ -38,23 +42,37 @@ const Checkout = () => {
     });
   };
 
-  const handleSales = async () => {
-    try {
-      const x = await purchaseTicket(modifyBasket).then(() => {
-        dispatch(resetCart());
-        navigate("/purchase");
-      });
-    } catch (err) {
-      toast.error(err.message);
-      console.log(err);
-    }
-  };
+const handleSales = async () => {
+  // Check if any of the fields are empty
+  if (!data.name || !data.cardNo || !data.expires || !data.pin) {
+    toast.error("Please fill in all the fields before proceeding.");
+    return;
+  }
+
+  try {
+    const x = await purchaseTicket(modifyBasket).then(() => {
+      dispatch(resetCart());
+      // Check the user's role and navigate accordingly
+      if (userRole === "user") {
+        navigate("/user-purchase-ticket");
+      } else if (userRole === "admin") {
+        navigate("/admin-purchase-ticket");
+      } else {
+        navigate("/");
+      }
+    });
+  } catch (err) {
+    toast.error(err.message);
+    console.log(err);
+  }
+};
 
   return (
     <div>
       <h2 className="checkout-card-h">Checkout</h2>
       <div className="divider">
-        <div className="">
+        <AllItemsCart/>
+        {/* <div className="">
           <div className="checkout-card-container">
             <div className="left-checkout-card-container">
               <img
@@ -80,7 +98,7 @@ const Checkout = () => {
             <p>Total:</p>
             <p>$120</p>
           </div>
-        </div>
+        </div> */}
         <div className="">
           <div className="checkout-right-section">
             <InputField
