@@ -21,7 +21,8 @@ const Cards = ({
   };
 
   return (
-    <div className="card-parent">
+    <div className="card-parent
+    ">
       {/* Left section */}
       <img src={image} alt="" className="card__left" />
       {/* Right section */}

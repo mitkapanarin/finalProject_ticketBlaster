@@ -1,16 +1,22 @@
 import React from "react";
-import Cards from "../../components/Cards/Cards";
+import Cards from "../../Components/Cards/Cards";
 import { useGetAllEventsQuery } from "../../store";
 import "./StandUpComedies.css";
 import Loader from "../../Components/Loader/Loader";
+import dayjs from "dayjs";
 
 const StandUpComedies = () => {
   const { data, isLoading, isFetching, isError } = useGetAllEventsQuery();
   const sortDate = (a, b) => {
     return new Date(a.eventDate) - new Date(b.eventDate);
   };
+
+  const isEventDatePassed = (eventDate) => {
+    return dayjs(eventDate).isBefore(dayjs());
+  };
+
   const comedies = data?.data
-    ?.filter((item) => item?.eventType === "comedy")
+    ?.filter((item) => item?.eventType === "comedy" && !isEventDatePassed(item?.eventDate))
     .slice()
     .sort((a, b) => sortDate(a, b));
 
