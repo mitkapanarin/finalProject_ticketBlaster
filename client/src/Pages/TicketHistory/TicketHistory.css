@@ -4,6 +4,11 @@
   gap: 15px;
 }
 
+.fade {
+  opacity: 0.5;
+  cursor: default !important;
+}
+
 .card-ticket-history {
   display: flex;
   flex-direction: column;

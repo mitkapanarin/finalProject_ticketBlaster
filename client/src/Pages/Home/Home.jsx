@@ -4,6 +4,8 @@ import TopCard from "../../components/TopCard/TopCard";
 import "./Home.css";
 import { useGetAllEventsQuery } from "../../store";
 import Loader from "../../Components/Loader/Loader";
+import dayjs from "dayjs";
+
 
 const Home = () => {
   const { data, isLoading, isFetching, isError } = useGetAllEventsQuery();
@@ -11,12 +13,17 @@ const Home = () => {
     return new Date(a.eventDate) - new Date(b.eventDate);
   };
 
+  const isEventDatePassed = (eventDate) => {
+    return dayjs(eventDate).isBefore(dayjs());
+  };
+  
   const concerts = data?.data
-    ?.filter((item) => item?.eventType === "concert")
+    ?.filter((item) => item?.eventType === "concert" && !isEventDatePassed(item?.eventDate))
     .slice()
     .sort((a, b) => sortDate(a, b));
+
   const comedies = data?.data
-    ?.filter((item) => item?.eventType === "comedy")
+    ?.filter((item) => item?.eventType === "comedy" && !isEventDatePassed(item?.eventDate))
     .slice()
     .sort((a, b) => sortDate(a, b));
 

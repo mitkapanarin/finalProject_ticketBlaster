@@ -1,5 +1,3 @@
-// Cards.js
-
 import React, { useState } from "react";
 import "./Cards.css";
 import dayjs from "dayjs";
@@ -15,7 +13,6 @@ const Cards = ({
   price,
   _id,
 }) => {
-  const isExpired = dayjs(eventDate).isBefore(dayjs());
   const [showFullDescription, setShowFullDescription] = useState(false);
   const navigate = useNavigate();
 
@@ -24,7 +21,7 @@ const Cards = ({
   };
 
   return (
-    <div className={`card-parent ${isExpired && "fade"}`}>
+    <div className="card-parent">
       {/* Left section */}
       <img src={image} alt="" className="card__left" />
       {/* Right section */}
