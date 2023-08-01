@@ -13,7 +13,6 @@ const ResetPassword = () => {
     console.log(token);
     if (token) {
       // Store the reset token in the component state
-      // You can also use a state management library like Redux to store the token globally
       setResetToken(token);
     }
   }, []);
@@ -21,8 +20,24 @@ const ResetPassword = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Validation: Check if new password and confirm password are not empty
+    if (!newPassword || !confirmPassword) {
+      setMessage("Please enter both the new password and confirm password");
+      return;
+    }
+
+    // Validation: Check if new password and confirm password match
     if (newPassword !== confirmPassword) {
       setMessage("Passwords do not match");
+      return;
+    }
+
+    // Validation: Check the complexity of the new password using regex
+    const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;
+    if (!passwordPattern.test(newPassword)) {
+      setMessage(
+        "Password must be at least 6 characters long and contain at least one letter and one number"
+      );
       return;
     }
 
@@ -32,7 +47,7 @@ const ResetPassword = () => {
         {
           resetToken,
           newPassword,
-        },
+        }
       );
 
       if (response.status === 200) {
