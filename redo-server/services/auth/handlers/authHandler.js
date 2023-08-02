@@ -200,7 +200,6 @@ export const forgotPassword = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    // Generate a password reset token (e.g., using uuid or random string generator)
     const resetToken = await generateResetToken();
 
     // Save the reset token and its expiration in the user document
@@ -224,11 +223,6 @@ export const forgotPassword = async (req, res) => {
 export const resetPassword = async (req, res) => {
   const { resetToken, newPassword } = req.body;
 
-  // Validation: Check if resetToken and newPassword are provided
-  if (!resetToken || !newPassword) {
-    return res.status(400).json({ message: "Reset token and new password are required" });
-  }
-
   try {
     // Find the user with the given reset token and token expiration
     const user = await UserModel.findOne({
@@ -238,15 +232,9 @@ export const resetPassword = async (req, res) => {
 
     if (!user) {
       // Invalid or expired token
-      return res.status(400).json({ message: "Invalid or expired reset token" });
-    }
-
-    // Validation: Check if newPassword meets minimum criteria using regex
-    const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-    if (!passwordPattern.test(newPassword)) {
-      return res.status(400).json({
-        message: "Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character",
-      });
+      return res
+        .status(400)
+        .json({ message: "Invalid or expired reset token" });
     }
 
     // Update the user's password with the new password
@@ -258,10 +246,11 @@ export const resetPassword = async (req, res) => {
 
     return res.status(200).json({ message: "Password reset successful" });
   } catch (error) {
-    return res.status(500).json({ message: "Server Error", log: error.message });
+    return res
+      .status(500)
+      .json({ message: "Server Error", log: error.message });
   }
 };
-
 //
 
 export const changePassword = async (req, res) => {

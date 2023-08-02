@@ -6,7 +6,6 @@ const ResetPassword = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState("");
   const [resetToken, setResetToken] = useState("");
-
   useEffect(() => {
     // Extract the reset token from the URL
     const token = window.location.pathname.split("/").pop();
@@ -20,24 +19,17 @@ const ResetPassword = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validation: Check if new password and confirm password are not empty
-    if (!newPassword || !confirmPassword) {
-      setMessage("Please enter both the new password and confirm password");
-      return;
-    }
-
-    // Validation: Check if new password and confirm password match
-    if (newPassword !== confirmPassword) {
-      setMessage("Passwords do not match");
-      return;
-    }
-
-    // Validation: Check the complexity of the new password using regex
-    const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;
+    // Validate the new password with a regex pattern
+    const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{6,}$/;
     if (!passwordPattern.test(newPassword)) {
       setMessage(
-        "Password must be at least 6 characters long and contain at least one letter and one number"
+        "Password must contain at least 6 characters, one uppercase letter, one lowercase letter, one digit, and one special character."
       );
+      return;
+    }
+
+    if (newPassword !== confirmPassword) {
+      setMessage("Passwords do not match");
       return;
     }
 
@@ -73,7 +65,6 @@ const ResetPassword = () => {
           onChange={(e) => setNewPassword(e.target.value)}
           required
         />
-
         <label htmlFor="confirmPassword">Confirm Password</label>
         <input
           type="password"
@@ -82,7 +73,6 @@ const ResetPassword = () => {
           onChange={(e) => setConfirmPassword(e.target.value)}
           required
         />
-
         <button type="submit">Reset Password</button>
       </form>
       {message && <p>{message}</p>}
