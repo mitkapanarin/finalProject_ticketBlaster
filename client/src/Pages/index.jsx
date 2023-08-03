@@ -12,16 +12,16 @@ import UpdateUserDetails from "./UpdateUserDetails/UpdateUserDetails";
 import Purchase from "./Purchase/Purchase";
 import StandUpComedies from "./StandUpComedies/StandUpComedies";
 import MusicalConcerts from "./MusicalConcerts/MusicalConcerts";
-// import AdminCreateEvent from "./Dashboard/Admin/AdminCreateEvent";
 import ResetPassword from "./ResetPassword/ResetPassword";
-// import CartPage from "./CartPage/CartPage";
 import DisplaySearchResult from "./DisplaySearchResult/DisplaySearchResult";
 import EventDetails from "./DetailedEvent/EventDetails";
 import Checkout from "./Checkout/Checkout";
 import GetAllEvents from "./GetAllEvents/GetAllEvents";
 import EditEvent from "./EditEvent/EditEvent";
+// import UpdatePasword from "./UpdatePasword/UpdatePasword";
 export {
   EventDetails,
+  // UpdatePasword,
   EditEvent,
   GetAllEvents,
   Signup,
@@ -39,8 +39,6 @@ export {
   Purchase,
   StandUpComedies,
   MusicalConcerts,
-  // AdminCreateEvent,
-  // CartPage,
   DisplaySearchResult,
   Checkout,
 };

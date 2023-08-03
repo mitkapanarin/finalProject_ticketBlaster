@@ -1,27 +1,39 @@
 import React from "react";
+import dayjs from "dayjs";
+import { useNavigate } from "react-router-dom";
 import "./TopCard.css";
 
-const TopCard = ({
-  title = "This is Title",
-  image = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Classical_spectacular10.jpg/1280px-Classical_spectacular10.jpg",
-  date = "23.2.2024",
-  location = { city: "Skopje", country: "Macedonia" },
+const TopCard = ({ 
+eventName = "",
+image = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Classical_spectacular10.jpg/1280px-Classical_spectacular10.jpg",
+eventDate = "",
+eventLocation = "",
+_id
 }) => {
+  const navigate = useNavigate();
+  const handleGetTicketClick = () => {
+    navigate(`/events/${_id}`);
+  };
+
   return (
     <div className="top-card-container">
-      <img src={image} alt="" className="top-card-background" />
+      <img src={image} alt={eventName} className="top-card-background" />
       <div className="top-card-content">
         <div className="top-card-left">
-          <h3 className="top-card-title">{title}</h3>
+          <h3 className="top-card-title">{eventName}</h3>
           <div className="top-card-details">
-            <h6 className="top-card-date">{date}</h6>
+            <h6 className="top-card-date">
+            {dayjs(eventDate).format("DD MMM, YYYY")}
+            </h6>
             <p className="top-card-location">
-              {location.city}, {location.country}
+              {eventLocation}
             </p>
           </div>
         </div>
         <div className="top-card-right">
-          <button className="top-card-button">Get Tickets</button>
+          <button onClick={handleGetTicketClick} className="top-card-button">
+            Get Tickets
+          </button>
         </div>
       </div>
     </div>

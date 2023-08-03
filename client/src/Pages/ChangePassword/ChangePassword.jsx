@@ -3,6 +3,7 @@ import axios from "axios";
 import "./ChangePassword.css"
 import { toast } from 'react-toastify';
 import InputField from "../../Components/Form/InputField";
+import { useNavigate } from "react-router-dom"; 
 
 
 const ChangePasswordForm = ({ email }) => {
@@ -11,17 +12,29 @@ const ChangePasswordForm = ({ email }) => {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState("");
+  const navigate = useNavigate();
 
   const handleChangePassword = () => {
     setShowPasswordFields((prevShowPasswordFields) => !prevShowPasswordFields);
     setMessage(""); // Clear the previous message when toggling the form
+    // navigate("/change-password");
   };
 
   const handleSubmitPassword = async (e) => {
     e.preventDefault();
 
+    // Password validation regex pattern
+    const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{6,}$/;
+
     if (newPassword !== confirmPassword) {
       setMessage("Passwords do not match");
+      return;
+    }
+
+    if (!passwordPattern.test(newPassword)) {
+      setMessage(
+        "Password must contain at least 6 characters, one uppercase letter, one lowercase letter, one digit, and one special character."
+      );
       return;
     }
 
@@ -49,6 +62,7 @@ const ChangePasswordForm = ({ email }) => {
       console.error(error);
     }
   };
+
 
   return (
     <div>

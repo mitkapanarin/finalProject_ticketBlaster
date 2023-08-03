@@ -15,12 +15,11 @@ import {
   StandUpComedies,
   MusicalConcerts,
   EditEvent,
-  // AdminCreateEvent,
-  // CartPage,
   DisplaySearchResult,
   EventDetails,
   Checkout,
   Purchase,
+  // UpdatePasword,
 } from "./Pages";
 import NavBar from "../src/Components/Navbar/Navbar";
 import Footer from "../src/Components/Footer/Footer";
@@ -63,9 +62,9 @@ const App = () => {
           <Route path="/all-users" element={<AllUsers />} />
           <Route path="/create-event" element={<AdminDashboard />} />
           <Route path="/update-user-details" element={<UpdateUserDetails />} />
+          {/* <Route path="/change-password" element={<UpdatePasword />} /> */}
           <Route path="/events/:eventId" element={<EventDetails />} />
           <Route path="/checkout" element={<Checkout />} />
-          {/* <Route exact path="/cart-page" element={<CartPage />} /> */}
           <Route path="*" element={<ErrorPage />} />
         </Routes>
       </div>

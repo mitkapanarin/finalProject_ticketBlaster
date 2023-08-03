@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import Cards from "../../Components/Cards/Cards";
 import TopCard from "../../components/TopCard/TopCard";
 import "./Home.css";
@@ -16,7 +16,7 @@ const Home = () => {
   const isEventDatePassed = (eventDate) => {
     return dayjs(eventDate).isBefore(dayjs());
   };
-  
+
   const concerts = data?.data
     ?.filter((item) => item?.eventType === "concert" && !isEventDatePassed(item?.eventDate))
     .slice()
@@ -33,9 +33,19 @@ const Home = () => {
     return <h1>Something went wrong</h1>;
   }
 
+  const allEvents = [...concerts, ...comedies];
+  const [randomEvent, setRandomEvent] = useState(null);
+
+  useEffect(() => {
+    if (allEvents.length > 0) {
+      const randomIndex = Math.floor(Math.random() * allEvents.length);
+      setRandomEvent(allEvents[randomIndex]);
+    }
+  }, [allEvents]);
+
   return (
     <div>
-      <TopCard />
+      {randomEvent && <TopCard {...randomEvent} />}
       <div className="home__pageItems">
         <div className="home__pageItems--left">
           <h3 className="home__page__h3">Musical concerts</h3>
