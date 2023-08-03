@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom"; // Import the useNavigate hook
 import Cards from "../../Components/Cards/Cards";
 import TopCard from "../../components/TopCard/TopCard";
 import "./Home.css";
@@ -9,13 +10,10 @@ import dayjs from "dayjs";
 const Home = () => {
   const { data, isLoading, isFetching, isError } = useGetAllEventsQuery();
   const [randomEvent, setRandomEvent] = useState(null);
-
-//The useEffect hook processes fetched data and sets a random event to display,
-// filtering and sorting events by type and date,
-// ensuring it happens after data is available and not during the initial loading.
+  const navigate = useNavigate(); // Initialize the useNavigate hook
 
   useEffect(() => {
-    // The useEffect hook runs when the component is mounted (initial render) and whenever the data or isLoading changes.
+    // The useEffect hook runs on initial render and whenever the data or isLoading changes.
 
     if (!isLoading && data) {
       // When isLoading is false and data is available, process the events.
@@ -50,6 +48,16 @@ const Home = () => {
     return <h1>Something went wrong</h1>;
   }
 
+  // Event handler to navigate to the "Standup comedy" page
+  const handleSeeAllComedies = () => {
+    navigate("/stand-up-comedies");
+  };
+
+  // Event handler to navigate to the "Musical concerts" page
+  const handleSeeAllConcerts = () => {
+    navigate("/musical-concerts");
+  };
+
   return (
     <div>
       {randomEvent && <TopCard {...randomEvent} />}
@@ -62,7 +70,9 @@ const Home = () => {
             data.data
               .filter((item) => item.eventType === "concert")
               .map((item) => <Cards key={item._id} {...item} />)}
-          <button className="home__page--exploreBtn">See All</button>
+          <button className="home__page--exploreBtn" onClick={handleSeeAllConcerts}>
+            See All
+          </button>
         </div>
         <div className="home__pageItems--right">
           <h3 className="home__page__h3">Standup comedy</h3>
@@ -71,7 +81,9 @@ const Home = () => {
             data.data
               .filter((item) => item.eventType === "comedy")
               .map((item) => <Cards key={item._id} {...item} />)}
-          <button className="home__page--exploreBtn">See All</button>
+          <button className="home__page--exploreBtn" onClick={handleSeeAllComedies}>
+            See All
+          </button>
         </div>
       </div>
     </div>
