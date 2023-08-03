@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Cards from "../../Components/Cards/Cards";
 import TopCard from "../../components/TopCard/TopCard";
 import "./Home.css";
@@ -6,26 +6,43 @@ import { useGetAllEventsQuery } from "../../store";
 import Loader from "../../Components/Loader/Loader";
 import dayjs from "dayjs";
 
-
 const Home = () => {
   const { data, isLoading, isFetching, isError } = useGetAllEventsQuery();
-  const sortDate = (a, b) => {
-    return new Date(a.eventDate) - new Date(b.eventDate);
-  };
+  const [randomEvent, setRandomEvent] = useState(null);
 
-  const isEventDatePassed = (eventDate) => {
-    return dayjs(eventDate).isBefore(dayjs());
-  };
+//The useEffect hook processes fetched data and sets a random event to display,
+// filtering and sorting events by type and date,
+// ensuring it happens after data is available and not during the initial loading.
 
-  const concerts = data?.data
-    ?.filter((item) => item?.eventType === "concert" && !isEventDatePassed(item?.eventDate))
-    .slice()
-    .sort((a, b) => sortDate(a, b));
+  useEffect(() => {
+    // The useEffect hook runs when the component is mounted (initial render) and whenever the data or isLoading changes.
 
-  const comedies = data?.data
-    ?.filter((item) => item?.eventType === "comedy" && !isEventDatePassed(item?.eventDate))
-    .slice()
-    .sort((a, b) => sortDate(a, b));
+    if (!isLoading && data) {
+      // When isLoading is false and data is available, process the events.
+
+      // Function to sort events based on their eventDate.
+      const sortDate = (a, b) => new Date(a.eventDate) - new Date(b.eventDate);
+
+      // Function to check if the event date has passed.
+      const isEventDatePassed = (eventDate) => dayjs(eventDate).isBefore(dayjs());
+
+      // Filter events that have not passed, sort them by date, and store them in allEvents.
+      const allEvents = data.data
+        .filter((item) => !isEventDatePassed(item.eventDate))
+        .slice()
+        .sort((a, b) => sortDate(a, b));
+
+      // Filter concerts and comedies separately from allEvents.
+      const concerts = allEvents.filter((item) => item.eventType === "concert");
+      const comedies = allEvents.filter((item) => item.eventType === "comedy");
+
+      if (allEvents.length > 0) {
+        // If there are events left after filtering, select a random event from allEvents.
+        const randomIndex = Math.floor(Math.random() * allEvents.length);
+        setRandomEvent(allEvents[randomIndex]);
+      }
+    }
+  }, [data, isLoading]); // The useEffect hook will re-run whenever data or isLoading changes.
 
   if (isLoading || isFetching) return <Loader />;
 
@@ -33,33 +50,27 @@ const Home = () => {
     return <h1>Something went wrong</h1>;
   }
 
-  const allEvents = [...concerts, ...comedies];
-  const [randomEvent, setRandomEvent] = useState(null);
-
-  useEffect(() => {
-    if (allEvents.length > 0) {
-      const randomIndex = Math.floor(Math.random() * allEvents.length); //generates a random index within the range of the allEvents array length.
-      setRandomEvent(allEvents[randomIndex]); //Sets the randomEvent state to the event at the random index we generated. This will cause a re-render of the component with the newly chosen random event.
-    }
-  }, [allEvents]); //his useEffect ensures that every time there is a change in the allEvents array,
-  // a new random event is picked from the combined allEvents array and displayed in the TopCard component when the component is rendered. 
-
   return (
     <div>
-      {randomEvent && <TopCard {...randomEvent} />} {/*Render the TopCard component only if randomEvent exists, passing randomEvent as props */}
+      {randomEvent && <TopCard {...randomEvent} />}
+
       <div className="home__pageItems">
         <div className="home__pageItems--left">
           <h3 className="home__page__h3">Musical concerts</h3>
-          {concerts?.map((item) => (
-            <Cards key={item._id} {...item} />
-          ))}
+          {/* Conditional rendering for concerts */}
+          {data?.data &&
+            data.data
+              .filter((item) => item.eventType === "concert")
+              .map((item) => <Cards key={item._id} {...item} />)}
           <button className="home__page--exploreBtn">See All</button>
         </div>
         <div className="home__pageItems--right">
           <h3 className="home__page__h3">Standup comedy</h3>
-          {comedies?.map((item) => (
-            <Cards key={item._id} {...item} />
-          ))}
+          {/* Conditional rendering for comedies */}
+          {data?.data &&
+            data.data
+              .filter((item) => item.eventType === "comedy")
+              .map((item) => <Cards key={item._id} {...item} />)}
           <button className="home__page--exploreBtn">See All</button>
         </div>
       </div>
