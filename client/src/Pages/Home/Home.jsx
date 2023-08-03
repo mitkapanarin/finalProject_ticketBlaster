@@ -38,14 +38,15 @@ const Home = () => {
 
   useEffect(() => {
     if (allEvents.length > 0) {
-      const randomIndex = Math.floor(Math.random() * allEvents.length);
-      setRandomEvent(allEvents[randomIndex]);
+      const randomIndex = Math.floor(Math.random() * allEvents.length); //generates a random index within the range of the allEvents array length.
+      setRandomEvent(allEvents[randomIndex]); //Sets the randomEvent state to the event at the random index we generated. This will cause a re-render of the component with the newly chosen random event.
     }
-  }, [allEvents]);
+  }, [allEvents]); //his useEffect ensures that every time there is a change in the allEvents array,
+  // a new random event is picked from the combined allEvents array and displayed in the TopCard component when the component is rendered. 
 
   return (
     <div>
-      {randomEvent && <TopCard {...randomEvent} />}
+      {randomEvent && <TopCard {...randomEvent} />} {/*Render the TopCard component only if randomEvent exists, passing randomEvent as props */}
       <div className="home__pageItems">
         <div className="home__pageItems--left">
           <h3 className="home__page__h3">Musical concerts</h3>
