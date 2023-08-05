@@ -64,6 +64,9 @@ const Signup = () => {
       return;
     }
 
+    // await toast.promise(createUser(data).unwrap(), {
+
+    // })
     try {
       await createUser(data);
 

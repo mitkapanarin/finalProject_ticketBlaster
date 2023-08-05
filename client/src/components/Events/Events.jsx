@@ -156,9 +156,9 @@ const Events = ({ handleSubmit, handleInput, eventData }) => {
         </div>
       </form>
 
-      {relatedEvents.map((item) => (
+      {/* {relatedEvents.map((item) => (
         <RelatedActs key={item._id} {...item} />
-      ))}
+      ))} */}
 
       <div className="botom-event-card-buttons">
         <button className="botom-left-right-btn">Save</button>

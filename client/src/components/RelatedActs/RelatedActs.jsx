@@ -20,7 +20,7 @@ const RelatedActs = ({
                         height="153"
                     />
                 </div>
-                <div botom-right-event-card-container>
+                <div className='botom-right-event-card-container'>
                     <div className="botom--event-card-details">
                         <h5 className="botom--event-card-title">{eventName}</h5>
                         <p className="botom--event-card-date">{dayjs(eventDate).format("DD MMM, YYYY")}</p>

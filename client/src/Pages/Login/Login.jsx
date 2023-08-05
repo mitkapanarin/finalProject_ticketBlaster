@@ -20,15 +20,15 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const x = await loginUser(data);
-      dispatch(login(x?.data));
-      toast.success("Logged in successfully");
+    await toast.promise(loginUser(data).unwrap(), {
+      pending: "logging in, please wait...",
+      success: "logged in successfully",
+      error: "failed to log in"
+    }).then((res)=>{
+      console.log(res)
+      dispatch(login(res?.data));
       navigate("/");
-    } catch (err) {
-      console.log("error occured");
-      toast.error("Couldn't login, please try again");
-    }
+    })
   };
 
   const handleInput = (e) => {
