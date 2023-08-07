@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useGetEventQuery } from "../../store/API/eventApi";
-import DetailsCard from "../../components/DetailsCard/DetailsCard";
+import DetailsCard from "../../Components/DetailsCard/DetailsCard";
 
 const EventDetails = () => {
   const params = useParams();
@@ -13,7 +13,10 @@ const EventDetails = () => {
 
   return (
     <div>
-      <DetailsCard {...data?.data} />
+      <DetailsCard
+        {...data?.data}
+        relatedEventsIds={data?.data?.relatedEventsIds}
+      />
     </div>
   );
 };

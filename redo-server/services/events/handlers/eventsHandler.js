@@ -12,20 +12,32 @@ export const createEvent = async (req, res) => {
     price,
     eventLocation,
     eventType,
+    relatedEvents, // Array of _id values of related events
   } = req.body;
+
   try {
     if (role !== "admin") {
       return res
         .status(400)
         .json({ message: "You are not authorized to create an event" });
     }
-    await EventModel.create(req.body);
+
+    const newEvent = await EventModel.create(req.body);
+
+    if (relatedEvents && relatedEvents.length > 0) {
+      // Update related events for the newly created event
+      await EventModel.updateMany(
+        { _id: { $in: relatedEvents } },
+        { $push: { relatedEvents: newEvent._id } }
+      );
+    }
 
     res.status(201).json({ message: "Event created successfully" });
   } catch (err) {
     res.status(500).json({ message: "Server Error", log: err.message });
   }
 };
+
 
 // GET ALL Events
 export const getAllEvents = async (req, res) => {

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
 import { useGetAllEventsQuery } from "../../store/API/eventApi";
 import InputField from "../Form/InputField";
 import AdminTab from "../AdminTab/AdminTab";
@@ -9,7 +8,6 @@ import Loader from "../Loader/Loader";
 import UploadEventImage from "../Upload/UploadEventImage";
 
 const Events = ({ handleSubmit, handleInput, eventData }) => {
-  const dispatch = useDispatch();
   const { data, isLoading, isFetching, isError } = useGetAllEventsQuery();
   const sortDate = (a, b) => {
     return new Date(a.eventDate) - new Date(b.eventDate);
@@ -26,6 +24,8 @@ const Events = ({ handleSubmit, handleInput, eventData }) => {
     .sort((a, b) => sortDate(a, b));
 
   const [relatedEvents, setRelatedEvents] = useState([]);
+  const [selectedRelatedEvent, setSelectedRelatedEvent] = useState("");
+  const [addedRelatedEvents, setAddedRelatedEvents] = useState([]);
 
   const updateRelatedEvents = (eventType) => {
     if (eventType === "concert") {
@@ -43,6 +43,14 @@ const Events = ({ handleSubmit, handleInput, eventData }) => {
     updateRelatedEvents(selectedEventType);
   };
 
+  const handleAddRelatedEvent = () => {
+    const selectedEvent = relatedEvents.find(event => event._id === selectedRelatedEvent);
+    if (selectedEvent) {
+      setAddedRelatedEvents(prevEvents => [...prevEvents, selectedEvent]);
+    }
+    setSelectedRelatedEvent(""); // Clear selected event after adding
+  };
+
   if (isLoading || isFetching) return <Loader />;
 
   if (isError) {
@@ -55,7 +63,7 @@ const Events = ({ handleSubmit, handleInput, eventData }) => {
         <h2>Events</h2>
         <AdminTab />
       </div>
-      <form onSubmit={handleSubmit}>
+      <form>
         <div className="input-row">
           <InputField
             className="inputField"
@@ -138,33 +146,38 @@ const Events = ({ handleSubmit, handleInput, eventData }) => {
           <div className="related-events-input">
             <select
               name="relates-events"
-              value={data.eventType}
-              onChange={handleInput}
+              value={selectedRelatedEvent}
+              onChange={(e) => setSelectedRelatedEvent(e.target.value)}
               required={true}
             >
-              <option value="">Select a category</option>
+              <option value="">Select an event</option>
               {relatedEvents.map((event) => (
-                <option key={event._id} value={event.eventType}>
+                <option key={event._id} value={event._id}>
                   {event.eventName}
                 </option>
               ))}
             </select>
-            <button type="submit" className="related-events-btn">
+            <button
+              type="button"
+              className="related-events-btn"
+              onClick={handleAddRelatedEvent}
+            >
               Add
             </button>
           </div>
         </div>
       </form>
-
-      {/* {relatedEvents.map((item) => (
-        <RelatedActs key={item._id} {...item} />
-      ))} */}
-
+      <div className="related-events-list">
+        {addedRelatedEvents.map((item) => (
+          <RelatedActs key={item._id} {...item} />
+        ))}
+      </div>
       <div className="botom-event-card-buttons">
-        <button className="botom-left-right-btn">Save</button>
+        <button onClick={handleSubmit} className="botom-left-right-btn">
+          Save
+        </button>
       </div>
     </div>
-
   );
 };
 
