@@ -4,12 +4,10 @@ import InputField from "../../Components/Form/InputField";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../store/Slices/userSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 const Login = () => {
   const dispatch = useDispatch(); // initialization
-  const store = useSelector((z) => z);
-  console.log(store);
   const navigate = useNavigate();
   const [data, setData] = useState({
     email: "",
@@ -18,18 +16,23 @@ const Login = () => {
 
   const [loginUser] = useLoginUserMutation();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    await toast.promise(loginUser(data).unwrap(), {
-      pending: "logging in, please wait...",
-      success: "logged in successfully",
-      error: "failed to log in"
-    }).then((res)=>{
-      console.log(res)
-      dispatch(login(res?.data));
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    const response = await loginUser(data);
+    // Check if the response contains an error and handle accordingly
+    if (response.error) {
+      toast.error("Failed to log in");
+    } else {
+      toast.success("Logged in successfully");
+      dispatch(login(response.data)); // Dispatch action only on success
       navigate("/");
-    })
-  };
+    }
+  } catch (error) {
+    toast.error("An error occurred while logging in");
+  }
+};
+
 
   const handleInput = (e) => {
     setData({
