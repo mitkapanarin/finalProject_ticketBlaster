@@ -22,12 +22,6 @@
   font-weight: bold;
 }
 
-/* styles for spacing between rows */
-.home__pageItems--left,
-.home__pageItems--right {
-  width: 100%;
-}
-
 .card-parent {
   display: flex;
   align-items: center;
