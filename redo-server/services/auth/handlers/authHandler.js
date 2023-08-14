@@ -2,17 +2,47 @@ import { UserModel } from "../../../pkg/Model/userModel.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import { sendResetPasswordEmail } from "./nodemailer.js";
-
+import { S3Client } from "@aws-sdk/client-s3";
+import multer from "multer";
+import multers3 from "multer-s3";
+import dotenv from "dotenv";
 import crypto from "crypto";
+
+dotenv.config();
+
+const s3 = new S3Client({
+  region: process.env.S3_BUCKET_REGION,
+  credentials: {
+    accessKeyId: process.env.S3_ACCESS_KEY,
+    secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
+  },
+});
+
+export const upload = multer({
+  storage: multers3({
+    s3,
+    bucket: process.env.S3_BUCKET_NAME,
+    metadata: function (req, file, cb) {
+      cb(null, { fieldName: file.fieldname });
+    },
+    key: function (req, file, cb) {
+      const fileName = `${Date.now().toString()}_${file.originalname}`;
+      cb(null, fileName);
+    },
+    contentType: multers3.AUTO_CONTENT_TYPE,
+  }),
+});
 
 function generateResetToken(length = 32) {
   return new Promise((resolve, reject) => {
-    crypto.randomBytes(length, (err, buffer) => {  // Извршува генерирање на случајни бинарна низа со должина `length`
-      if (err) {    // ако се случи грешка, промисот ќе се отфрли (reject) со грешката како аргумент
+    crypto.randomBytes(length, (err, buffer) => {
+      // Извршува генерирање на случајни бинарна низа со должина `length`
+      if (err) {
+        // ако се случи грешка, промисот ќе се отфрли (reject) со грешката како аргумент
         reject(err);
       } else {
-        const token = buffer.toString("hex");    // Ако генерирањето е успешно, тогаш ја конвертира бинарната низа во хексадецимална нотација
-        resolve(token);     // и ја враќа како резултат на промисот (resolve)
+        const token = buffer.toString("hex"); // Ако генерирањето е успешно, тогаш ја конвертира бинарната низа во хексадецимална нотација
+        resolve(token); // и ја враќа како резултат на промисот (resolve)
       }
     });
   });
@@ -20,6 +50,8 @@ function generateResetToken(length = 32) {
 
 export const signup = async (req, res) => {
   const { fullName, email, password, retypePassword } = req.body;
+  const { location } = req?.file || "";
+
 
   // Regular expression to validate email format
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -48,18 +80,24 @@ export const signup = async (req, res) => {
 
     // Verify if the provided password follows a valid format
     if (!passwordRegex.test(password)) {
-      return res.status(400).json({ message: "Password must be at least 6 characters long and contain at least one uppercase letter, one lowercase letter, and one digit" });
+      return res.status(400).json({
+        message:
+          "Password must be at least 6 characters long and contain at least one uppercase letter, one lowercase letter, and one digit",
+      });
     }
 
     // Verify if the retype password matches the original password
     if (password !== retypePassword) {
-      return res.status(400).json({ message: "Retyped password does not match the original password" });
+      return res.status(400).json({
+        message: "Retyped password does not match the original password",
+      });
     }
 
     const hashedPassword = await bcrypt.hash(password, 12);
 
     await UserModel.create({
       ...req.body,
+      image: location,
       password: hashedPassword,
     });
 
@@ -81,8 +119,6 @@ export const signup = async (req, res) => {
     return res.status(500).json({ message: "Server Error", log: err.message });
   }
 };
-
-
 
 export const login = async (req, res) => {
   const { email, password } = req.body;
@@ -121,25 +157,28 @@ export const updateUser = async (req, res) => {
   try {
     const { _id } = req.params;
     const { fullName, email, role } = req.body;
+    const { location } = req?.file || "";
 
-    // const hashedPassword = await bcrypt.hash(password, 10);
     const findUser = await UserModel.findOne({ _id });
     if (!findUser) {
       return res.status(404).json({ message: "User not found" });
     }
+
     const updatedUser = await UserModel.findOneAndUpdate(
       { _id },
       {
         fullName,
         email,
-        role
+        role,
+        image: location,
       },
       { new: true }
     );
 
-    return res
-      .status(200)
-      .json({ message: "Successfully updated user", updateUser });
+    return res.status(200).json({
+      message: "Successfully updated user",
+      updateUser: updatedUser,
+    });
   } catch (err) {
     console.error(err);
     return res.status(500).json({ message: "Server error" });

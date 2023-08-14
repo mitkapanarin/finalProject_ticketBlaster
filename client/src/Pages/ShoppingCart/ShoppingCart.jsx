@@ -2,7 +2,6 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import "../ShoppingCart/ShoppingCart.css";
 import { useSelector, useDispatch } from "react-redux";
-import { nanoid } from "@reduxjs/toolkit";
 import dayjs from "dayjs";
 import { removeOneItemFromCart } from "../../store";
 

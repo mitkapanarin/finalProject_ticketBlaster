@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import dayjs from "dayjs";
-import { useDispatch, useSelector } from "react-redux";
 import {
   useUpdateEventMutation,
   useGetAllEventsQuery,

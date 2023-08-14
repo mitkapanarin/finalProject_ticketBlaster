@@ -47,7 +47,9 @@ export const userApi = createApi({
       invalidatesTags: ["Users"],
     }),
     forgotPassword: builder.mutation({
+      // middleware-функција queryFn за forgotPassword акцијата се користи за обработка на барањето пред да стигне до редукторите и дополнителна контрола и логика за успех и неуспех на барањето.
       queryFn: async (email) => {
+        //Оваа middleware функција е асинхрона и користи fetch функција за испраќање POST барање на /forgot-password патеката со дадениот email.
         const response = await fetch("/forgot-password", {
           method: "POST",
           body: JSON.stringify({ email }),

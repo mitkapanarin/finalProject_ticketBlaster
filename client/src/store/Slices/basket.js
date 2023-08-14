@@ -14,7 +14,7 @@ export const basketSlice = createSlice({
     },
     removeOneItemFromCart: (state, action) => {
       const updatedBasketItems = state.basketItems.filter(
-        (item) => item._id !== action.payload
+        (item) => item._id !== action.payload  //Keep only those items whose _id property is not equal to the itemID we want to delete.
       );
       return {
         ...state,

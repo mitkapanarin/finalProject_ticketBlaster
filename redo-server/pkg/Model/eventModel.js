@@ -39,6 +39,11 @@ const EventSchema = new mongoose.Schema({
     required: [true, "Please enter the event type"],
     enum: ["concert", "comedy"],
   },
+  image: {
+    type: String,
+    default: "",
+    required: false,
+  },
   relatedEvents: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: "Event", // Reference to the same model

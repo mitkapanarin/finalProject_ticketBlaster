@@ -34,6 +34,11 @@ const UserSchema = new mongoose.Schema({
     default: "user",
     trim: true,
   }, 
+  image: {
+    type: String,
+    default: "",
+    required: false,
+  },
   resetToken: {
     type: String,
     default: null,
