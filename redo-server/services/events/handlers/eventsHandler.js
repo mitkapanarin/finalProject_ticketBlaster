@@ -30,61 +30,51 @@ const upload = multer({
 
 // create
 export const createEvent = async (req, res) => {
-  // Add the image upload middleware here
-  upload.single("image")(req, res, async (uploadError) => {
-    if (uploadError) {
-      return res.status(500).json({ message: "Image upload error" });
+  try {
+    const {
+      role,
+      eventName,
+      eventDescription,
+      eventDate,
+      price,
+      eventLocation,
+      eventType,
+      relatedEvents,
+    } = req.body;
+
+    const { location } = req?.file || "";
+
+
+    if (role !== "admin") {
+      return res
+        .status(400)
+        .json({ message: "You are not authorized to create an event" });
     }
 
-    try {
-      const {
-        role,
-        eventName,
-        eventDescription,
-        eventDate,
-        price,
-        eventLocation,
-        eventType,
-        relatedEvents,
-        image
-      } = req.body;
+    const newEvent = await EventModel.create({
+      eventName,
+      eventDescription,
+      eventDate,
+      price,
+      eventLocation,
+      eventType,
+      relatedEvents,
+      image: location,
+    });
 
-      if (role !== "admin") {
-        return res
-          .status(400)
-          .json({ message: "You are not authorized to create an event" });
-      }
-
-      const { location } = req.file; // Get the uploaded image location
-
-      const newEvent = await EventModel.create({
-        eventName,
-        eventDescription,
-        eventDate,
-        price,
-        eventLocation,
-        eventType,
-        relatedEvents,
-        image: location, // Save the image location to the event
-      });
-
-      if (relatedEvents && relatedEvents.length > 0) {
-        // Update related events for the newly created event
-        await EventModel.updateMany(
-          { _id: { $in: relatedEvents } },
-          { $push: { relatedEvents: newEvent._id } }
-        );
-      }
-
-      res.status(201).json({ message: "Event created successfully" });
-    } catch (err) {
-      res.status(500).json({ message: "Server Error", log: err.message });
+    if (relatedEvents && relatedEvents.length > 0) {
+      // Update related events for the newly created event
+      await EventModel.updateMany(
+        { _id: { $in: relatedEvents } },
+        { $push: { relatedEvents: newEvent._id } }
+      );
     }
-  });
+
+    res.status(201).json({ message: "Event created successfully" });
+  } catch (err) {
+    res.status(500).json({ message: "Server Error", log: err.message });
+  }
 };
-
-
-
 
 // GET ALL Events
 export const getAllEvents = async (req, res) => {
@@ -128,51 +118,43 @@ export const getMultipleEvents = async (req, res) => {
 
 // update
 export const updateEvent = async (req, res) => {
-  // Add the image upload middleware here
-  upload.single("image")(req, res, async (uploadError) => {
-    if (uploadError) {
-      return res.status(500).json({ message: "Image upload error" });
-    }
+  try {
+    const { eventID } = req.params;
+    const { location } = req?.file || "";
 
-    try {
-      const { eventID } = req.params;
-      const {
+    const {
+      eventName,
+      eventDescription,
+      eventDate,
+      price,
+      eventLocation,
+      eventType,
+    } = req.body;
+
+    const updatedEvent = await EventModel.findByIdAndUpdate(
+      eventID,
+      {
         eventName,
         eventDescription,
         eventDate,
         price,
         eventLocation,
         eventType,
-        image
-      } = req.body;
+        image: location,
+      },
+      { new: true }
+    );
 
-      const { location } = req.file; // Get the updated image location
-
-      const updatedEvent = await EventModel.findByIdAndUpdate(
-        eventID,
-        {
-          eventName,
-          eventDescription,
-          eventDate,
-          price,
-          eventLocation,
-          eventType,
-          image: location, // Update the image location
-        },
-        { new: true }
-      );
-
-      if (!updatedEvent) {
-        res.status(404).json({ message: "Event not found" });
-        return;
-      }
-
-      res.json({ message: "Successfully updated Event" });
-    } catch (err) {
-      console.error(err);
-      res.status(500).json({ message: "Server error" });
+    if (!updatedEvent) {
+      res.status(404).json({ message: "Event not found" });
+      return;
     }
-  });
+
+    res.json({ message: "Successfully updated Event" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error" });
+  }
 };
 
 
