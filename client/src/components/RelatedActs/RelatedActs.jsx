@@ -8,7 +8,7 @@ const RelatedActs = ({
     eventDate,
     eventLocation = "",
     handleRemoveRelatedEvent,
-    _id, // Assuming your event ID property is named "_id"
+    _id, 
 }) => {
     const handleRemoveClick = () => {
         handleRemoveRelatedEvent(_id); // Call the parent's function to remove the related event
