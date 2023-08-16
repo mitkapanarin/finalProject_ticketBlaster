@@ -82,7 +82,7 @@ const AllUsers = () => {
           <div className="user-card" key={user?._id}>
             <img
               className="user-card-image"
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/World_Map_%28political%29.svg/1024px-World_Map_%28political%29.svg.png"
+              src={user.image}
               alt="World Map"
               width="100"
               height="100"

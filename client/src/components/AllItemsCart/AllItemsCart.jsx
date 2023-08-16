@@ -4,17 +4,15 @@ import { useSelector } from "react-redux";
 import dayjs from "dayjs";
 
 const AllItemsCart = () => {
-
   const basketItems = useSelector((state) => state?.Basket?.basketItems);
 
   const calculateTotalPrice = () => {
     let totalPrice = 0;
-    basketItems.forEach((item) => { //Iterate through the basketItems and add each item's price multiplied by its quantity to the total price variable.
+    basketItems.forEach((item) => {
       totalPrice += item.price * item.quantity;
     });
     return totalPrice;
   };
-  
 
   return (
     <div>
@@ -23,8 +21,8 @@ const AllItemsCart = () => {
           <div className="left-ShoppingCart-card-container">
             <img
               className="left-ShoppingCart-card-image"
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/World_Map_%28political%29.svg/1024px-World_Map_%28political%29.svg.png"
-              alt="World Map"
+              src={item.image} // Use the image property from the item object
+              alt={item.eventName}
               width="200"
               height="153"
             />
@@ -56,7 +54,6 @@ const AllItemsCart = () => {
         <h3>Total Price:</h3>
         <p>${calculateTotalPrice()}</p>
       </div>
-
     </div>
   );
 };

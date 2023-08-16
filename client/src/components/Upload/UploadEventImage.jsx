@@ -81,17 +81,11 @@ export default function UploadEventImage() {
                         // Required, used for reading the image data
                         imageReader: [
                             createDefaultImageReader,
-                            {
-                                /* optional image reader options here */
-                            },
                         ],
 
                         // optionally. can leave out when not generating a preview thumbnail and/or output image
                         imageWriter: [
                             createDefaultImageWriter,
-                            {
-                                /* optional image writer options here */
-                            },
                         ],
 
                         // used to generate poster images, runs an editor in the background

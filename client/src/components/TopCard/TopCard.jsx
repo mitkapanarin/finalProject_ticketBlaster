@@ -5,7 +5,7 @@ import "./TopCard.css";
 
 const TopCard = ({
   eventName = "",
-  image = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Classical_spectacular10.jpg/1280px-Classical_spectacular10.jpg",
+  image = "",
   eventDate = "",
   eventLocation = "",
   _id,
@@ -18,7 +18,7 @@ const TopCard = ({
   return (
     <div className="top-card-container">
       <img
-        src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Classical_spectacular10.jpg/1280px-Classical_spectacular10.jpg"
+        src={image}
         alt={eventName}
         className="top-card-background"
       />

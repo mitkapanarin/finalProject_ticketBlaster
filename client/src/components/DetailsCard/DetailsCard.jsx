@@ -10,7 +10,7 @@ import Cards from "../../Components/Cards/Cards";
 
 const DetailsCard = ({
   eventName,
-  image = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Classical_spectacular10.jpg/1280px-Classical_spectacular10.jpg",
+  image,
   eventDate,
   eventDescription,
   eventLocation,

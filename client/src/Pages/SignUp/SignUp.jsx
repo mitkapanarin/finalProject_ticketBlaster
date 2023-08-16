@@ -6,17 +6,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
-  const dispatch = useDispatch(); // initialization
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const store = useSelector((z) => z);
+
   const [data, setData] = useState({
     fullName: "",
     email: "",
     password: "",
-    retypePassword: ""
+    retypePassword: "",
+    image: null,
   });
-  const [createUser, { isLoading, isError, isSuccess }] =
-    useCreateUserMutation(); // since this is not query, but it is mutation we put [] and since we are Signup we put the name of the functin createUser
+
+  const [createUser, { isLoading, isError, isSuccess }] = useCreateUserMutation();
 
   const handleInput = (e) => {
     setData({
@@ -25,67 +26,63 @@ const Signup = () => {
     });
   };
 
+  const handleImageChange = (e) => {
+    setData({
+      ...data,
+      image: e.target.files[0],
+    });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Regular expression to validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-    // Regular expression to validate full name format
     const fullNameRegex = /^[A-Za-z]+(\s[A-Za-z]+)+$/;
-
-    // Regular expression to validate password format (at least 6 characters, at least one uppercase letter, one lowercase letter, and one digit)
     const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
 
-    // Extract the data from the form
-    const { fullName, email, password, retypePassword } = data;
+    const { fullName, email, password, retypePassword, image } = data;
 
-    // Verify if the provided email follows a valid format
     if (!emailRegex.test(email)) {
       toast.error("Please enter a valid email address");
       return;
     }
 
-    // Verify if the provided full name follows a valid format
     if (!fullNameRegex.test(fullName)) {
-      toast.error("Please enter a valid full name (at least two words without special characters or numbers)");
+      toast.error("Please enter a valid full name");
       return;
     }
 
-    // Verify if the provided password follows a valid format
     if (!passwordRegex.test(password)) {
-      toast.error("Password must be at least 6 characters long and contain at least one uppercase letter, one lowercase letter, and one digit");
+      toast.error("Password must meet the criteria");
       return;
     }
 
-    // Verify if the retype password matches the original password
     if (password !== retypePassword) {
-      toast.error("Retyped password does not match the original password");
+      toast.error("Retyped password does not match");
       return;
     }
 
-    // await toast.promise(createUser(data).unwrap(), {
-
-    // })
     try {
-      await createUser(data);
+      const formData = new FormData();
+      formData.append("image", image);
+      formData.append("fullName", fullName);
+      formData.append("email", email);
+      formData.append("password", password);
+      formData.append("retypePassword", retypePassword);
+
+      await createUser(formData);
 
       if (isError) {
         toast.error("Some error occurred");
       } else {
-        toast.success("Account created successfully 👌");
+        toast.success("Account created successfully");
         navigate("/login");
       }
-      console.log(data);
     } catch (err) {
       console.log(err);
       toast.error("Couldn't create account, please try again");
     }
   };
-
-
-
-
 
   const handleLogin = () => {
     navigate("/login");
@@ -139,11 +136,20 @@ const Signup = () => {
                   required={true}
                   className="signup-input"
                 />
+                <InputField
+                  type="file"
+                  name="image"
+                  accept="image/*"
+                  onChange={handleImageChange}
+                  label="Profile Image"
+                  required={true}
+                  className="signup-input"
+                />
                 <button type="submit" className="signup-button">
                   Create account
                 </button>
                 <button
-                  type="submit"
+                  type="button"
                   className="signup-button"
                   onClick={handleLogin}
                 >

@@ -13,7 +13,7 @@ const s3 = new S3Client({
   }
 });
 
-const upload = multer({
+export const upload = multer({
   storage: multers3({
     s3,
     bucket: process.env.S3_BUCKET_NAME,
@@ -146,11 +146,10 @@ export const updateEvent = async (req, res) => {
     );
 
     if (!updatedEvent) {
-      res.status(404).json({ message: "Event not found" });
-      return;
+      return res.status(404).json({ message: "Event not found" });
     }
 
-    res.json({ message: "Successfully updated Event" });
+    res.json({ message: "Successfully updated Event", data: updatedEvent });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Server error" });

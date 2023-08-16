@@ -5,7 +5,7 @@ import PrintModal from "../../Components/PrintModal/PrintModal";
 
 const History = ({
   eventName = "",
-  image = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Classical_spectacular10.jpg/1280px-Classical_spectacular10.jpg",
+  image = "",
   eventDate = "",
   eventDescription = "",
   eventLocation = "",
@@ -32,7 +32,7 @@ const History = ({
         {/* Bottom section */}
         <div className="card-bottom_section">
           <h6 className="location">{eventLocation}</h6>
-          <PrintModal />
+          <PrintModal image={image} />
         </div>
       </div>
     </div>

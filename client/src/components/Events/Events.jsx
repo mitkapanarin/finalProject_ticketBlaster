@@ -7,21 +7,19 @@ import RelatedActs from "../RelatedActs/RelatedActs";
 import Loader from "../Loader/Loader";
 import UploadEventImage from "../Upload/UploadEventImage";
 
-const Events = ({ handleSubmit, handleInput, eventData }) => {
+const Events = ({ handleSubmit, handleInput, eventData, handleImageChange }) => {
   const { data, isLoading, isFetching, isError } = useGetAllEventsQuery();
-  const sortDate = (a, b) => {
-    return new Date(a.eventDate) - new Date(b.eventDate);
-  };
+  const sortDate = (a, b) => new Date(a.eventDate) - new Date(b.eventDate);
 
-  const concerts = data?.data
+  const concerts = (data?.data
     ?.filter((item) => item?.eventType === "concert")
     .slice()
-    .sort((a, b) => sortDate(a, b));
+    .sort((a, b) => sortDate(a, b))) || [];
 
-  const comedies = data?.data
+  const comedies = (data?.data
     ?.filter((item) => item?.eventType === "comedy")
     .slice()
-    .sort((a, b) => sortDate(a, b));
+    .sort((a, b) => sortDate(a, b))) || [];
 
   const [relatedEvents, setRelatedEvents] = useState([]);
   const [selectedRelatedEvent, setSelectedRelatedEvent] = useState("");
@@ -44,11 +42,16 @@ const Events = ({ handleSubmit, handleInput, eventData }) => {
   };
 
   const handleAddRelatedEvent = () => {
-    const selectedEvent = relatedEvents.find(event => event._id === selectedRelatedEvent);
+    const selectedEvent = relatedEvents.find((event) => event._id === selectedRelatedEvent);
     if (selectedEvent) {
-      setAddedRelatedEvents(prevEvents => [...prevEvents, selectedEvent]);
+      setAddedRelatedEvents((prevEvents) => [...prevEvents, selectedEvent]);
     }
     setSelectedRelatedEvent(""); // Clear selected event after adding
+  };
+
+  const handleRemoveRelatedEvent = (eventId) => {
+    const updatedRelatedEvents = addedRelatedEvents.filter((event) => event._id !== eventId);
+    setAddedRelatedEvents(updatedRelatedEvents);
   };
 
   if (isLoading || isFetching) return <Loader />;
@@ -56,6 +59,7 @@ const Events = ({ handleSubmit, handleInput, eventData }) => {
   if (isError) {
     return <h1>Something went wrong</h1>;
   }
+
 
   return (
     <div className="card-events-details">
@@ -102,7 +106,15 @@ const Events = ({ handleSubmit, handleInput, eventData }) => {
         <div className="events-content">
           <div className="events-left-section">
             <div className="events-event-photo">
-              <UploadEventImage />
+              {/* <UploadEventImage /> */}
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleImageChange}
+                required={true}
+                className="signup-input"
+              />
+
             </div>
           </div>
           <div className="events-right-section">
@@ -169,9 +181,12 @@ const Events = ({ handleSubmit, handleInput, eventData }) => {
       </form>
       <div className="related-events-list">
         {addedRelatedEvents.map((item) => (
-          <RelatedActs key={item._id} {...item} />
+          <div key={item._id} className="related-event-item">
+            <RelatedActs {...item} handleRemoveRelatedEvent={handleRemoveRelatedEvent} />
+          </div>
         ))}
       </div>
+
       <div className="botom-event-card-buttons">
         <button onClick={handleSubmit} className="botom-left-right-btn">
           Save

@@ -6,6 +6,7 @@ import { useUpdateUserMutation } from "../../../store/API/userApi";
 import { toast } from "react-toastify";
 import ChangePassword from "../../ChangePassword/ChangePassword"
 import ProfilePictureUpload from "../../../Components/Upload/ProfilePictureUpload";
+
 const ProfileDashboard = () => {
   const [updateUser] = useUpdateUserMutation();
   const [showPasswordFields, setShowPasswordFields] = useState(false);
@@ -102,5 +103,6 @@ const ProfileDashboard = () => {
     </div>
   );
 };
+
 
 export default ProfileDashboard;

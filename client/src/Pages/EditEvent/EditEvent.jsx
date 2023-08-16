@@ -28,6 +28,7 @@ const EditEvent = () => {
     eventLocation: "",
     eventType: "",
     eventID: "",
+    image: ""
   });
 
   console.log("formData", formData);
@@ -94,6 +95,14 @@ const EditEvent = () => {
     }
   };
 
+  
+  const [image, setImage] = useState(null); // New state for image
+
+  const handleImageChange = (e) => {
+    const selectedImage = e.target.files[0]; // Get the selected image file
+    setImage(selectedImage); // Update the image state with the selected image
+  };
+
   const handleEventTypeChange = (event) => {
     const selectedEventType = event.target.value;
     handleInput(event);
@@ -147,7 +156,13 @@ const EditEvent = () => {
         <div className="events-content">
           <div className="events-left-section">
             <div className="events-event-photo">
-              <UploadEventImage />
+              {/* <UploadEventImage /> */}
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleImageChange}
+                className="signup-input"
+              />
             </div>
           </div>
           <div className="events-right-section">

@@ -23,7 +23,7 @@ const ShoppingCart = () => {
           <div className="left-ShoppingCart-card-container">
             <img
               className="left-ShoppingCart-card-image"
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/World_Map_%28political%29.svg/1024px-World_Map_%28political%29.svg.png"
+              src={item.image}
               alt="World Map"
               width="200"
               height="153"

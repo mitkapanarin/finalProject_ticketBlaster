@@ -1,34 +1,35 @@
 import React, { useState } from "react";
 import "./PrintModal.css";
 
-const PrintModal = () => {
+const PrintModal = ({ image }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const closeModal = () => {
-    setIsOpen(false);}
+    setIsOpen(false);
+  };
 
-    return (
-      <div className="print-user-modal">
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          data-modal-target="popup-modal"
-          data-modal-toggle="popup-modal"
-          className="print-button"
-          type="button"
-        >
-          Print
-        </button>
-  
-        {isOpen && (
-          <div className="modal-overlay">
-            <div className="modal">
-              <div className="modal-body" onClick={closeModal}>
-                <span className="close-modal-button" onClick={closeModal}></span>
+  return (
+    <div className="print-user-modal">
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        data-modal-target="popup-modal"
+        data-modal-toggle="popup-modal"
+        className="print-button"
+        type="button"
+      >
+        Print
+      </button>
+
+      {isOpen && (
+        <div className="modal-overlay">
+          <div className="modal">
+            <div className="modal-body" onClick={closeModal}>
+              <span className="close-modal-button" onClick={closeModal}></span>
               <h2 className="printModal-card-h">ticketBlaster</h2>
               <img
                 className="left-printModal-card-image"
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/World_Map_%28political%29.svg/1024px-World_Map_%28political%29.svg.png"
-                alt="World Map"
+                src={image}
+                alt="Artist"
                 width="200"
                 height="153"
               />
@@ -44,7 +45,7 @@ const PrintModal = () => {
                     </p>
                   </div>
                   <div className="right-printModal-card-content">
-                    <img
+                  <img
                       className="qr-code-image"
                       src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/QR_code_for_mobile_English_Wikipedia.svg/800px-QR_code_for_mobile_English_Wikipedia.svg.png"
                       alt="qr-code"

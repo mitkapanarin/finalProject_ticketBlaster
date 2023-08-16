@@ -26,35 +26,55 @@ const AdminDashboard = () => {
 
   console.log(eventData);
 
-  const navigate = useNavigate(); // Add useNavigate hook
+  const navigate = useNavigate();
+
+  const [image, setImage] = useState(null); // New state for image
 
   const [createEvent, { isLoading, isError, error }] = useCreateEventMutation();
+
   const handleInput = (e) => {
     setEventData({ ...eventData, [e.target.name]: e.target.value });
   };
+
+  const handleImageChange = (e) => {
+    const selectedImage = e.target.files[0]; // Get the selected image file
+    setImage(selectedImage); // Update the image state with the selected image
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+  
+    const formData = new FormData();
+    for (const key in eventData) {
+      formData.append(key, eventData[key]);
+    }
+    formData.append("image", image); // Add the image file to the form data
+  
     try {
-      await toast.promise(createEvent(eventData), {
+      await toast.promise(createEvent(formData), {
         pending: "Creating Event",
         success: "Event Created",
         error: "Error Creating Event",
       });
       setEventData(initialEventFormState);
-      navigate("/admin-dashboard"); // Navigate to admin dashboard
+      setImage(null); // Clear the image after successful submission
+      navigate("/admin-dashboard");
     } catch (err) {
       console.log(err);
       toast.error("Error Creating Event");
     }
   };
+  
+
   return (
-      <div>
-        <Events
-          eventData={eventData} // Pass eventData as prop to Events
-          handleSubmit={handleSubmit}
-          handleInput={handleInput}
-        />
-      </div>
+    <div>
+      <Events
+        eventData={eventData}
+        handleSubmit={handleSubmit}
+        handleInput={handleInput}
+        handleImageChange={handleImageChange} // Pass the image change handler
+      />
+    </div>
   );
 };
 
