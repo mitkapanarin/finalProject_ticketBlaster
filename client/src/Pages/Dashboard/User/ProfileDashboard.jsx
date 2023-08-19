@@ -4,7 +4,7 @@ import AdminTab from "../../../Components/AdminTab/AdminTab";
 import { useSelector, useDispatch } from "react-redux";
 import { useUpdateUserMutation } from "../../../store/API/userApi";
 import { toast } from "react-toastify";
-import ChangePassword from "../../ChangePassword/ChangePassword";
+import ChangePassword from "../../ChangePassword/ChangePassword"
 import ProfilePictureUpload from "../../../Components/Upload/ProfilePictureUpload";
 import InputField from "../../../Components/Form/InputField";
 
@@ -27,16 +27,29 @@ const ProfileDashboard = () => {
       ...userData,
       [e.target.name]: e.target.value,
     });
+    console.log(e.target.value);
+  };
+
+  const handleChangePassword = () => {
+    setShowPasswordFields(!showPasswordFields);
+  };
+
+  const handleSubmitPassword = () => {
+    // Add logic to handle password change submission
+    console.log("New Password:", password);
+    console.log("Retyped Password:", retypePassword);
   };
 
   const handleImageChange = (e) => {
+     console.log("Image file selected:", e.target.files[0]);
     setUserData({
       ...userData,
       image: e.target.files[0],
     });
   };
 
-  const handleUserDetailsSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
       console.log("Form data:", userData);
       await toast.promise(updateUser(userData), {
@@ -55,19 +68,19 @@ const ProfileDashboard = () => {
         <h2>User Details</h2>
         <AdminTab />
       </div>
-      <form action="">
+      <form action="" onSubmit={handleSubmit}>
         <div className="top-user-details">
           <div className="left-user-details">
             {/* <ProfilePictureUpload/> */}
             <InputField
-              type="file"
-              name="image"
-              accept="image/*"
-              onChange={handleImageChange}
-              label="Profile Image"
-              required={true}
-              className="signup-input"
-            />
+                  type="file"
+                  name="image"
+                  accept="image/*"
+                  onChange={handleImageChange}
+                  label="Profile Image"
+                  required={true}
+                  className="signup-input"
+                />
           </div>
           <div className="right-user-details">
             <label htmlFor="full-name-user">Full Name</label>
@@ -99,19 +112,16 @@ const ProfileDashboard = () => {
             />
           </div>
         </div>
+        <div className="sub-section-user-details">
+          <button type="submit" className="submit-button-user">
+            Submit
+          </button>
+        </div>
       </form>
-      <div className="sub-section-user-details">
-        <button
-          type="button"
-          className="submit-button-user"
-          onClick={handleUserDetailsSubmit}
-        >
-          Submit
-        </button>
-      </div>
       <ChangePassword email={userData.email} />
     </div>
   );
 };
+
 
 export default ProfileDashboard;

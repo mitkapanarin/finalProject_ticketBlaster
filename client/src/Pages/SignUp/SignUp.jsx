@@ -3,6 +3,7 @@ import { useCreateUserMutation } from "../../store/API/userApi";
 import InputField from "../../Components/Form/InputField";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import "./Signup.css"
 
 const Signup = () => {
   const navigate = useNavigate();

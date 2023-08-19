@@ -11,7 +11,7 @@ import {
   ShoppingCart,
   TicketHistory,
   AllUsers,
-  // UpdateUserDetails,
+  UpdateUserDetails,
   StandUpComedies,
   MusicalConcerts,
   EditEvent,
@@ -61,7 +61,7 @@ const App = () => {
           <Route path="/reset-password/:token" element={<ResetPassword />} />
           <Route path="/ticket-history" element={<TicketHistory />} />
           <Route path="/all-users" element={<AllUsers />} />
-          {/* <Route path="/update-user-details" element={<UpdateUserDetails />} /> */}
+          <Route path="/update-user-details" element={<UpdateUserDetails />} />
           {/* <Route path="/change-password" element={<UpdatePasword />} /> */}
           <Route path="/events/:eventId" element={<EventDetails />} />
           <Route path="/checkout" element={<Checkout />} />
