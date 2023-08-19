@@ -29,7 +29,7 @@
 
 .card-parent .card__left {
   border-radius: 8%;
-  max-width: 500px;
+  width: 300px;
   height: 150px !important;
   object-fit: cover;
 }
@@ -96,3 +96,8 @@
     gap: 10px;
   }
 }
+
+
+
+
+

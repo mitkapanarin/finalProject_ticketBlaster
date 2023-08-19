@@ -35,7 +35,10 @@ const TicketHistory = () => {
   
   if (purchaseHistoryLoading || eventsLoading) return <Loader />;
 
-  if (eventsError) <h1>Something went wrong</h1>;
+  if (eventsError) {
+    return <h1>Something went wrong</h1>;
+  }
+  
 
   return (
     <div className="card-ticket-history">

@@ -48,6 +48,7 @@ const App = () => {
           </Route>
           <Route element={<AdminRoutes />}>
             <Route path="/admin-dashboard" element={<AdminDashboard />} />
+            <Route path="/create-event" element={<AdminDashboard />} />
             <Route path="/admin-purchase-ticket" element={<Purchase />} />
             <Route path="/get-all-events" element={<GetAllEvents />} />
             <Route path="/update-event/:eventId" element={<EditEvent />} />
@@ -60,7 +61,6 @@ const App = () => {
           <Route path="/reset-password/:token" element={<ResetPassword />} />
           <Route path="/ticket-history" element={<TicketHistory />} />
           <Route path="/all-users" element={<AllUsers />} />
-          <Route path="/create-event" element={<AdminDashboard />} />
           <Route path="/update-user-details" element={<UpdateUserDetails />} />
           {/* <Route path="/change-password" element={<UpdatePasword />} /> */}
           <Route path="/events/:eventId" element={<EventDetails />} />

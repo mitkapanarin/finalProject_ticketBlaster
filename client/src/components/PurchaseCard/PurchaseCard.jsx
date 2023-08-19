@@ -4,14 +4,15 @@ import PrintModal from "../PrintModal/PrintModal";
 
 const PurchaseCard = ({
     eventName = "",
-    image = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Classical_spectacular10.jpg/1280px-Classical_spectacular10.jpg",
+    image = "",
     eventDate = "",
     eventLocation = "",
     price,
+    quantity,
 }) => {
-  return (
-    <div>
-                    <div className="Purchase-card-container">
+    return (
+        <div>
+            <div className="Purchase-card-container">
                 <div className="left-Purchase-card-container">
                     <img
                         className="left-Purchase-card-image"
@@ -32,13 +33,13 @@ const PurchaseCard = ({
                 <div className="purchase-right-sec">
                     <div className="Purchase-price">
                         <p className="Purchase-total-price">${price}</p>
-                        <p className="Purchase-total-tickets">2x60.00USD</p>
+                        <p className="Purchase-total-tickets">{quantity} x ${price}</p>
                     </div>
-                    <PrintModal />
+                    <PrintModal image={image} />
                 </div>
             </div>
-    </div>
-  )
+        </div>
+    )
 }
 
 export default PurchaseCard

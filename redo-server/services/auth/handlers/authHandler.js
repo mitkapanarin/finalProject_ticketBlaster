@@ -227,37 +227,42 @@ export const getAllUsers = async (req, res) => {
   }
 };
 
+// Оваа функција се повикува кога корисникот побарува да се ресетира лозинката
 export const forgotPassword = async (req, res) => {
-  const { email } = req.body;
+  const { email } = req.body; // Извлекување на email од барањето
 
   try {
-    // Find the user by their email
+    // Пребарување на корисникот според нивниот email
     const user = await UserModel.findOne({ email });
 
     if (!user) {
-      // User with the given email does not exist
+      // Ако не е најден корисник со дадениот email
       return res.status(404).json({ message: "User not found" });
     }
 
+    // Генерирање на ресет токен
     const resetToken = await generateResetToken();
 
-    // Save the reset token and its expiration in the user document
+    // Зачувување на ресет токенот и неговото време на истек во документот на корисникот
     user.resetToken = resetToken;
-    user.resetTokenExpiration = Date.now() + 3600000; // Token expires in 1 hour
+    user.resetTokenExpiration = Date.now() + 3600000; // Токенот истекува по 1 час
     await user.save();
 
-    // Send an email to the user with the reset password instructions
+    // Испраќање на е-порака на корисникот со инструкции за ресетирање на лозинката
     sendResetPasswordEmail(user.email, resetToken);
 
+    // Враќа успешен одговор со порака
     return res
       .status(200)
       .json({ message: "Password reset instructions sent" });
   } catch (error) {
+    // Враќа грешка на сервер со детали за грешката
     return res
       .status(500)
       .json({ message: "Server Error", log: error.message });
   }
 };
+
 
 export const resetPassword = async (req, res) => {
   const { resetToken, newPassword } = req.body;
