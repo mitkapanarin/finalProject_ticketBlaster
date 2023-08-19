@@ -10,4 +10,7 @@
 
 
 
+In PurchaseCard I cant get quantity dinamicaly displayed
+
+
 

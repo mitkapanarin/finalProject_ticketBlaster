@@ -8,7 +8,7 @@ import ForgotPassword from "./ForgotPassword/ForgotPassword";
 import ShoppingCart from "./ShoppingCart/ShoppingCart";
 import TicketHistory from "./TicketHistory/TicketHistory";
 import AllUsers from "./AllUsers/AllUsers";
-import UpdateUserDetails from "./UpdateUserDetails/UpdateUserDetails";
+// import UpdateUserDetails from "./UpdateUserDetails/UpdateUserDetails";
 import Purchase from "./Purchase/Purchase";
 import StandUpComedies from "./StandUpComedies/StandUpComedies";
 import MusicalConcerts from "./MusicalConcerts/MusicalConcerts";
@@ -35,7 +35,7 @@ export {
   ShoppingCart,
   TicketHistory,
   AllUsers,
-  UpdateUserDetails,
+  // UpdateUserDetails,
   Purchase,
   StandUpComedies,
   MusicalConcerts,

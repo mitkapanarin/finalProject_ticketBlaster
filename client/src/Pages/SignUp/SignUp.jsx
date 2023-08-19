@@ -2,11 +2,9 @@ import React, { useState } from "react";
 import { useCreateUserMutation } from "../../store/API/userApi";
 import InputField from "../../Components/Form/InputField";
 import { toast } from "react-toastify";
-import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [data, setData] = useState({
