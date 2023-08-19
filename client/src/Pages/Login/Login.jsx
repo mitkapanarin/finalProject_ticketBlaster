@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../store/Slices/userSlice";
 import { useDispatch } from "react-redux";
+import "./Login.css"
 
 const Login = () => {
   const dispatch = useDispatch(); // initialization
