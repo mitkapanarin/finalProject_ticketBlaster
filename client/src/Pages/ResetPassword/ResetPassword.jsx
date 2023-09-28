@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"
 import axios from "axios";
+import "./ResetPassword.css"
 
 const ResetPassword = () => {
   const [newPassword, setNewPassword] = useState("");
@@ -8,6 +9,10 @@ const ResetPassword = () => {
   const [message, setMessage] = useState("");
   const [resetToken, setResetToken] = useState("");
   const navigate = useNavigate();
+
+  const handleNavigateToLogin = () => {
+    navigate('/login');
+  };
 
   useEffect(() => {
     // Extract the reset token from the URL
@@ -58,26 +63,29 @@ const ResetPassword = () => {
   };
 
   return (
-    <div>
-      <h2>Reset Password</h2>
+    <div className="psw-reset-containerr ">
+      <h2 className=" reset-form-title ">Reset Password</h2>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="newPassword">New Password</label>
+        <label htmlFor="newPassword">Password</label>
         <input
+        className="input-password-resett "
           type="password"
           id="newPassword"
           value={newPassword}
           onChange={(e) => setNewPassword(e.target.value)}
           required
         />
-        <label htmlFor="confirmPassword">Confirm Password</label>
+        <label htmlFor="confirmPassword">Re-type password</label>
         <input
+        className="input-password-resett "
           type="password"
           id="confirmPassword"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
           required
         />
-        <button type="submit">Reset Password</button>
+        <button className="btn-password-reset-email" type="submit">Reset Password</button>
+         <button className="back-to-login"  onClick={handleNavigateToLogin} >Back to Login</button>
       </form>
       {message && <p>{message}</p>}
     </div>

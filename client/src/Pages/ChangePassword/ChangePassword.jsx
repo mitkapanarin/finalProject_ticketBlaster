@@ -111,7 +111,7 @@ const ChangePasswordForm = ({ email }) => {
               onChange={(e) => setConfirmPassword(e.target.value)}
               placeholder="Confirm Your Password"
               required={true}
-              label="Confirm Password"
+              label="Re-type password"
             />
           </div>
           <button className="submit-button-user" onClick={handleSubmitPassword}>

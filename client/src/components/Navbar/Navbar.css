@@ -82,7 +82,7 @@
 .user-profile-button {
   width: 26px;
   height: 26px;
-  color: white;
+  color: rgb(234, 58, 193);
   margin-right: 20px;
   cursor: pointer;
 }
@@ -90,7 +90,7 @@
 .user-shopping-button{
   width: 26px;
   height: 26px;
-  color: white;
+  color: rgb(234, 58, 193);
   margin-right: 20px;
   cursor: pointer;
 }
