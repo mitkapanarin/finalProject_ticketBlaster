@@ -7,10 +7,8 @@ import Loader from "../../Components/Loader/Loader";
 import PurchaseCard from "../../Components/PurchaseCard/PurchaseCard";
 import "../Purchase/Purchase.css";
 
-
 const Purchase = () => {
-
-    const [eventData, setEventData] = useState([]);
+  const [eventData, setEventData] = useState([]);
   const [
     getMultipleEvents,
     { isLoading: eventsLoading, isError: eventsError },
@@ -34,19 +32,25 @@ const Purchase = () => {
     }
   }, [purchaseHistoryData]);
 
-  
   if (purchaseHistoryLoading || eventsLoading) return <Loader />;
 
   if (eventsError) <h1>Something went wrong</h1>;
-    return (
-        <div>
-            <h2 className="Purchase-card-h">Thank you for your purchase!</h2>
-            {eventData?.map((event) => (
-                <PurchaseCard key={event?._id} {...event} />
-            ))}
-            <hr className="hr-sc" />
-        </div>
-    );
+
+  const eventDataWithQuantity = eventData?.map((event) => {
+    const quantity = purchaseHistoryData?.data?.find(
+      (item) => item.eventID === event?._id
+    ).quantity;
+    return { ...event, quantity };
+  });
+  return (
+    <div>
+      <h2 className="Purchase-card-h">Thank you for your purchase!</h2>
+      {eventDataWithQuantity?.map((event) => (
+        <PurchaseCard key={event?._id} {...event} />
+      ))}
+      <hr className="hr-sc" />
+    </div>
+  );
 };
 
 export default Purchase;

@@ -47,9 +47,8 @@ const AllItemsCart = () => {
           </div>
         </div>
       ))}
-      <hr className="hr-sc" />
-
       <div className="total-price-container">
+        <hr />
         <h3>Total Price:</h3>
         <p>${calculateTotalPrice()}</p>
       </div>

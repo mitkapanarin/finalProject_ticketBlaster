@@ -54,9 +54,9 @@ const EditEvent = () => {
     e.preventDefault();
     try {
       await toast.promise(updateEvent(formData), {
-        pending: "Updating User Details...",
-        success: "User Details Updated Successfully!",
-        error: "Error Updating User Details!",
+        pending: "Updating event Details...",
+        success: "Event Details Updated Successfully!",
+        error: "Error Updating event Details!",
       });
     } catch (err) {
       console.log(err);

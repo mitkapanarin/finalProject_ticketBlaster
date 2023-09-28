@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom"
 import axios from "axios";
 
 const ResetPassword = () => {
@@ -6,6 +7,8 @@ const ResetPassword = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState("");
   const [resetToken, setResetToken] = useState("");
+  const navigate = useNavigate();
+
   useEffect(() => {
     // Extract the reset token from the URL
     const token = window.location.pathname.split("/").pop();
@@ -44,6 +47,7 @@ const ResetPassword = () => {
 
       if (response.status === 200) {
         setMessage(response.data.message);
+         navigate("/login");
       } else {
         setMessage("Invalid or expired reset token");
       }

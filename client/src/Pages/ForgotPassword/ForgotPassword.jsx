@@ -1,34 +1,40 @@
 import React, { useState } from "react";
 import axios from "axios";
+import "./ForgotPassword.css"
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    if (!validateEmail(email)) {
-      setMessage("Please enter a valid email address");
-      return;
+  if (!validateEmail(email)) {
+    setMessage("Please enter a valid email address");
+    return;
+  }
+
+  try {
+    const response = await axios.post(
+      "http://localhost:9000/api/v1/auth/forgot-password",
+      { email },
+    );
+
+    if (response.status === 200) {
+      setMessage(response.data.message);
+    } else {
+      setMessage("Server Error");
     }
-
-    try {
-      const response = await axios.post(
-        "http://localhost:9000/api/v1/auth/forgot-password",
-        { email },
-      );
-
-      if (response.status === 200) {
-        setMessage(response.data.message);
-      } else {
-        setMessage("User not found");
-      }
-    } catch (error) {
+  } catch (error) {
+    if (error.response && error.response.status === 404) {
+      setMessage("User not found");
+    } else {
       setMessage("Server Error");
       console.error(error);
     }
-  };
+  }
+};
+
 
   const validateEmail = (email) => {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -37,9 +43,9 @@ const ForgotPassword = () => {
 
   return (
     <div>
-      <h2>Forgot Password</h2>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="email">Email</label>
+      <h2 className="reset-form-title" >Forgot Password</h2>
+      <form className="psw-reset-container" onSubmit={handleSubmit}>
+        <label className="reset-form-title" htmlFor="email">Email</label>
         <input
           type="email"
           id="email"
@@ -47,7 +53,7 @@ const ForgotPassword = () => {
           onChange={(e) => setEmail(e.target.value)}
           required
         />
-        <button type="submit">Reset Password</button>
+        <button className="btn-password-reset-email" type="submit">Reset Password</button>
       </form>
       {message && <p>{message}</p>}
     </div>

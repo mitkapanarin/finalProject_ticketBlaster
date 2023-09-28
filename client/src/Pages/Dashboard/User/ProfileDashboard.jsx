@@ -78,7 +78,7 @@ const ProfileDashboard = () => {
                   accept="image/*"
                   onChange={handleImageChange}
                   label="Profile Image"
-                  required={true}
+                  required={false}
                   className="signup-input"
                 />
           </div>

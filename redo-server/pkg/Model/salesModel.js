@@ -18,7 +18,7 @@ const SalesSchema = new mongoose.Schema({
     type: String,
     enum: ["pending", "completed"],
     default: "pending",
-    required: true,
+    required: false,
   },
 });
 
