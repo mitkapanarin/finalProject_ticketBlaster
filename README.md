@@ -34,3 +34,6 @@ TicketBlaster is an app for online ticket sales for Concerts and Comedy events. 
 * MongoDB
 * AWS S3 for storing images
 * JWT for authentication
+
+https://xd.adobe.com/view/7e6e2246-7682-45ad-991d-2f9d75f01372-2b3d/?fullscreen
+
