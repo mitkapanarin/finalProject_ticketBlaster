@@ -5,10 +5,10 @@ import { useSelector } from "react-redux";
 const AdminRoutes = () => {
   const { token, role } = useSelector((state) => state.User);
 
-  return token && role === "Admin" ? (
+  return token && role === "admin" ? (
     <Outlet />
   ) : token ? (
-    <Navigate to="/admin-dashboard" />
+    <Navigate to="/" />
   ) : (
     <Navigate to="/login" />
   );
